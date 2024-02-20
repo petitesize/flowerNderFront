@@ -1,0 +1,31 @@
+/* =============================================== cart =============================================== */
+.cart{
+    position: relative;
+}
+.cart .cart-content{
+    max-width: 80%;
+    margin: 122px auto 338px;
+}
+.cart table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart th,
+.cart td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: middle; /* Adjust vertical alignment */
+}
+
+.cart th {
+    background-color: #f2f2f2;
+}
+
+.cart input  {
+    display: none;
+}
+.cart input + label{}
+.cart input + label em{display: inline-block; width: 15px; height: 15px; background: url('../img/checkbox_off.png') center center/100% no-repeat; vertical-align: middle;}
+.cart input:checked + label em{background: url('../img/checkbox_on.png') center center/100% no-repeat;}
