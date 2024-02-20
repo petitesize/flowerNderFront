@@ -1,54 +1,6 @@
-@import "reset.css";
-
-
-
 /* =============================================== main =============================================== */
 .container{
     width: 100%;
-}
-
-/* ---------- nav ---------- */
-.nav{
-    position: sticky;
-    top: 73px;
-}
-.nav-wrap{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    background: #fff;
-
-}
-.nav-wrap .nav-left{
-    width: 75%;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 11px 0;
-    margin-left: 24px;
-    background: #fff;
-}
-.nav-wrap .nav-left a{
-
-}
-.nav-wrap .nav-right{
-    width: 10%;
-    padding: 10px 0;
-    background: #000;
-    border: 1px solid #000;
-}
-.nav-wrap .nav-right a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: end;
-    color: #fff;
-}
-.nav-wrap .nav-right a img{
-    width: 18px;
-    margin-right: 11px;
 }
 
 /* ---------- product ---------- */
