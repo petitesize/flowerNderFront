@@ -97,8 +97,9 @@
     margin-left: 24px;
     background: #fff;
 }
-.nav-wrap .nav-left a{
-
+/* 선택시 bold 추가함 */
+.nav-wrap .nav-left .nav-bold{
+    font-weight: 600;
 }
 .nav-wrap .nav-right{
     width: 10%;
@@ -117,3 +118,4 @@
     width: 18px;
     margin-right: 11px;
 }
+
