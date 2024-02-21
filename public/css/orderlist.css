@@ -1,0 +1,157 @@
+@import "reset.css";
+
+input,
+button {
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+}
+
+.nav-wrap {
+  border-right: none;
+}
+
+.button-black {
+  background-color: black;
+  color: white;
+  width: 100px;
+  padding: 6px 0;
+}
+
+.orderlist {
+  padding: 24px;
+  margin: 122px 128px 200px 128px;
+}
+
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.order-table th,
+.order-table td {
+  border-top: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+tbody {
+  border-bottom: 1px solid black;
+}
+
+th {
+  padding: 12px 8px;
+}
+
+td {
+  padding: 10px;
+}
+
+.no-order > td {
+  padding: 80px;
+}
+
+.product-row {
+  margin: 10px;
+  display: table;
+}
+
+.img-block {
+  width: 80px;
+  display: table-cell;
+}
+
+.img-block > img {
+  width: 100%;
+}
+
+.product-info {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  padding-left: 16px;
+}
+
+.delivery-status {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.delivery-step,
+.delivery-cancel,
+.change-address {
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* change-address modal */
+
+.overlay-modal {
+  display: none;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.change-address-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 32px 24px 24px;
+  border: 1px solid #888;
+  border-radius: 4px;
+}
+.modal-content h2 {
+  font-size: 18px;
+  margin: -10px 0 30px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.modal-content input {
+  border: 1px solid black;
+  padding: 12px 16px;
+  width: 100%;
+}
+
+.input-block {
+  margin-bottom: 25px;
+}
+
+.input-address {
+  display: flex;
+}
+
+.input-address-detail > input {
+  border-top: none;
+}
+
+.confirm-button {
+  width: 100%;
+  padding: 10px;
+}
