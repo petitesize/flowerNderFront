@@ -1,5 +1,4 @@
 const overlay = document.querySelector(".overlay-modal");
-g;
 const modal = document.querySelector(".change-address-modal");
 const tableBody = document.querySelector(".orderlist-tbody");
 
