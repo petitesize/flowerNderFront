@@ -1,0 +1,175 @@
+@import "reset.css";
+input,
+button,
+select {
+  font-family: "Pretendard", sans-serif;
+  font-size: 14px;
+}
+
+.inside {
+  padding: 24px;
+  margin: 84px auto;
+  width: 860px;
+  display: flex;
+}
+
+h6 {
+  font-size: 18px;
+  padding-bottom: 20px;
+}
+
+.large-font {
+  font-size: 18px;
+}
+
+.order-wrap {
+  width: 520px;
+}
+
+.order-item {
+  padding: 14px 29px;
+  border-top: 1px solid black;
+}
+
+.order-item > a {
+  display: flex;
+  width: 100%;
+}
+
+.order-item .img-wrap {
+  width: 104px;
+}
+
+.img-wrap > img {
+  width: 80px;
+}
+
+.order-item .info-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-title {
+  margin-bottom: 4px;
+  display: block;
+}
+
+.item-option {
+  margin-bottom: 4px;
+}
+.item-amount {
+  margin-top: 4px;
+}
+
+.order-block {
+  border: 1px solid black;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.button-black-big {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.orderer-info > div {
+  line-height: 1.6;
+}
+
+/* 배송 정보 */
+.input-wrap {
+  display: flex;
+}
+
+.input-wrap > input {
+  padding: 7px;
+  width: 50%;
+}
+
+.shipping-wrap {
+  margin-bottom: 16px;
+}
+
+.shipping-wrap > div {
+  padding: 7px;
+}
+
+.button-black {
+  background-color: black;
+  color: white;
+  width: 100px;
+  padding: 6px 0;
+}
+
+.delivery-msg-wrap > p {
+  margin-bottom: 10px;
+}
+
+.delivery-msg-wrap > div {
+  padding: 7px 5px;
+}
+
+/* summary */
+.order-summary-wrap {
+  width: 325px;
+  margin-left: 16px;
+}
+
+.pay-wrap {
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pay-col > p:first-child {
+  margin-bottom: 8px;
+}
+
+.pay-number {
+  text-align: right;
+}
+
+.total-payment-wrap {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px black solid;
+}
+
+.payment-block > div {
+  margin-bottom: 8px;
+}
+
+.payment-select {
+  display: flex;
+}
+
+.payment-select > p,
+.payment-select > input {
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="radio"]:checked {
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-right: 6px;
+}
+
+input[type="radio"] {
+  background-color: white;
+}
+input[type="radio"]:checked {
+  background: radial-gradient(#000 35%, #ffffff 45%);
+}
+
+.payment-button {
+  width: 100%;
+}
