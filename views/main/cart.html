@@ -25,9 +25,12 @@
         </div>
       </div>
     </header>
-    <!-- cart -->
+
+    <!-- 장바구니 시작 -->
     <section class="cart">
         <div class="cart-content">
+
+          <!-- 상품정보 리스트 입니다 -->
             <div class="cart-head">
                 <div class="cart-head-left">
                     <span class="chl1">
@@ -52,12 +55,18 @@
                         </span>
                         <span class="cl-list-2">
                             <span class="cl-img">
-                                <img src="/public/img/05d3cdee67886.jpeg" alt="">
+                                <a href="./detail.html">
+                                  <img src="/public/img/05d3cdee67886.jpeg" alt="장바구니에 담은 상품 이미지">
+                                </a>
                             </span> 
                             <span class="cl-info">
-                                <span class="cl-title">JAPAN LOUNGE CHAIR</span>
+                                <span class="cl-title">
+                                  <a href="./detail.html">
+                                    JAPAN LOUNGE CHAIR
+                                  </a>
+                                </span>
                                 <span class="cl-dep">
-                                    필수 Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
+                                    <span>필수</span>Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
                                 </span>
                             </span> 
                             <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
@@ -79,20 +88,25 @@
                             </span>
                         </span>
                     </div>
-                    <!-- cart-list 가 장바구니 목록임 이거만 늘어나게 하면됨 ! -->
                     <div class="cart-list">
                         <span class="cl-list-1">
-                            <input type="checkbox" id="cart-ck2">
-                            <label for="cart-ck2"><em></em></label>
+                            <input type="checkbox" id="cart-ck1">
+                            <label for="cart-ck1"><em></em></label>
                         </span>
                         <span class="cl-list-2">
                             <span class="cl-img">
-                                <img src="/public/img/05d3cdee67886.jpeg" alt="">
+                                <a href="./detail.html">
+                                  <img src="/public/img/05d3cdee67886.jpeg" alt="장바구니에 담은 상품 이미지">
+                                </a>
                             </span> 
                             <span class="cl-info">
-                                <span class="cl-title">JAPAN LOUNGE CHAIR</span>
+                                <span class="cl-title">
+                                  <a href="./detail.html">
+                                    JAPAN LOUNGE CHAIR
+                                  </a>
+                                </span>
                                 <span class="cl-dep">
-                                    필수 Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
+                                    <span>필수</span>Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
                                 </span>
                             </span> 
                             <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
@@ -114,20 +128,25 @@
                             </span>
                         </span>
                     </div>
-                    <!-- cart-list 가 장바구니 목록임 이거만 늘어나게 하면됨 ! -->
                     <div class="cart-list">
                         <span class="cl-list-1">
-                            <input type="checkbox" id="cart-ck3">
-                            <label for="cart-ck3"><em></em></label>
+                            <input type="checkbox" id="cart-ck1">
+                            <label for="cart-ck1"><em></em></label>
                         </span>
                         <span class="cl-list-2">
                             <span class="cl-img">
-                                <img src="/public/img/05d3cdee67886.jpeg" alt="">
+                                <a href="./detail.html">
+                                  <img src="/public/img/05d3cdee67886.jpeg" alt="장바구니에 담은 상품 이미지">
+                                </a>
                             </span> 
                             <span class="cl-info">
-                                <span class="cl-title">JAPAN LOUNGE CHAIR</span>
+                                <span class="cl-title">
+                                  <a href="./detail.html">
+                                    JAPAN LOUNGE CHAIR
+                                  </a>
+                                </span>
                                 <span class="cl-dep">
-                                    필수 Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
+                                    <span>필수</span>Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
                                 </span>
                             </span> 
                             <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
@@ -150,13 +169,19 @@
                         </span>
                     </div>
                 </div>
+
                 <div class="cart-body-right">
                     <p>착불<br>직접배송</p>
                 </div>
+
+            <!-- 상품 삭제할수있는 버튼 -->
             </div>
             <div class="cart-ck-delete">
                 <button type="button">선택상품 삭제</button>
+                <button type="button">전체상품 삭제</button>
             </div>
+
+            <!-- 상품가격의 합계가 들어가는 곳 -->
             <div class="cart-total">
                 <div class="ct-title">총 주문 상품 2개</div>
                 <div class="ct-wrap">
@@ -182,13 +207,18 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 주문하기 - 주문하기 페이지로 이동 -->
+            <!-- 계속 쇼핑하기 - 홈이 all 상품이니까 all로 이동하면 될듯 -->
             <div class="cart-last">
                 <a href="#" class="cl-baro1">주문하기</a>
-                <a href="#" class="cl-baro2">계속 쇼핑하기</a>
+                <a href="./index.html" class="cl-baro2">계속 쇼핑하기</a>
             </div>
         </div>
 
     </section>
+    <!-- 장바구니 끝 -->
+
     <footer class="site-footer">
       <div class="footer-content">
         <p>© 2023. Flora & Dér All rights reserved.</p>
@@ -206,4 +236,5 @@
       </div>
     </footer>
   </body>
+  <script src="/public/js/cart.js"></script>
 </html>
