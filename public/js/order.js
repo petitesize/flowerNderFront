@@ -32,3 +32,15 @@ function handleSelectChange(select) {
 }
 
 selectDeliveryMsg.addEventListener("change", handleSelectChange);
+
+/* 결제하기 버튼 */
+const paymentBtn = document.querySelector(".payment-button");
+function isPurchase() {
+  // 확인 메시지를 표시하고 사용자의 선택을 확인
+  const confirmPurchase = confirm("구매하시겠습니까?");
+  if (confirmPurchase) {
+    alert("주문이 완료되었습니다.");
+  }
+}
+/* form으로 submit 해야할 것 같지만 일단 click.. */
+paymentBtn.addEventListener("click", isPurchase);
