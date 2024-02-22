@@ -234,14 +234,23 @@
           <div class="address-block input-block">
             <label for="address">주소</label>
             <div class="address-wrap">
+              <div class="input-postcode">
+                <input
+                  type="text"
+                  name="address"
+                  required="required"
+                  value="배송 설정한 우편 번호"
+                />
+              </div>
               <div class="input-address">
                 <input
+                  class="input-border"
                   type="text"
                   name="address"
                   required="required"
                   value="배송 설정한 주소"
                 />
-                <button class="search-address button-black">주소 검색</button>
+                <!-- <button class="search-address button-black">주소 검색</button> -->
               </div>
               <div class="input-address-detail">
                 <input
