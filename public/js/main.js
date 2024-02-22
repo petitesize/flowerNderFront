@@ -10,16 +10,19 @@ function loadMoreProducts() {
         const listItem = document.createElement('li');
         listItem.classList.add('list-wrap');
         listItem.innerHTML = `
-        <div class="list-top">
-        <a href="./detail.html">
-            <img src="/public/img/p3.jpeg" alt="제품사진1">
-        </a>
-    </div>
-    <div class="list-bottom">
-        <p class="list-brand">HANS J. WEGNER</p>
-        <a href="./detail.html" class="list-title">DINING CHAIR</a>
-        <p class="list-pay">2,300,000원</p>
-    </div>
+            <div class="list-top">
+                <a href="./detail.html">
+                    <img src="/public/img/p5.jpeg" alt="제품사진1">
+                </a>
+            </div>
+            <div class="list-bottom">
+                <a href="./detail.html" class="list-title">DINING CHAIR</a>
+                <p class="list-cg">MODERN</p>
+                <p class="list-pay">2,300,000원</p>
+                <!-- <div class="list-status">
+                    <img src="/public/img/sold.jpg" alt="">
+                </div> -->
+            </div>
         `;
         productList.appendChild(listItem);
     }
