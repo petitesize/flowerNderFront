@@ -27,7 +27,7 @@
 .detail .detail-left .detail-l-bottom{
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .detail .detail-left .detail-lb-inner{
@@ -38,7 +38,14 @@
 .detail .detail-left .detail-lb-inner img{
     width: 100%;
     height: 100%;
+    cursor: pointer;
     object-fit: cover;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+.detail .detail-left .detail-lb-inner img:hover,
+.detail .detail-left .detail-lb-inner img.hover{
+opacity: 1;
 }
 
 
@@ -98,15 +105,12 @@
 .detail .detail-warning{
     margin-bottom: 65px;
 }
-.detail .detail-info p{}
 .detail .detail-delivery{
     display: flex;
     align-items: center;
     gap: 50px;
     margin-bottom: 30px;
 }
-.detail .detail-delivery .dd-title{}
-.detail .detail-delivery .dd-text{}
 .detail .dc-inner{
     margin-bottom: 20px;
 }
@@ -119,19 +123,12 @@
     font-size: 16px;
     padding: 8px 12px;
 }
-.detail .dc-inner option{}
-.detail .dc-sel-top{
-}
-.detail .dc-bottom{
-}
-.detail .dc-bottom .dcb-btn{}
 .detail .dc-bottom .dcb-btn button{
     padding: 14px 0;
     text-align: center;
     border: 1px solid #000;
 
 }
-.detail .dc-bottom .dcb-soldout{}
 .detail .dc-bottom .dcb-soldout button{
     width: 100%;
     background: #d9d9d9;
@@ -152,7 +149,6 @@
     background: #fff;
     color: #000;
 }
-.detail .detail-b-text{}
 .detail .detail-b-text h4{
     font-size: 16px;
     font-weight: 400;
@@ -181,4 +177,3 @@
 .detail .detail-b-text ul.delivery-info{
     margin-bottom: 90px;
 }
-.detail .detail-b-text li{}

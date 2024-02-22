@@ -28,153 +28,74 @@
 
     <!-- 장바구니 시작 -->
     <section class="cart">
+      
+        <!-- *** 상품을 담았을때 ui -->
         <div class="cart-content">
 
           <!-- 상품정보 리스트 입니다 -->
-            <div class="cart-head">
-                <div class="cart-head-left">
-                    <span class="chl1">
-                      <input type="checkbox" id="cart-all-ck">
-                      <label for="cart-all-ck"><em></em></label>
-                    </span>
-                    <span class="chl2">상품정보</span>
-                    <span class="chl3">수량</span>
-                    <span class="chl4">주문금액</span>
-                </div>
-                <div class="cart-head-right">
-                    <span>배송정보</span>
-                </div>
-            </div>
-            <div class="cart-body">
-                <div class="cart-body-left">
-                    <!-- cart-list 가 장바구니 목록임 이거만 늘어나게 하면됨 ! -->
-                    <div class="cart-list">
-                        <span class="cl-list-1">
-                            <input type="checkbox" id="cart-ck1">
-                            <label for="cart-ck1"><em></em></label>
+            <div class="cart-list-box">
+                <div class="cart-head">
+                    <div class="cart-head-left">
+                        <span class="chl1">
+                          <input type="checkbox" id="cart-all-ck">
+                          <label for="cart-all-ck"><em></em></label>
                         </span>
-                        <span class="cl-list-2">
-                            <span class="cl-img">
-                                <a href="./detail.html">
-                                  <img src="/public/img/05d3cdee67886.jpeg" alt="장바구니에 담은 상품 이미지">
-                                </a>
-                            </span> 
-                            <span class="cl-info">
-                                <span class="cl-title">
-                                  <a href="./detail.html">
-                                    JAPAN LOUNGE CHAIR
-                                  </a>
-                                </span>
-                                <span class="cl-dep">
-                                    <span>필수</span>Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
-                                </span>
-                            </span> 
-                            <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
-                        </span>
-                        <span class="cl-list-3">
-                            <span class="cart-count">
-                                <button class="cc-btn1">-</button>
-                                <span>1</span>
-                                <button class="cc-btn2">+</button>
-                            </span>
-                            <span class="cart-count-submit">
-                                <button class="cart-common-btn">수량변경</button>
-                            </span>
-                        </span>
-                        <span class="cl-list-4">
-                            <span class="cart-price">3,700,000원</span>
-                            <span class="cart-baro">
-                                <a href="#" class="cart-common-btn">바로구매</a>
-                            </span>
-                        </span>
+                        <span class="chl2">상품정보</span>
+                        <span class="chl3">수량</span>
+                        <span class="chl4">주문금액</span>
                     </div>
-                    <div class="cart-list">
-                        <span class="cl-list-1">
-                            <input type="checkbox" id="cart-ck1">
-                            <label for="cart-ck1"><em></em></label>
-                        </span>
-                        <span class="cl-list-2">
-                            <span class="cl-img">
-                                <a href="./detail.html">
-                                  <img src="/public/img/05d3cdee67886.jpeg" alt="장바구니에 담은 상품 이미지">
-                                </a>
-                            </span> 
-                            <span class="cl-info">
-                                <span class="cl-title">
-                                  <a href="./detail.html">
-                                    JAPAN LOUNGE CHAIR
-                                  </a>
-                                </span>
-                                <span class="cl-dep">
-                                    <span>필수</span>Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
-                                </span>
-                            </span> 
-                            <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
-                        </span>
-                        <span class="cl-list-3">
-                            <span class="cart-count">
-                                <button class="cc-btn1">-</button>
-                                <span>1</span>
-                                <button class="cc-btn2">+</button>
-                            </span>
-                            <span class="cart-count-submit">
-                                <button class="cart-common-btn">수량변경</button>
-                            </span>
-                        </span>
-                        <span class="cl-list-4">
-                            <span class="cart-price">3,700,000원</span>
-                            <span class="cart-baro">
-                                <a href="#" class="cart-common-btn">바로구매</a>
-                            </span>
-                        </span>
-                    </div>
-                    <div class="cart-list">
-                        <span class="cl-list-1">
-                            <input type="checkbox" id="cart-ck1">
-                            <label for="cart-ck1"><em></em></label>
-                        </span>
-                        <span class="cl-list-2">
-                            <span class="cl-img">
-                                <a href="./detail.html">
-                                  <img src="/public/img/05d3cdee67886.jpeg" alt="장바구니에 담은 상품 이미지">
-                                </a>
-                            </span> 
-                            <span class="cl-info">
-                                <span class="cl-title">
-                                  <a href="./detail.html">
-                                    JAPAN LOUNGE CHAIR
-                                  </a>
-                                </span>
-                                <span class="cl-dep">
-                                    <span>필수</span>Japan lounge chair_Finn Juhl / 교환 및 환불 불가 안내에 동의합니다. - 1개
-                                </span>
-                            </span> 
-                            <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
-                        </span>
-                        <span class="cl-list-3">
-                            <span class="cart-count">
-                                <button class="cc-btn1">-</button>
-                                <span>1</span>
-                                <button class="cc-btn2">+</button>
-                            </span>
-                            <span class="cart-count-submit">
-                                <button class="cart-common-btn">수량변경</button>
-                            </span>
-                        </span>
-                        <span class="cl-list-4">
-                            <span class="cart-price">3,700,000원</span>
-                            <span class="cart-baro">
-                                <a href="#" class="cart-common-btn">바로구매</a>
-                            </span>
-                        </span>
+                    <div class="cart-head-right">
+                        <span>배송정보</span>
                     </div>
                 </div>
-
-                <div class="cart-body-right">
-                    <p>착불<br>직접배송</p>
+                <div class="cart-body">
+                    <div class="cart-body-left">
+                        <!-- cart-list 가 장바구니 목록임 이거만 늘어나게 하면됨 ! -->
+                        <!-- <div class="cart-list"  id="checkboxList">
+                            <span class="cl-list-1">
+                                <input type="checkbox" id="cart-ck1">
+                                <label for="cart-ck1"><em></em></label>
+                            </span>
+                            <span class="cl-list-2">
+                                <span class="cl-img">
+                                    <a href="./detail.html">
+                                      <img src="/public/img/p1.jpeg" alt="장바구니에 담은 상품 이미지">
+                                    </a>
+                                </span> 
+                                <span class="cl-info">
+                                    <span class="cl-title">
+                                      <a href="./detail.html">
+                                        JAPAN LOUNGE CHAIR
+                                      </a>
+                                    </span>
+                                    <span class="cl-dep">
+                                        <span>필수</span> 제품을 개봉하거나 상품가치가 훼손된 경우에는 제품의 교환 및 환불 불가 안내에 동의합니다.
+                                    </span>
+                                </span> 
+                                <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
+                            </span>
+                            <span class="cl-list-3">
+                                <span class="cart-count">
+                                    <button class="cc-btn1">-</button>
+                                    <span>1</span>
+                                    <button class="cc-btn2">+</button>
+                                </span>
+                                <span class="cart-count-submit">
+                                    <button class="cart-common-btn">수량변경</button>
+                                </span>
+                            </span>
+                            <span class="cl-list-4">
+                                <span class="cart-price">3,700,000원</span>
+                                <span class="cart-baro">
+                                    <a href="#" class="cart-common-btn">바로구매</a>
+                                </span>
+                            </span>
+                        </div> -->
+                    </div>
+                    <div class="cart-body-right ">
+                        <p>착불<br>직접배송</p>
+                    </div>
                 </div>
-
-            <!-- 상품 삭제할수있는 버튼 -->
             </div>
             <div class="cart-ck-delete">
                 <button type="button">선택상품 삭제</button>
@@ -215,6 +136,40 @@
                 <a href="./index.html" class="cl-baro2">계속 쇼핑하기</a>
             </div>
         </div>
+
+        <!-- *** 상품을 아무것도 담지 없을때 ui -->
+        <div class="cart-content cart-content-none">
+
+          <!-- 상품정보 리스트 입니다 -->
+            <div class="cart-list-box">
+                <div class="cart-head">
+                    <div class="cart-head-left">
+                        <span class="chl1">
+                          <input type="checkbox" id="cart-all-ck">
+                          <label for="cart-all-ck"><em></em></label>
+                        </span>
+                        <span class="chl2">상품정보</span>
+                        <span class="chl3">수량</span>
+                        <span class="chl4">주문금액</span>
+                    </div>
+                    <div class="cart-head-right">
+                        <span>배송정보</span>
+                    </div>
+                </div>
+                <div class="cart-body">
+                    <div class="cb-text">
+                        장바구니가 비어있습니다.
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="cart-last">
+                <a href="./index.html" class="cl-baro2">계속 쇼핑하기</a>
+            </div>
+        </div>
+        
     </section>
     <!-- 장바구니 끝 -->
 
@@ -235,5 +190,6 @@
       </div>
     </footer>
   </body>
+  <script src="/public/js/detail.js"></script>
   <script src="/public/js/cart.js"></script>
 </html>
