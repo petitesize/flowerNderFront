@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>관리자 페이지</title>
-    <link rel="stylesheet" href="../../public/css/common.css" />
-    <link rel="stylesheet" href="../../public/css/reset.css" />
-    <link rel="stylesheet" href="../../public/css/admin.css" />
+    <title>상품관리</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/reset.css" />
   </head>
   <body>
     <div class="container">
@@ -14,7 +14,7 @@
         <div class="header-wrap">
           <h1>
             <a href="index.html">
-              <img src="../../public/img/logo.png" alt="로고" />
+              <img src="/img/logo.png" alt="로고" />
             </a>
           </h1>
           <div class="h-right">
@@ -28,13 +28,47 @@
         <div class="nav-wrap">
           <div class="nav-left">
             <a href="/admin/orders">주문관리</a>
-            <a href="/admin/products">상품관리</a>
+            <a href="/admin/products" class="active">상품관리</a>
             <a href="/admin/users">회원관리</a>
             <a href="/admin/categories">카테고리관리</a>
           </div>
         </div>
       </nav>
-      <main class="admin-main">관리자 페이지입니다.</main>
+      <main class="admin-container">
+        <div class="admin-product-category">
+          <p>상품번호</p>
+          <p>카테고리</p>
+          <p>상품명</p>
+          <p>이미지</p>
+          <p>가격</p>
+          <p>재고</p>
+          <p>상세설명</p>
+          <p>크기</p>           
+          <p>원산지</p>
+          <p>제품특징</p>
+        </div>
+        <!--  상품 정보 데이터 -->
+        <% for(let i=0; i<products.length; i++) {%>
+        <div class="admin-product-data">
+          <p class="product-id"><%=products[i]._id %></p>
+          <p class="product-category"><%=products[i].category %></p>
+          <p class="product-title"><%=products[i].title %></p>
+          <img src="/" class="product-img"></img>
+          <p class="product-price"><%=products[i].price %></p>
+          <p class="product-stock"><%=products[i].stock %></p>
+          <p class="product-description"><%=products[i].description %></p>
+          <p class="product-size"><%=products[i].size %></p>
+          <p class="product-origin"><%=products[i].origin %></p>
+          <p class="product-attribute"><%=products[i].attribute %></p>
+          <div>
+            <button class="btn product-update">상품수정</button>
+            <button class="btn product-delete">상품삭제</button>
+          </div>
+        </div>
+        <% } %>
+
+      </main>
+      <p class="product-add">+ 상품 추가</p>
       <footer class="site-footer">
         <div class="footer-content">
           <p>© 2023. Flora & Dér All rights reserved.</p>

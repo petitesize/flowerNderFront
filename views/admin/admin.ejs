@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>회원관리</title>
-    <link rel="stylesheet" href="../../public/css/common.css" />
-    <link rel="stylesheet" href="../../public/css/reset.css" />
-    <link rel="stylesheet" href="../../public/css/admin.css" />
+    <title>관리자 페이지</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="/css/reset.css" />
   </head>
   <body>
     <div class="container">
@@ -14,7 +14,7 @@
         <div class="header-wrap">
           <h1>
             <a href="index.html">
-              <img src="../../public/img/logo.png" alt="로고" />
+              <img src="/img/logo.png" alt="로고" />
             </a>
           </h1>
           <div class="h-right">
@@ -29,30 +29,13 @@
           <div class="nav-left">
             <a href="/admin/orders">주문관리</a>
             <a href="/admin/products">상품관리</a>
-            <a href="/admin/users" class="active">회원관리</a>
+            <a href="/admin/users">회원관리</a>
             <a href="/admin/categories">카테고리관리</a>
           </div>
         </div>
       </nav>
-      <main class="admin-container">
-        <div class="admin-user-category">
-          <p>회원번호</p>
-          <p>이름</p>
-          <p>아이디</p>
-          <p>연락처</p>
-          <p>이메일</p>
-          <p>등록일</p>
-        </div>
-
-        <div class="admin-user-data">
-          <p class="user-id">6370AE-SAD343DBZZ534-00A</p>
-          <p class="user-name">김혁진</p>
-          <p class="user-username">khj1234</p>
-          <p class="user-phone">010-1234-1234</p>
-          <p class="user-email">khj1234@gmail.com</p>
-          <p class="user-registrated_at">2022-05-22</p>
-        </div>
-      </main>
+      <!--  관리자 페이지  -->
+      <main class="admin-main">관리자 페이지입니다.</main>
       <footer class="site-footer">
         <div class="footer-content">
           <p>© 2023. Flora & Dér All rights reserved.</p>
@@ -74,5 +57,5 @@
       </footer>
     </div>
   </body>
-  <script src="./js/admin.js"></script>
+  <script src="/js/admin.js"></script>
 </html>
