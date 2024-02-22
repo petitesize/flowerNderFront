@@ -2,10 +2,6 @@
   border-right: none;
 }
 
-.input-border {
-  margin: -1px 0;
-}
-
 .button-black {
   background-color: black;
   color: white;
@@ -134,6 +130,14 @@ td {
   border: 1px solid black;
   padding: 12px 14px;
   width: 100%;
+}
+
+.input-border {
+  margin: -1px 0;
+}
+
+.input-postcode > input {
+  border-bottom: none;
 }
 
 .input-block {

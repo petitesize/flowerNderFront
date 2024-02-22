@@ -29,5 +29,6 @@ input {
 }
 
 .input-border {
-  margin: -1px 0;
+  border-top: none;
+  border-bottom: none;
 }
