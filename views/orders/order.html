@@ -39,9 +39,9 @@
                   </div>
                   <div class="info-wrap">
                     <span class="item-title large-font"> 상품명 </span>
-                    <span class="item-option"> 옵션 </span>
+                    <!-- <span class="item-option"> 옵션 </span> -->
                     <span class="item-quantity">수량</span>
-                    <span class="item-amount large-font">4,200,000원</span>
+                    <span class="item-amount">4,200,000원</span>
                   </div>
                 </a>
               </div>
@@ -55,9 +55,9 @@
                   </div>
                   <div class="info-wrap">
                     <span class="item-title large-font"> 상품명 </span>
-                    <span class="item-option"> 옵션 </span>
+                    <!-- <span class="item-option"> 옵션 </span> -->
                     <span class="item-quantity">수량</span>
-                    <span class="item-amount large-font">4,200,000원</span>
+                    <span class="item-amount">4,200,000원</span>
                   </div>
                 </a>
               </div>
@@ -69,14 +69,25 @@
         <div class="orderer-block order-block">
           <h6>주문자 정보</h6>
           <div class="orderer-info">
-            <div class="orderer-name">이름</div>
-            <div class="orderer-phone">전화번호</div>
-            <div class="orderer-email">이메일</div>
+            <div>
+              <input class="orderer-name" type="text" placeholder="이름" />
+            </div>
+            <div>
+              <input class="orderer-phone" type="tel" placeholder="전화번호" />
+            </div>
+            <div>
+              <input class="orderer-email" type="email" placeholder="이메일" />
+            </div>
           </div>
         </div>
+        <!-- 배송 정보 -->
         <div class="shipping-block order-block">
           <h6>배송 정보</h6>
           <div class="recipient-wrap">
+            <label for="checkbox" class="checkbox-recipient">
+              <input class="checkbox" type="checkbox" />
+              <p>주문자 정보와 동일</p>
+            </label>
             <div class="input-wrap">
               <input
                 class="recipient-name-input"
@@ -100,7 +111,7 @@
                 value="12312"
                 placeholder="우편번호"
               />
-              <button class="button-black">주소찾기</button>
+              <!-- <button class="button-black">주소찾기</button> -->
             </div>
 
             <div>
@@ -120,10 +131,11 @@
               />
             </div>
           </div>
+          <!-- 배송 메모 -->
           <div class="delivery-msg-wrap">
             <p>배송메모</p>
             <div>
-              <select name="delivery-msg">
+              <select class="delivery-msg">
                 <option value>배송메모를 선택해주세요.</option>
                 <option value="배송 전에 미리 연락 바랍니다.">
                   배송 전에 미리 연락 바랍니다.
@@ -131,7 +143,14 @@
                 <option value="부재 시 경비실에 맡겨주세요.">
                   부재 시 경비실에 맡겨주세요.
                 </option>
+                <option value="직접 입력">직접 입력</option>
               </select>
+              <input
+                type="text"
+                class="direct-input"
+                style="display: none"
+                placeholder="배송 메모를 입력해주세요."
+              />
             </div>
           </div>
         </div>
@@ -185,5 +204,6 @@
       </div>
       <div class="footer-right"></div>
     </footer>
+    <script src="../../public/js/order.js"></script>
   </body>
 </html>
