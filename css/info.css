@@ -1,0 +1,82 @@
+.container{
+    width: 100%;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info .info-wrap {
+    width: 600px;
+    height: 1200px;
+}
+
+.info .info-wrap .info-box {
+    width: 94%;
+    margin: 100px auto;
+}
+
+.info .info-wrap .info-box .info-header {
+    margin: 14px 0;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.info .info-wrap .info-content {
+    display: flex;
+}
+
+.info .info-wrap .button .instagram-button {
+    width: 140px;
+    height: 36px;
+    margin-top: 14px;
+    background-color: #000;
+    color: #fff;
+}
+
+.info .info-wrap .info-content .content-left {
+    width: 32%;
+}
+
+.info .info-wrap .info-content .content-right {
+    width: 68%;
+}
+
+/* ---------- FAQ ---------- */
+/* ----- top -----  */
+.info .info-wrap .info-box .faq-list .list-top {
+    padding: 12px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #000;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+/* ----- icon ----- */
+.info .info-wrap .info-box .faq-list .list-top .top-icon .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.info .info-wrap .info-box .faq-list .list-top .top-icon .off {
+    display: none;
+}
+
+/* ----- bottom ----- */
+.info .info-wrap .info-box .faq-list .list-bottom.last{
+    border-bottom: 1px solid #000;
+    box-sizing: border-box;
+}
+
+/* ----- bottom > answer ----- */
+.info .info-wrap .info-box .faq-list .list-bottom .answer.off {
+    display: none;
+    transition: all .35s;
+    overflow: hidden;
+    margin-left: 92px;
+    margin-bottom: 12px;
+}
