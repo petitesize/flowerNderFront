@@ -1,0 +1,34 @@
+input {
+  border: 1px solid black;
+  padding: 12px 14px;
+}
+
+.button-black-big {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.inside {
+  padding: 24px;
+  margin: 84px auto;
+  width: 600px;
+}
+
+.gol-wrap {
+  padding: 0 24px;
+  width: 100%;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-border {
+  border-top: none;
+  border-bottom: none;
+}

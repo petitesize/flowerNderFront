@@ -1,11 +1,3 @@
-@import "reset.css";
-
-input,
-button {
-  font-family: "Pretendard", sans-serif;
-  font-size: 14px;
-}
-
 .nav-wrap {
   border-right: none;
 }
@@ -136,12 +128,24 @@ td {
 
 .modal-content input {
   border: 1px solid black;
-  padding: 12px 16px;
+  padding: 12px 14px;
   width: 100%;
+}
+
+.input-border {
+  margin: -1px 0;
+}
+
+.input-postcode > input {
+  border-bottom: none;
 }
 
 .input-block {
   margin-bottom: 25px;
+}
+
+.input-postcode {
+  width: 30%;
 }
 
 .input-address {
