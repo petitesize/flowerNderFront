@@ -7,6 +7,7 @@
 .product ul{
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 48px;
 }
 .product .list-wrap{
     width: 25%;
@@ -20,10 +21,14 @@
 }
 .product .list-top a{
     text-align:  center;
+    overflow: hidden;
+}
+.product .list-top a:hover img{
+    transform: scale(1.13);
 }
 .product .list-top a img{
     width: 100%;
-    /* object-fit: cover; */
+    transition: all 0.2s linear;
 }
 .product .list-bottom{
     min-height: 150px;
@@ -46,10 +51,22 @@
 .product .list-bottom .list-status img{
     width: 100%;}
 .product-more{
-    margin: 48px auto 88px;
+    margin: 0 auto;
     text-align: center;
 }
 .product-more button{
     padding: 10px 25px;
     border: 1px solid #000;
+}
+
+#productList li:nth-child(n+13) {
+    display: none;
+}
+
+.product-more {
+    display: none;
+}
+
+.site-footer{
+    margin-top: 88px;
 }

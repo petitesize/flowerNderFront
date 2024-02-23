@@ -6,6 +6,9 @@
   width: 90%;
   margin: 80px auto 300px auto;
 }
+.cart .cart-content.none{
+  display: none;
+}
 .cart .cart-head {
   display: flex;
   align-items: normal;
@@ -120,9 +123,11 @@
 }
 .cart .cart-body .cart-body-left .cart-list .cl-list-2 .cl-info .cl-dep span{
   border: 1px solid #444;
-  padding: 2px 3px;
+  padding: 1px 3px;
   border-radius: 3px;
   margin-right: 3px;
+  color: #444;
+  letter-spacing: 0.5px;
 }
 .cart .cart-body .cart-body-left .cart-list .cl-list-3 {
   width: 16%;
@@ -160,6 +165,9 @@
   justify-content: center;
   text-align: center;
   border-bottom: 1px solid #333;
+}
+.cart .cart-body .cart-body-right.none{
+  display: none;
 }
 .cart .cart-body .cart-body-right span {
   padding: 20px 0;
@@ -252,3 +260,21 @@
   padding-bottom: 3px;
   border-bottom: 1px solid #000;
 }
+
+
+
+/* --- 장바구니에 아무것도 없을때 ui */
+
+.cart .cart-content-none.none{
+  display: none;
+}
+.cart .cart-content-none .cart-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+  border-bottom: 1px solid #000;
+  margin-bottom: 35px;
+}
+
+
