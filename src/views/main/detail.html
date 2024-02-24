@@ -12,14 +12,14 @@
     <header class="header">
       <div class="header-wrap">
         <h1>
-          <a href="../index.html">
+          <a href="/index.html">
             <img src="/public/img/logo.png" alt="로고" />
           </a>
         </h1>
         <div class="h-right">
-          <a href="#">LOGIN</a>
-          <a href="#">MY PAGE</a>
-          <a href="cart.html" class="nav-cart"
+          <a href="/member/login.html">LOGIN</a>
+          <a href="/orders/orderlist.html">MY PAGE</a>
+          <a href="/main/cart.html" class="nav-cart"
             >CART<span class="cart-num">1</span></a
           >
         </div>
@@ -50,7 +50,7 @@
               <img
                 src="/public/img/p1.jpeg"
                 alt="상품사진"
-                id="productMainImg"
+                id="product-main-img"
               />
             </div>
             <!-- 서브이미지들 sub_image1~5 -->
@@ -59,35 +59,35 @@
                 <img
                   src="/public/img/p2.jpeg"
                   alt="다른상품 사진들"
-                  class="productSubImg"
+                  class="product-sub-img"
                 />
               </div>
               <div class="detail-lb-inner">
                 <img
                   src="/public/img/p3.jpeg"
                   alt="다른상품 사진들"
-                  class="productSubImg"
+                  class="product-sub-img"
                 />
               </div>
               <div class="detail-lb-inner">
                 <img
                   src="/public/img/p4.jpeg"
                   alt="다른상품 사진들"
-                  class="productSubImg"
+                  class="product-sub-img"
                 />
               </div>
               <div class="detail-lb-inner">
                 <img
                   src="/public/img/p5.jpeg"
                   alt="다른상품 사진들"
-                  class="productSubImg"
+                  class="product-sub-img"
                 />
               </div>
               <div class="detail-lb-inner">
                 <img
                   src="/public/img/p1.jpg"
                   alt="다른상품 사진들"
-                  class="productSubImg"
+                  class="product-sub-img"
                 />
               </div>
             </div>
@@ -198,10 +198,10 @@
                   </div>
                   <!-- *** 장바구니는 로컬스토리지로 연결~~~~ -->
                   <div class="dcb-btn dcb-buy">
-                    <button type="button" class="buy-btn" onclick="buyGo()">
+                    <button type="button" class="buy-btn" onclick="goToBuy()">
                       구매하기
                     </button>
-                    <button type="submit" class="buy-cart" onclick="cartGo()">
+                    <button type="submit" class="buy-cart" onclick="addToCart()">
                       장바구니
                     </button>
                   </div>
@@ -283,5 +283,6 @@
     </footer>
   </body>
   <script src="/public/js/cart.js"></script>
+  <!-- <script src="/public/js/detail.js"></script> -->
   <script type="module" src="/public/js/detail.js"></script>
 </html>

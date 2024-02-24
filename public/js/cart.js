@@ -5,7 +5,7 @@ const cartContentNone = document.querySelector('.cart-content-none');
 
 // 저장된 카트 가져오기
 const saveCart = JSON.parse(localStorage.getItem('cart'));
-console.log(saveCart);
+// console.log(saveCart);
 
 // ================ 장바구니에 아무것도 없을때 style 적용 ================
 if (saveCart === null || saveCart.length === 0) {
@@ -17,12 +17,12 @@ if (saveCart === null || saveCart.length === 0) {
 
 // ---------- 상품 리스트 템플릿
 const plusList = () => {
-    for(let i = 0; saveCart.length > 0; i++){
-        const template  = `
+    for (let i = 0; i < saveCart.length; i++) {
+        const cartTemplate  = `
         <div class="cart-list">
             <span class="cl-list-1">
-                <input type="checkbox" id="cart-ck1">
-                <label for="cart-ck1"><em></em></label>
+                <input type="checkbox" id="cart-ck${i}">
+                <label for="cart-ck${i}"><em></em></label>
             </span>
             <span class="cl-list-2">
                 <span class="cl-img">
@@ -60,7 +60,7 @@ const plusList = () => {
             </span>
         </div>
 `
-wrapBox.innerHTML += template;
+wrapBox.insertAdjacentHTML('beforeend', cartTemplate)
 
     }
 }

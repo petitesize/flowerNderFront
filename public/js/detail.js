@@ -1,33 +1,36 @@
 import { API_URL } from "/public/js/constants.js";
 
 // ================  ***마우스 올렸을때의 이미지가 메인이미지 부분에 보이게 만들기 ================
-const mainImg = document.getElementById("productMainImg");
-const subImgs = document.querySelectorAll(".productSubImg");
+const mainImg = document.getElementById("product-main-img");
+const subImgs = document.querySelectorAll(".product-sub-img");
 
-subImgs.forEach((subImg) => {
-  subImg.addEventListener("mouseover", (e) => {
-    mainImg.src = e.target.src;
+// ** 부모 컨테이너에 이벤트 위임하기!
+document.querySelector('.detail-left').addEventListener('mouseover', (e) => {
+    const targetImg = e.target;
+    if (targetImg.classList.contains('product-sub-img')) {
+        mainImg.src = targetImg.src;
 
-    // 모든 서브이미지에만 클래스 제거
-    subImgs.forEach((img) => img.classList.remove("hover"));
+        // 모든 subImgs에서 'hover' 클래스 제거
+        subImgs.forEach((img) => img.classList.remove('hover'));
 
-    // 현재 마우스 올린 서비이미지에만 'hover' 클래스 추가
-    subImg.classList.add("hover");
-  });
+        // 현재 subImg에 'hover' 클래스 추가
+        targetImg.classList.add('hover');
+    }
 });
+
 
 // ================ 교환 환불 동의 셀렉트박스 선택안될시 얼럿창 ================
 // ---------- 주문하기 버튼
-function buyGo() {
+function goToBuy() {
   const selectAgree = document.getElementById("selectAgree");
 
   if (selectAgree.value === "0") {
     alert("교환 및 환불 동의 항목을 선택하세요.");
-  } else {
   }
 }
 // ---------- 장바구니 담기 버튼
-function cartGo() {
+function addToCart() {
+  console.log("addToCart 함수 호출"); // 디버깅을 위한 콘솔 로그
   const selectAgree = document.getElementById("selectAgree");
 
   if (selectAgree.value === "0") {
@@ -57,7 +60,9 @@ const data = {
   mainImage,
 };
 
-const localCart = JSON.parse(localStorage.getItem("cart"));
+// ** cart 조회 후 값이 없을 경우에 빈 배열로 초기화해주는 방어 로직 추가!!
+const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+
 
 if (localCart === null) {
   localStorage.setItem("cart", JSON.stringify([]));
