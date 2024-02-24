@@ -10,7 +10,7 @@ const showMoreItems = () => {
             pulsLi.style.display = 'block';
         } else {
             // 더 이상 보여줄 아이템이 없을 경우 버튼 숨김
-            document.getElementById('moreButton').style.display = 'none';
+            document.getElementById('more-btn').style.display = 'none';
             break;
         }
     }
@@ -20,7 +20,7 @@ const showMoreItems = () => {
 };
 
 // 더 보기 버튼에 이벤트 리스너 추가
-document.getElementById('moreButton').addEventListener('click', showMoreItems);
+document.getElementById('more-btn').addEventListener('click', showMoreItems);
 
 // 초기에 보여지는 아이템의 개수
 let showItems = 12;
