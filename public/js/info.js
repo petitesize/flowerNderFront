@@ -1,8 +1,8 @@
 const instagramButton = document.querySelector('.instagram-button');
-const question = document.getElementsByClassName('list-top');
-const answer = document.getElementsByClassName('answer');
-const upButton = document.getElementsByClassName('icon-up');
-const downButton = document.getElementsByClassName('icon-down')
+const question = document.querySelectorAll('.list-top');
+const answer = document.querySelectorAll('.answer');
+const upButton = document.querySelectorAll('.icon-up');
+const downButton = document.querySelectorAll('.icon-down');
 
 instagramButton.addEventListener('click', () => window.open('https://www.instagram.com/market.apf/'));
 
