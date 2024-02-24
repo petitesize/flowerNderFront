@@ -1,240 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flora & Dér</title>
-    <link rel="stylesheet" href="/public/css/reset.css">
-    <link rel="stylesheet" href="/public/css/common.css">
-    <link rel="stylesheet" href="/public/css/detail.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/public/css/reset.css" />
+    <link rel="stylesheet" href="/public/css/common.css" />
+    <link rel="stylesheet" href="/public/css/detail.css" />
+  </head>
+  <body>
     <header class="header">
-        <div class="header-wrap">
-            <h1>
-                <a href="../index.html">
-                    <img src="/public/img/logo.png" alt="로고">
-                </a>
-            </h1>
-            <div class="h-right">
-                <a href="#">LOGIN</a>
-                <a href="#">MY PAGE</a>
-                <a href="cart.html" class="nav-cart">CART<span class="cart-num">1</span></a>
-            </div>
+      <div class="header-wrap">
+        <h1>
+          <a href="../index.html">
+            <img src="/public/img/logo.png" alt="로고" />
+          </a>
+        </h1>
+        <div class="h-right">
+          <a href="#">LOGIN</a>
+          <a href="#">MY PAGE</a>
+          <a href="cart.html" class="nav-cart"
+            >CART<span class="cart-num">1</span></a
+          >
         </div>
+      </div>
     </header>
 
     <nav class="nav">
-        <div class="nav-wrap">
-            <div class="nav-left">
-                <!-- 상품을 선택하면 상세페이지에서
+      <div class="nav-wrap">
+        <div class="nav-left">
+          <!-- 상품을 선택하면 상세페이지에서
                     BUY > 그 페이지에서 선택한 카테고리이름이 뜹니다! -->
-                <a href="#">BUY</a>
-                <div class="right-arrow">></div>
-                <!-- 아래! -->
-                <a href="#">ALL</a>
-            </div>
+          <a href="#">BUY</a>
+          <div class="right-arrow">></div>
+          <!-- 아래! -->
+          <a href="#">ALL</a>
         </div>
+      </div>
     </nav>
 
     <!-- 상품 상세페이지 시작 -->
     <section class="detail">
-        <div class="detail-content">
-            <!-- 상품 이미지 & 상품설명 + 상품선택이 있습니다! -->
-            <div class="dc-top">
-                <div class="detail-left">
-                    <!-- 이미지들 url로 한다고 하심 main_image -->
-                    <div class="detail-l-top">
-                        <img src="/public/img/p1.jpeg" alt="상품사진" id="productMainImg">
-                    </div>
-                    <!-- 서브이미지들 sub_image1~5 -->
-                    <div class="detail-l-bottom">
-                        <div class="detail-lb-inner">
-                            <img src="/public/img/p2.jpeg" alt="다른상품 사진들" class="productSubImg">
-                        </div>
-                        <div class="detail-lb-inner">
-                            <img src="/public/img/p3.jpeg" alt="다른상품 사진들" class="productSubImg">
-                        </div>
-                        <div class="detail-lb-inner">
-                            <img src="/public/img/p4.jpeg" alt="다른상품 사진들" class="productSubImg">
-                        </div>
-                        <div class="detail-lb-inner">
-                            <img src="/public/img/p5.jpeg" alt="다른상품 사진들" class="productSubImg">
-                        </div>
-                        <div class="detail-lb-inner">
-                            <img src="/public/img/p1.jpg" alt="다른상품 사진들" class="productSubImg">
-                        </div>
-                    </div>
-                </div>
-                <div class="detail-right">
-                    <div class="detail-r-top">
-                        <div class="detail-title">
-                            <!-- *** 상품의 이름! title -->
-                            <h2>Dynastic tulip</h2>
-                            <!-- *** 수량이 0이 되었을때 이미지 떠야함 stock , soldout -->
-                            <img src="/public/img/sold.jpg" alt="">
-                        </div>
-
-                        <!-- *** 상품의 가격! price -->
-                        <div class="detail-price">
-                            <h3>25,800원</h3>
-                        </div>
-                        <!-- *** 상품 설명 description -->
-                        <div class="detail-info">
-                            <p>
-                                설레는 사랑의 시작, 다이너스티 튤립
-                                연한 핑크색의 다이너스티 튤립은 '사랑의 시작'을 의미합니다.
-
-                                사랑이 시작되는 설레는 순간, 다이너스티 튤립을 전해보세요.
-
-
-                                연한 핑크색의 발그레한 볼과 함께 기억에 남을 겁니다.
-
-                                
-                                네덜란드 암스테르담에서는 매년 봄이 오기 전에,
-                                시청 앞에서 튤립을 서로 건네는 페스티벌을 진행해요.
-                                전국의 튤립 농가에서도
-                                새로운 품종의 튤립을 처음으로 소개하는 자리이기도 하고
-                                서로 새해의 좋은 기운을 전하는 행사가 되기도 해요.
-                                오늘 플로라앤더에서 암스테르담처럼,
-                                튤립을 편하게 즐겨보세요!
-                                Schönen Tag noch.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="detail-r-mid">
-                        <div class="drm-top">
-                            <!-- 사이즈 size -->
-                            <div class="detail-flex df-two">
-                                <p class="dft-title">Volume</p>
-                                <span class="dft-text">Small</span>
-                            </div>
-                            <!-- 원산지! origin -->
-                            <div class="detail-flex df-two">
-                                <p class="dft-title">Origin</p>
-                                <span class="dft-text">Korea</span>
-                            </div>
-                        </div>
-                        
-                        <div class="drm-bottom">
-                            <div class="detail-flex df-two">
-                                <!-- 꽃의 특징이 들어가는곳! attribute -->
-                                <p class="dft-title">특성</p>
-                                <span class="dft-text">튤립은 품종이 다양해 색상, 화형을 고르는 재미가 있습니다. 
-                                    빛과 온도에 따라 벌어졌다가 오므라드는 특성이 있습니다.
-                                </span>
-                            </div>
-
-                            <!-- 고정된 텍스트들 개발필요 x -->
-                            <div class="detail-flex df-two">
-                                <p class="dft-title">상세 내용</p>
-                                <span class="dft-text">꽃, 이렇게 배송 돼요.
-                                    Flora & Dér 꽃시장은 국내 농장의 신선한 꽃을 최소한의 
-                                    컨디셔닝만 거쳐 보내드립니다.
-
-                                    배송 중에도 꽃에 물을 공급하기 위해 
-                                    플로럴 폼(오아시스)을 사용합니다.
-
-                                    꽃을 보호하기 위해 포장지로 감싸고 
-                                    Flora & Dér 시그니처 로고가 적용된 패키지에 담아 배송됩니다.
-                                </span>
-                            </div>
-                            <div class="detail-flex df-two">
-                                <p class="dft-title">컨디셔닝</p>
-                                <span class="dft-text">잎은 꽃받침 아래 2~3개를 제외하고 전부 제거하여 물에 잠기는 부분에 잎이 없도록 합니다. 
-
-                                    잎 정리 후 줄기의 끝부분을 잘라 물에 담가줍니다.
-                                </span>
-                            </div>
-                            <div class="detail-flex df-two">
-                                <p class="dft-title">관리 방법</p>
-                                <span class="dft-text">신선한 물로 화병을 자주 갈아 주며, 
-                                    줄기 끝을 다시 잘라 수화작용을 원활하게 해주세요.
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detail-r-bottom">
-                        <p class="detail-warning">
-                            ※ 구매 수량에 따라 배송되는 박스는 이미지와 다를 수 있습니다.
-                        </p>
-                        <div class="detail-delivery">
-                            <p class="dd-title">배송비</p>
-                            <p class="dd-text">착불</p>
-                        </div>
-                        <div class="detail-choice">
-                            <div class="dc-inner dc-sel-top">
-                                <p>필수 선택 *</p>
-                                <select name="selectAgree" id="selectAgree" required>
-                                    <option value="0">교환 및 환불 동의</option>
-                                    <option value="1">제품을 개봉하거나 상품가치가 훼손된 경우에는 제품의 교환 및 환불 불가 안내에 동의합니다.</option>
-                                </select>
-                            </div>
-
-                            <div class="dc-bottom">
-                                <div class="dcb-btn dcb-soldout">
-                                    <button type="button">품절된상품입니다.</button>
-                                </div>
-                                <!-- *** 장바구니는 로컬스토리지로 연결~~~~ -->
-                                <div class="dcb-btn dcb-buy">
-                                    <button type="button" class="buy-btn" onclick="buyGo()">구매하기</button>
-                                    <button type="submit" class="buy-cart"  onclick="cartGo()">장바구니</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="detail-content">
+        <!-- 상품 이미지 & 상품설명 + 상품선택이 있습니다! -->
+        <div class="dc-top">
+          <div class="detail-left">
+            <!-- 이미지들 url로 한다고 하심 main_image -->
+            <div class="detail-l-top">
+              <img
+                src="/public/img/p1.jpeg"
+                alt="상품사진"
+                id="productMainImg"
+              />
             </div>
-
-            <!-- 주문안내와 배송안내 text들이 있는곳입니다.
-                고정된 값이여서 추가개발 필요 X -->
-            <div class="detail-b-text">
-                <h4>주문안내</h4>
-                <ul class="buy-info">
-                    <li>
-                        꽃은 살아있는 생물이므로 꽃 송이마다 화형, 색상 등이 다릅니다. 따라서 배송 되는 상품은 이미지와 조금 차이가 날 수 있다는 점 양해 부탁드립니다.
-                    </li>
-                    <li>
-                        꽃을 직접 가꾸는 즐거움을 느낄 수 있도록 가장 최소한의 컨디셔닝으로만 작업 후 보내드립니다.
-                    </li>
-                    <li>
-                        꽃은 물에 꽂힌 상태로 수급&보관되고 있기에 줄기 하단의 이파리에 상처가 생길 수 있습니다. 줄기 하단의 상처 있는 이파리는 제거하여 보시길 추천드립니다.
-                    </li>
-                    <li>
-                        배송 과정에서 꽃이 지쳐 물 내림 현상이 발생할 수 있습니다. 꽃을 받은 즉시 남아있는 이파리들을 제거해 주고 하루 정도 시원한 물을 올려주면 꽃이 싱싱하게 살아날 수 있습니다.
-                    </li>
-                    <li>
-                        매일 오전 꽃 입고 및 검수 후, 꽃의 상태가 좋지 못하다면 플로리스트의 판단하에 새로 수급되는 꽃으로 배송을 도와드립니다. 따라서 선택하신 배송일보다 1~3일 정도 지연이 될 수 있다는 점 양해 부탁드립니다.
-                    </li>
-                </ul>
-                <h4>배송안내</h4>
-                <ul class="delivery-info">
-                    <li>
-                        택배 배송 특성상 정확한 배송 시간 안내와 배송 시간 조정이 어렵습니다.
-                    </li>
-                    <li>
-                        제주도 및 일부 도서산간 지역은 지정하신 수령일 보다 1~2일 더 소요될 수 있습니다
-                    </li>
-                    <li>
-                        CJ 대한통운을 통해 전국 배송이 가능합니다. (제주/도서산간 포함)
-                    </li>
-                    <li>
-                        배송 정보(실시간 배송 현황, 배송 완료 사진, 고객센터 전화번호 등)는 카카오톡 알림 서비스를 통해 확인하실 수 있습니다
-                    </li>
-                </ul>
+            <!-- 서브이미지들 sub_image1~5 -->
+            <div class="detail-l-bottom">
+              <div class="detail-lb-inner">
+                <img
+                  src="/public/img/p2.jpeg"
+                  alt="다른상품 사진들"
+                  class="productSubImg"
+                />
+              </div>
+              <div class="detail-lb-inner">
+                <img
+                  src="/public/img/p3.jpeg"
+                  alt="다른상품 사진들"
+                  class="productSubImg"
+                />
+              </div>
+              <div class="detail-lb-inner">
+                <img
+                  src="/public/img/p4.jpeg"
+                  alt="다른상품 사진들"
+                  class="productSubImg"
+                />
+              </div>
+              <div class="detail-lb-inner">
+                <img
+                  src="/public/img/p5.jpeg"
+                  alt="다른상품 사진들"
+                  class="productSubImg"
+                />
+              </div>
+              <div class="detail-lb-inner">
+                <img
+                  src="/public/img/p1.jpg"
+                  alt="다른상품 사진들"
+                  class="productSubImg"
+                />
+              </div>
             </div>
+          </div>
+          <div class="detail-right">
+            <div class="detail-r-top">
+              <div class="detail-title">
+                <!-- *** 상품의 이름! title -->
+                <h2>Dynastic tulip</h2>
+                <!-- *** 수량이 0이 되었을때 이미지 떠야함 stock , soldout -->
+                <img src="/public/img/sold.jpg" alt="" />
+              </div>
+
+              <!-- *** 상품의 가격! price -->
+              <div class="detail-price">
+                <h3>25,800원</h3>
+              </div>
+              <!-- *** 상품 설명 description -->
+              <div class="detail-info">
+                <p>
+                  설레는 사랑의 시작, 다이너스티 튤립 연한 핑크색의 다이너스티
+                  튤립은 '사랑의 시작'을 의미합니다. 사랑이 시작되는 설레는
+                  순간, 다이너스티 튤립을 전해보세요. 연한 핑크색의 발그레한
+                  볼과 함께 기억에 남을 겁니다. 네덜란드 암스테르담에서는 매년
+                  봄이 오기 전에, 시청 앞에서 튤립을 서로 건네는 페스티벌을
+                  진행해요. 전국의 튤립 농가에서도 새로운 품종의 튤립을 처음으로
+                  소개하는 자리이기도 하고 서로 새해의 좋은 기운을 전하는 행사가
+                  되기도 해요. 오늘 플로라앤더에서 암스테르담처럼, 튤립을 편하게
+                  즐겨보세요! Schönen Tag noch.
+                </p>
+              </div>
+            </div>
+            <div class="detail-r-mid">
+              <div class="drm-top">
+                <!-- 사이즈 size -->
+                <div class="detail-flex df-two">
+                  <p class="dft-title">Volume</p>
+                  <span class="dft-text">Small</span>
+                </div>
+                <!-- 원산지! origin -->
+                <div class="detail-flex df-two">
+                  <p class="dft-title">Origin</p>
+                  <span class="dft-text">Korea</span>
+                </div>
+              </div>
+
+              <div class="drm-bottom">
+                <div class="detail-flex df-two">
+                  <!-- 꽃의 특징이 들어가는곳! attribute -->
+                  <p class="dft-title">특성</p>
+                  <span class="dft-text"
+                    >튤립은 품종이 다양해 색상, 화형을 고르는 재미가 있습니다.
+                    빛과 온도에 따라 벌어졌다가 오므라드는 특성이 있습니다.
+                  </span>
+                </div>
+
+                <!-- 고정된 텍스트들 개발필요 x -->
+                <div class="detail-flex df-two">
+                  <p class="dft-title">상세 내용</p>
+                  <span class="dft-text"
+                    >꽃, 이렇게 배송 돼요. Flora & Dér 꽃시장은 국내 농장의
+                    신선한 꽃을 최소한의 컨디셔닝만 거쳐 보내드립니다. 배송
+                    중에도 꽃에 물을 공급하기 위해 플로럴 폼(오아시스)을
+                    사용합니다. 꽃을 보호하기 위해 포장지로 감싸고 Flora & Dér
+                    시그니처 로고가 적용된 패키지에 담아 배송됩니다.
+                  </span>
+                </div>
+                <div class="detail-flex df-two">
+                  <p class="dft-title">컨디셔닝</p>
+                  <span class="dft-text"
+                    >잎은 꽃받침 아래 2~3개를 제외하고 전부 제거하여 물에 잠기는
+                    부분에 잎이 없도록 합니다. 잎 정리 후 줄기의 끝부분을 잘라
+                    물에 담가줍니다.
+                  </span>
+                </div>
+                <div class="detail-flex df-two">
+                  <p class="dft-title">관리 방법</p>
+                  <span class="dft-text"
+                    >신선한 물로 화병을 자주 갈아 주며, 줄기 끝을 다시 잘라
+                    수화작용을 원활하게 해주세요.
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="detail-r-bottom">
+              <p class="detail-warning">
+                ※ 구매 수량에 따라 배송되는 박스는 이미지와 다를 수 있습니다.
+              </p>
+              <div class="detail-delivery">
+                <p class="dd-title">배송비</p>
+                <p class="dd-text">착불</p>
+              </div>
+              <div class="detail-choice">
+                <div class="dc-inner dc-sel-top">
+                  <p>필수 선택 *</p>
+                  <select name="selectAgree" id="selectAgree" required>
+                    <option value="0">교환 및 환불 동의</option>
+                    <option value="1">
+                      제품을 개봉하거나 상품가치가 훼손된 경우에는 제품의 교환
+                      및 환불 불가 안내에 동의합니다.
+                    </option>
+                  </select>
+                </div>
+
+                <div class="dc-bottom">
+                  <div class="dcb-btn dcb-soldout">
+                    <button type="button">품절된상품입니다.</button>
+                  </div>
+                  <!-- *** 장바구니는 로컬스토리지로 연결~~~~ -->
+                  <div class="dcb-btn dcb-buy">
+                    <button type="button" class="buy-btn" onclick="buyGo()">
+                      구매하기
+                    </button>
+                    <button type="submit" class="buy-cart" onclick="cartGo()">
+                      장바구니
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- 주문안내와 배송안내 text들이 있는곳입니다.
+                고정된 값이여서 추가개발 필요 X -->
+        <div class="detail-b-text">
+          <h4>주문안내</h4>
+          <ul class="buy-info">
+            <li>
+              꽃은 살아있는 생물이므로 꽃 송이마다 화형, 색상 등이 다릅니다.
+              따라서 배송 되는 상품은 이미지와 조금 차이가 날 수 있다는 점 양해
+              부탁드립니다.
+            </li>
+            <li>
+              꽃을 직접 가꾸는 즐거움을 느낄 수 있도록 가장 최소한의
+              컨디셔닝으로만 작업 후 보내드립니다.
+            </li>
+            <li>
+              꽃은 물에 꽂힌 상태로 수급&보관되고 있기에 줄기 하단의 이파리에
+              상처가 생길 수 있습니다. 줄기 하단의 상처 있는 이파리는 제거하여
+              보시길 추천드립니다.
+            </li>
+            <li>
+              배송 과정에서 꽃이 지쳐 물 내림 현상이 발생할 수 있습니다. 꽃을
+              받은 즉시 남아있는 이파리들을 제거해 주고 하루 정도 시원한 물을
+              올려주면 꽃이 싱싱하게 살아날 수 있습니다.
+            </li>
+            <li>
+              매일 오전 꽃 입고 및 검수 후, 꽃의 상태가 좋지 못하다면
+              플로리스트의 판단하에 새로 수급되는 꽃으로 배송을 도와드립니다.
+              따라서 선택하신 배송일보다 1~3일 정도 지연이 될 수 있다는 점 양해
+              부탁드립니다.
+            </li>
+          </ul>
+          <h4>배송안내</h4>
+          <ul class="delivery-info">
+            <li>
+              택배 배송 특성상 정확한 배송 시간 안내와 배송 시간 조정이
+              어렵습니다.
+            </li>
+            <li>
+              제주도 및 일부 도서산간 지역은 지정하신 수령일 보다 1~2일 더
+              소요될 수 있습니다
+            </li>
+            <li>
+              CJ 대한통운을 통해 전국 배송이 가능합니다. (제주/도서산간 포함)
+            </li>
+            <li>
+              배송 정보(실시간 배송 현황, 배송 완료 사진, 고객센터 전화번호
+              등)는 카카오톡 알림 서비스를 통해 확인하실 수 있습니다
+            </li>
+          </ul>
+        </div>
+      </div>
     </section>
     <!-- 상품 상세페이지 끝 -->
 
     <footer class="site-footer">
-        <div class="footer-content">
-            <p>© 2023. Flora & Dér All rights reserved.</p>
-            <p>주식회사 엘리스트랙ㅣ대표자 엘리스ㅣ123-45-67891  [사업자정보확인]ㅣ2024-서울-00123ㅣ서울특별시 성동구 아차산로17길 48, 성수낙낙 2층</p>
-            <p><a href="tel:+82-123-1234">02-123-1234</a> ㅣ contact@floraandder.krㅣ <a href="#">카카오톡 채널</a>ㅣ<a href="#">인스타그램</a>  |  MON-FRI 10:00-17:00 | <a href="#">이용약관</a> ㅣ <a href="#">개인정보처리방침</a></p>
-        </div>
+      <div class="footer-content">
+        <p>© 2023. Flora & Dér All rights reserved.</p>
+        <p>
+          주식회사 엘리스트랙ㅣ대표자 엘리스ㅣ123-45-67891
+          [사업자정보확인]ㅣ2024-서울-00123ㅣ서울특별시 성동구 아차산로17길 48,
+          성수낙낙 2층
+        </p>
+        <p>
+          <a href="tel:+82-123-1234">02-123-1234</a> ㅣ contact@floraandder.krㅣ
+          <a href="#">카카오톡 채널</a>ㅣ<a href="#">인스타그램</a> | MON-FRI
+          10:00-17:00 | <a href="#">이용약관</a> ㅣ
+          <a href="#">개인정보처리방침</a>
+        </p>
+      </div>
     </footer>
-</body>
-<script src="/public/js/cart.js"></script>
-<script src="/public/js/detail.js"></script>
+  </body>
+  <script src="/public/js/cart.js"></script>
+  <script type="module" src="/public/js/detail.js"></script>
 </html>
