@@ -63,9 +63,9 @@
     width: 100%;
 }
 
-.modify .modify-wrap .email,
-.modify .modify-wrap .name,
-.modify .modify-wrap .tel {
+.modify .modify-wrap .email-box,
+.modify .modify-wrap .name-box,
+.modify .modify-wrap .tel-box {
     background-color: #f3f3f3;
 }
 
