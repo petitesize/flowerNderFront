@@ -1,3 +1,5 @@
+import { API_URL } from '/public/js/constants.js'
+
 const getOrders = async () => {
   const res = await fetch('http://localhost:8081/v1/admin/orders', {
     method: 'GET',
@@ -22,7 +24,6 @@ const getOrders = async () => {
           </div>
           <p class="order-product">
           ${data[i].order_items[0].title}...
-            아름다운 장미 꽃다발
           </p>
           <div>
             <button class="btn order-update">주문수정</button>

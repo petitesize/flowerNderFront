@@ -1,5 +1,7 @@
+import { API_URL } from '/public/js/constants.js'
+
 const getProducts = async () => {
-  const res = await fetch('http://localhost:8081/v1/admin/products', {
+  const res = await fetch('http://localhost:8081/api/v1/admin/products', {
     method: 'GET',
   })
   const datas = await res.json()
