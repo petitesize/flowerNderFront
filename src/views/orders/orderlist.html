@@ -71,7 +71,7 @@
               <td>
                 2,000,000원
                 <br />
-                <span>1개</span>
+                <span class="quantity-span">1개</span>
               </td>
               <td>
                 <div class="delivery-status">
@@ -84,7 +84,7 @@
               </td>
             </tr>
             <!-- dummy -->
-            <tr>
+            <!-- <tr>
               <td>
                 <div class="product-row">
                   <a href="#" class="img-block">
@@ -176,10 +176,30 @@
                   <button class="delivery-cancel button-black">주문취소</button>
                 </div>
               </td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </section>
+      <div class="inside">
+        <div class="gol-wrap">
+          <form>
+            <div class="input-block">
+              <input
+                class="search-order-id"
+                type="text"
+                placeholder="주문번호"
+              />
+              <input
+                class="input-border search-name"
+                type="text"
+                placeholder="이름"
+              />
+              <input class="search-email" type="email" placeholder="이메일" />
+            </div>
+            <button class="gol-btn button-black-big">조회하기</button>
+          </form>
+        </div>
+      </div>
       <footer class="site-footer">
         <div class="footer-content">
           <p>© 2023. Flora & Dér All rights reserved.</p>
@@ -267,7 +287,7 @@
       </div>
     </div>
 
-    <script src="../../../public/js/orderlist.js"></script>
+    <script type="module" src="/public/js/orderlist.js"></script>
     <script
       src="https://kit.fontawesome.com/cc75cf6ef4.js"
       crossorigin="anonymous"

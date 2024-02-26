@@ -10,6 +10,7 @@
 }
 
 .orderlist {
+  display: none;
   padding: 24px;
   margin: 122px 128px 200px 128px;
 }
@@ -36,6 +37,7 @@ th {
 
 td {
   padding: 10px;
+  line-height: 1.5;
 }
 
 .no-order > td {
@@ -61,6 +63,7 @@ td {
   vertical-align: middle;
   text-align: left;
   padding-left: 16px;
+  font-weight: bold;
 }
 
 .delivery-status {
@@ -74,6 +77,10 @@ td {
 .change-address {
   display: block;
   margin-bottom: 5px;
+}
+
+.quantity-span {
+  color: #555 !important;
 }
 
 /* change-address modal */
@@ -159,4 +166,40 @@ td {
 .confirm-button {
   width: 100%;
   padding: 10px;
+}
+
+/* guest_orderlist.css 이사 */
+input {
+  border: 1px solid black;
+  padding: 12px 14px;
+}
+
+.button-black-big {
+  background-color: black;
+  color: white;
+  width: 100%;
+  padding: 10px 14px;
+  text-align: center;
+}
+
+.inside {
+  padding: 24px;
+  margin: 84px auto;
+  width: 600px;
+}
+
+.gol-wrap {
+  padding: 0 24px;
+  width: 100%;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.input-border {
+  border-top: none;
+  border-bottom: none;
 }
