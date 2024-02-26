@@ -28,20 +28,19 @@
         <div class="product-block order-block">
           <h6>주문 상품 정보</h6>
           <div class="order-list-info">
-            <div>
-              <div class="order-item">
+            <div class="order-item-conatiner">
+              <!-- <div class="order-item">
                 <a href="#">
                   <div class="img-wrap">
                     <img src="/public/img/p1.jpeg" alt="주문 상품 이미지" />
                   </div>
                   <div class="info-wrap">
                     <span class="item-title large-font"> 상품명 </span>
-                    <!-- <span class="item-option"> 옵션 </span> -->
                     <span class="item-quantity">수량</span>
                     <span class="item-amount">4,200,000원</span>
                   </div>
                 </a>
-              </div>
+              </div> -->
               <div class="order-item">
                 <a href="#">
                   <div class="img-wrap">
@@ -52,15 +51,13 @@
                   </div>
                   <div class="info-wrap">
                     <span class="item-title large-font"> 상품명 </span>
-                    <!-- <span class="item-option"> 옵션 </span> -->
                     <span class="item-quantity">수량</span>
                     <span class="item-amount">4,200,000원</span>
                   </div>
                 </a>
               </div>
-
-              <div class="delivery-fee button-black-big">배송비</div>
             </div>
+            <div class="delivery-fee button-black-big">배송비 착불</div>
           </div>
         </div>
         <div class="orderer-block order-block">
@@ -161,13 +158,13 @@
               <p>배송비</p>
             </div>
             <div class="pay-number pay-col">
-              <p>8,400,000원</p>
-              <p>착불</p>
+              <p class="order-amount-p">8,400,000원</p>
+              <p class="delivery-fee-p">착불</p>
             </div>
           </div>
           <div class="total-payment-wrap">
             <p>총 주문금액</p>
-            <p>8,400,000원</p>
+            <p class="pay-amount-p">8,400,000원</p>
           </div>
         </div>
         <div class="payment-block order-block">
@@ -201,6 +198,6 @@
       </div>
       <div class="footer-right"></div>
     </footer>
-    <script src="../../../public/js/order.js"></script>
+    <script src="/public/js/order.js"></script>
   </body>
 </html>
