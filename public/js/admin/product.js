@@ -3,24 +3,27 @@ import { API_URL } from '/public/js/constants.js'
 const getProducts = async () => {
   const res = await fetch('http://localhost:8081/api/v1/admin/products', {
     method: 'GET',
+    headers: {
+      Authorization: 'Bearer ACCESS_TOKEN',
+    },
   })
   const datas = await res.json()
   const adminContainerEl = document.querySelector('.admin-container')
-  datas.forEach((data, i) => {
+  datas.forEach(data => {
     adminContainerEl.insertAdjacentHTML(
       'beforeend',
       `
       <div class="admin-product-data">
-          <p class="product-id">${data[i]._id}</p>
-          <p class="product-category">${data[i].category}</p>
-          <p class="product-title">${data[i].title}</p>
-          <img src="${data[i].main_image}" class="product-img"></img>
-          <p class="product-price">${data[i].price}</p>
-          <p class="product-stock">${data[i].stock}</p>
-          <p class="product-description">${data[i].description}</p>
-          <p class="product-size">${data[i].size}</p>
-          <p class="product-origin">${data[i].origin}</p>
-          <p class="product-attribute">${data[i].attribute}</p>
+          <p class="product-id">${data._id}</p>
+          <p class="product-category">${data.category}</p>
+          <p class="product-title">${data.title}</p>
+          <img src="${data.main_image}" class="product-img"></img>
+          <p class="product-price">${data.price}</p>
+          <p class="product-stock">${data.stock}</p>
+          <p class="product-description">${data.description}</p>
+          <p class="product-size">${data.size}</p>
+          <p class="product-origin">${data.origin}</p>
+          <p class="product-attribute">${data.attribute}</p>
           <div>
             <button class="btn product-update">상품수정</button>
             <button class="btn product-delete">상품삭제</button>
