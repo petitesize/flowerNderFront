@@ -1,6 +1,6 @@
 // 관리자 컨테이너에서 발생하는 클릭 이벤트 처리
-const adminContainer = document.querySelector('.admin-container')
-adminContainer.addEventListener('click', e => {
+const $adminContainer = document.querySelector('.admin-container')
+$adminContainer.addEventListener('click', e => {
   if (e.target.className.includes('order-update')) {
     handleUpdateOrder(e)
   } else if (e.target.className.includes('order-delete')) {
@@ -143,7 +143,7 @@ function handleOrderSave(e) {
   const datas = {
     order_status: document.querySelector('.order-status1').value,
   }
-  const id = e.target.parentNode.parentNode.querySelector('.order-id').innerHTML
+  const id = e.target.parentNode.parentNode.querySelector('.order-id').orderId
   fetch(`/admin/orders/${id}`, {
     method: 'PATCH',
     headers: {
