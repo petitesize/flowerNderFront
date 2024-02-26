@@ -1,3 +1,35 @@
+const getProducts = async () => {
+  const res = await fetch('http://localhost:8081/v1/admin/products', {
+    method: 'GET',
+  })
+  const datas = await res.json()
+  const adminContainerEl = document.querySelector('.admin-container')
+  datas.forEach((data, i) => {
+    adminContainerEl.insertAdjacentHTML(
+      'beforeend',
+      `
+      <div class="admin-product-data">
+          <p class="product-id">${data[i]._id}</p>
+          <p class="product-category">${data[i].category}</p>
+          <p class="product-title">${data[i].title}</p>
+          <img src="${data[i].main_image}" class="product-img"></img>
+          <p class="product-price">${data[i].price}</p>
+          <p class="product-stock">${data[i].stock}</p>
+          <p class="product-description">${data[i].description}</p>
+          <p class="product-size">${data[i].size}</p>
+          <p class="product-origin">${data[i].origin}</p>
+          <p class="product-attribute">${data[i].attribute}</p>
+          <div>
+            <button class="btn product-update">상품수정</button>
+            <button class="btn product-delete">상품삭제</button>
+          </div>
+        </div>
+      `
+    )
+  })
+}
+getProducts()
+
 // 상품 추가 버튼 이벤트 리스너
 const productAddBtn = document.querySelector('.product-add')
 if (productAddBtn) {

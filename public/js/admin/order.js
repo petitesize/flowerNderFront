@@ -1,6 +1,43 @@
+const getOrders = async () => {
+  const res = await fetch('http://localhost:8081/v1/admin/orders', {
+    method: 'GET',
+  })
+  const datas = await res.json()
+  const adminContainerEl = document.querySelector('.admin-container')
+  datas.forEach((data, i) => {
+    adminContainerEl.insertAdjacentHTML(
+      'beforeend',
+      `
+      <div class="admin-content-data">
+          <p class="order-id" data-order-id=${data[i]._id}>${data[i]._id}</p>
+          <p class="order-status">${data[i].order_status}</p>
+          <p class="order-date">${data[i].order_date}</p>
+          <div class="user-data">
+            <p class="user-name">${data[i].customer_info.name}</p>
+            <p class="user-email">${data[i].customer_info.email}</p>
+            <p class="user-number">${data[i].customer_info.phone_number}</p>
+            <p class="user-address">
+              ${data[i].shipping_info.address}<br /> ${data[i].shipping_info.address}
+            </p>
+          </div>
+          <p class="order-product">
+          ${data[i].order_items[0].title}...
+            아름다운 장미 꽃다발
+          </p>
+          <div>
+            <button class="btn order-update">주문수정</button>
+            <button class="btn order-delete">주문취소</button>
+          </div>
+        </div>
+      `
+    )
+  })
+}
+getOrders()
+
 // 관리자 컨테이너에서 발생하는 클릭 이벤트 처리
-const $adminContainer = document.querySelector('.admin-container')
-$adminContainer.addEventListener('click', e => {
+const adminContainerEl = document.querySelector('.admin-container')
+adminContainerEl.addEventListener('click', e => {
   if (e.target.className.includes('order-update')) {
     handleUpdateOrder(e)
   } else if (e.target.className.includes('order-delete')) {
