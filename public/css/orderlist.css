@@ -164,8 +164,19 @@ td {
 }
 
 .confirm-button {
+  margin-right: 15px;
+}
+
+.button-div {
+  display: flex;
+  width: 100%;
+}
+
+.button-div > button {
+  display: flex;
   width: 100%;
   padding: 10px;
+  justify-content: center;
 }
 
 /* guest_orderlist.css 이사 */
@@ -202,4 +213,15 @@ input {
 .input-border {
   border-top: none;
   border-bottom: none;
+}
+
+/* 주문 취소시 버튼 비활성화 할거면 사용 */
+.disabled-btn {
+  pointer-events: none;
+  opacity: 0.1;
+}
+
+.span-td {
+  padding: 20px;
+  /* border-left: 1px solid #999; */
 }
