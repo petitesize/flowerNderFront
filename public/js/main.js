@@ -18,16 +18,20 @@ const showMoreItems = () => {
     showItems += 12;
 };
 
-// 더 보기 버튼에 이벤트 리스너 showMoreItems 추가하기!!!
+
+// -------------- 더 보기 버튼에 이벤트 리스너 showMoreItems 추가하기!!!
 document.getElementById('more-btn').addEventListener('click', showMoreItems);
 
-// 초기에 보여지는 아이템의 개수
+
+// -------------- 초기에 보여지는 아이템의 개수
 let showItems = 12;
 
-// 초기에 12개 이상의 아이템이 있다면 더 보기 버튼 보이게 처리
+// -------------- 초기에 12개 이상의 아이템이 있다면 더 보기 버튼 보이게 처리
 if (document.querySelectorAll('#product-list li').length > showItems) {
     document.querySelector('.product-more').style.display = 'block';
 }
+
+
 
 // ================ 메인 상품목록 api 불러오기! ================
 const mainList = async () => {
@@ -64,7 +68,7 @@ const mainList = async () => {
         navList.insertAdjacentHTML('beforeend', categoryLink);
     }
 
-    // 상품 리스트
+    // ================ 상품 리스트 템플릿 ================
     const productList = document.querySelector('#product-list');
     console.log(`/main/detail.html?=${realData[0]._id}`);
     for (let i = 0; i < realData.length; i++) {
