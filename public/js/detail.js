@@ -19,11 +19,11 @@ function addToCart() {
   console.log("addToCart 함수 호출"); // 디버깅을 위한 콘솔 로그
   const selectAgree = document.getElementById("selectAgree");
 
-  if (selectAgree.value === "0") {
-    alert("교환 및 환불 동의 항목을 선택하세요.");
-  } else {
-    location.href = "./cart.html";
-  }
+  // if (selectAgree.value === "0") {
+  //   alert("교환 및 환불 동의 항목을 선택하세요.");
+  // } else {
+  //   location.href = "./cart.html";
+  // }
 }
 
 // ================ 로컬스토리지 사용해서 담기 아직 데이터가 없기때문에 대충 만들어 놓음 ================
@@ -203,9 +203,6 @@ const fetchDetailData = async () => {
             <div class="dc-bottom">
               <!-- *** 장바구니는 로컬스토리지로 연결~~~~ -->
               <div class="dcb-btn dcb-buy">
-                <button type="button" class="buy-btn" onclick="goToBuy()">
-                  구매하기
-                </button>
                 <button type="submit" class="buy-cart" onclick="addToCart()">
                   장바구니
                 </button>
@@ -403,7 +400,15 @@ cartButton.addEventListener("click", () => {
   }
 
   // 로컬 스토리지에 저장
-  localStorage.setItem("cart", JSON.stringify(localCart));
+  const selectAgree = document.getElementById("selectAgree");
+
+  if (selectAgree.value === "1") {
+    localStorage.setItem("cart", JSON.stringify(localCart));
+    location.href = "./cart.html";
+  } else {
+    alert("교환 및 환불 동의 항목을 선택하세요.");
+  }
+  
 });
 
 
