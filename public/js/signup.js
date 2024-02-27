@@ -5,6 +5,7 @@ const userNameBox = document.querySelector('.name-box');
 const phoneNumberBox = document.querySelector('.tel-box');
 const addressBox = document.querySelector('.address-box');
 const addressDetailBox = document.querySelector('.detail-box');
+const borderBox = document.querySelectorAll('.border-box');
 
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');
@@ -28,7 +29,7 @@ signUpButton.addEventListener('click', e => {
 
     const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
     const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-    const phoneNumberPattern = /^(01[016789]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+    const phoneNumberPattern = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/
 
     // 이메일 유효성 검사
     if (!emailVal || !emailPattern.test(emailVal)) {
@@ -42,10 +43,12 @@ signUpButton.addEventListener('click', e => {
 
     // 비밀번호 유효성 검사
     if (!passwordVal) {
-        if (emailBox.classList.contains('on')) {
-            emailBox.removeChild(emailBox.lastChild);
-            emailBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!passwordBox.classList.contains('on')) {
             passwordBox.classList.add('on');
@@ -54,10 +57,12 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
     if (!passwordPattern.test(passwordVal)) {
-        if (passwordBox.classList.contains('on')) {
-            passwordBox.removeChild(passwordBox.lastChild);
-            passwordBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!passwordBox.classList.contains('on')) {
             passwordBox.classList.add('on');
@@ -66,10 +71,12 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
     if (!passwordConfirmVal) {
-        if (passwordBox.classList.contains('on')) {
-            passwordBox.removeChild(passwordBox.lastChild);
-            passwordBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!passwordConfirmBox.classList.contains('on')) {
             passwordConfirmBox.classList.add('on');
@@ -78,10 +85,12 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
     if (passwordVal !== passwordConfirmVal) {
-        if (passwordConfirmBox.classList.contains('on')) {
-            passwordConfirmBox.removeChild(passwordConfirmBox.lastChild);
-            passwordConfirmBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!passwordConfirmBox.classList.contains('on')) {
             passwordConfirmBox.classList.add('on');
@@ -92,10 +101,12 @@ signUpButton.addEventListener('click', e => {
 
     // 이름
     if (!userNameVal) {
-        if (passwordConfirmBox.classList.contains('on')) {
-            passwordConfirmBox.removeChild(passwordConfirmBox.lastChild);
-            passwordConfirmBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!userNameBox.classList.contains('on')) {
             userNameBox.classList.add('on');
@@ -106,10 +117,12 @@ signUpButton.addEventListener('click', e => {
 
     // 연락처 유효성 검사
     if (!phoneNumberVal) {
-        if (userNameBox.classList.contains('on')) {
-            userNameBox.removeChild(userNameBox.lastChild);
-            userNameBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!phoneNumberBox.classList.contains('on')) {
             phoneNumberBox.classList.add('on');
@@ -118,10 +131,12 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
     if (!phoneNumberPattern.test(phoneNumberVal)) {
-        if (phoneNumberBox.classList.contains('on')) {
-            phoneNumberBox.removeChild(phoneNumberBox.lastChild);
-            phoneNumberBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!phoneNumberBox.classList.contains('on')) {
             phoneNumberBox.classList.add('on');
@@ -132,10 +147,12 @@ signUpButton.addEventListener('click', e => {
 
     // 주소
     if (!addressVal) {
-        if (phoneNumberBox.classList.contains('on')) {
-            phoneNumberBox.removeChild(phoneNumberBox.lastChild);
-            phoneNumberBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!addressBox.classList.contains('on')) {
             addressBox.classList.add('on');
@@ -144,10 +161,12 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
     if (!addressDetailVal) {
-        if (addressBox.classList.contains('on')) {
-            addressBox.removeChild(addressBox.lastChild);
-            addressBox.classList.remove('on');
-        }
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
         if (!addressDetailBox.classList.contains('on')) {
             addressDetailBox.classList.add('on');
@@ -176,16 +195,4 @@ signUpButton.addEventListener('click', e => {
             }
         })
         .catch(err => console.log(err))
-
-
-
-    // 비밀번호 형식 검사 (최소 8글자 이상, 숫자 포함 필수)
-
-
-    // 비밀번호 - 비밀번호 확인 일치 검사
-    // 일치하지 않을 경우 > '비밀번호가 일치하지 않습니다', border red
-
-
-    // 값이 없을 경우 '비밀번호를 입력하세요', border red
-    // '비밀번호를 한번 더 입력하세요' '주소를 입력하세요' '상세 주소를 입력하세요'
 })

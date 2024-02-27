@@ -27,6 +27,7 @@ loginButton.addEventListener('click', e => {
             }),
         }).then(res => res.json())
             .then(res => {
+                console.log(res);
                 if (res.error) alert('잘못된 아이디 또는 비밀번호입니다.');
                 else {
                     localStorage.setItem("jwt", res.data);
