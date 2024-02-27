@@ -56,7 +56,8 @@ let orderAmount = 0;
 let htmlContent = "";
 carts.forEach((item) => {
   const { title, quantity, price, mainImage } = item;
-  orderAmount += parseInt(price);
+  const itemAmount = parseInt(price) * parseInt(quantity);
+  orderAmount += itemAmount;
   htmlContent += `
  <div class="order-item">
                 <a href="#">
@@ -67,7 +68,7 @@ carts.forEach((item) => {
                     <span class="item-title large-font"> ${title} </span>
                     <!-- <span class="item-option"> 옵션 </span> -->
                     <span class="item-quantity">${quantity}개</span>
-                    <span class="item-amount">${price.toLocaleString()}원</span>
+                    <span class="item-amount">${itemAmount.toLocaleString()}원</span>
                   </div>
                 </a>
               </div> `;
@@ -112,6 +113,7 @@ function isPurchase() {
       headers: {
         "Content-Type": "application/json",
       },
+      // JSON 포맷으로 객체 변환해서 전달해줌
       body: JSON.stringify({
         order_amount: orderAmount,
         order_status: "입금확인중",

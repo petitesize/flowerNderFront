@@ -41,13 +41,15 @@
             <col style="width: 14%" />
             <col style="width: 14%" />
             <col style="width: 14%" />
+            <col style="width: 15%" />
           </colgroup>
           <thead class="order-subject">
             <tr>
               <th>상품정보</th>
+              <th>상품금액(수량)</th>
               <th>주문일자</th>
               <th>주문번호</th>
-              <th>주문금액(수량)</th>
+              <th>주문금액</th>
               <th>주문상태</th>
             </tr>
           </thead>
@@ -67,13 +69,13 @@
                 </div>
               </td>
               <td>2024.02.20</td>
-              <td>주문번호2024022020240202</td>
+              <td>2024022020240202</td>
               <td>
                 2,000,000원
                 <br />
                 <span class="quantity-span">1개</span>
               </td>
-              <td>
+              <td class="span-td" rowspan="2">
                 <div class="delivery-status">
                   <span class="delivery-step">배송상태</span>
                   <button class="change-address button-black">
@@ -83,8 +85,7 @@
                 </div>
               </td>
             </tr>
-            <!-- dummy -->
-            <!-- <tr>
+            <tr>
               <td>
                 <div class="product-row">
                   <a href="#" class="img-block">
@@ -99,13 +100,13 @@
                 </div>
               </td>
               <td>2024.02.20</td>
-              <td>주문번호2024022020240202</td>
+              <td>2024022020240202</td>
               <td>
                 2,000,000원
                 <br />
                 <span>1개</span>
               </td>
-              <td>
+              <!-- <td>
                 <div class="delivery-status">
                   <span class="delivery-step">배송상태</span>
                   <button class="change-address button-black">
@@ -113,9 +114,9 @@
                   </button>
                   <button class="delivery-cancel button-black">주문취소</button>
                 </div>
-              </td>
+              </td> -->
             </tr>
-            <tr>
+            <!-- <tr>
               <td>
                 <div class="product-row">
                   <a href="#" class="img-block">
@@ -229,60 +230,65 @@
           <button class="close">
             <i class="fa-solid fa-xmark"></i>
           </button>
-          <div class="name-block input-block">
-            <label for="name">이름 </label>
-            <div class="input-name">
-              <input
-                type="text"
-                name="name"
-                required="required"
-                value="배송 설정한 이름"
-              />
-            </div>
-          </div>
-          <div class="phone-block input-block">
-            <label for="phone">연락처</label>
-            <div class="input-phone">
-              <input
-                type="tel"
-                name="phone"
-                required="required"
-                value="배송 설정한 연락처"
-              />
-            </div>
-          </div>
-          <div class="address-block input-block">
-            <label for="address">주소</label>
-            <div class="address-wrap">
-              <div class="input-postcode">
+          <form class="modal-section">
+            <div class="name-block input-block">
+              <label for="name">이름 </label>
+              <div class="input-name">
                 <input
                   type="text"
-                  name="address"
+                  name="name"
                   required="required"
-                  value="배송 설정한 우편 번호"
-                />
-              </div>
-              <div class="input-address">
-                <input
-                  class="input-border"
-                  type="text"
-                  name="address"
-                  required="required"
-                  value="배송 설정한 주소"
-                />
-                <!-- <button class="search-address button-black">주소 검색</button> -->
-              </div>
-              <div class="input-address-detail">
-                <input
-                  type="text"
-                  name="address-detail"
-                  required="required"
-                  value="배송 설정한 상세 주소"
+                  value="배송 설정한 이름"
                 />
               </div>
             </div>
+            <div class="phone-block input-block">
+              <label for="phone">연락처</label>
+              <div class="input-phone">
+                <input
+                  type="tel"
+                  name="phone"
+                  required="required"
+                  value="배송 설정한 연락처"
+                />
+              </div>
+            </div>
+            <div class="address-block input-block">
+              <label for="address">주소</label>
+              <div class="address-wrap">
+                <div class="input-postcode">
+                  <input
+                    type="text"
+                    name="address"
+                    required="required"
+                    value="배송 설정한 우편 번호"
+                  />
+                </div>
+                <div class="input-address">
+                  <input
+                    class="input-border"
+                    type="text"
+                    name="address"
+                    required="required"
+                    value="배송 설정한 주소"
+                  />
+                  <!-- <button class="search-address button-black">주소 검색</button> -->
+                </div>
+                <div class="input-address-detail">
+                  <input
+                    type="text"
+                    name="address-detail"
+                    required="required"
+                    value="배송 설정한 상세 주소"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="button-div">
+            <button class="confirm-button button-black">확인</button>
+            <button class="cancel-button button-black">취소</button>
           </div>
-          <button class="confirm-button button-black">확인</button>
         </div>
       </div>
     </div>
