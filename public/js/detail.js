@@ -57,7 +57,35 @@ const fetchDetailData = async () => {
   navWrap.insertAdjacentHTML('beforeend', detailItemNav);
 
 
+
+
   // ========================= 상품목록 템플릿 =======================
+
+  // ----------------- 서브이미지를 동적으로 추가하기
+function insertSubImages(subImages) {
+  const subImagesContainer = document.querySelector('.detail-l-bottom');
+
+  // ----------------- 이미지들을 순회하며 동적으로 추가
+  subImages.forEach(subImage => {
+      const subImageElement = document.createElement('div');
+      subImageElement.classList.add('detail-lb-inner');
+
+      const img = document.createElement('img');
+      img.src = subImage.url;
+      img.alt = '다른상품 사진들';
+      img.classList.add('product-sub-img');
+
+      subImageElement.appendChild(img);
+      subImagesContainer.appendChild(subImageElement);
+  });
+}
+
+
+// 전체 코드를 삽입하는 함수
+function insertDetailWrap(realData) {
+  const detailContent = document.querySelector('.detail-content');
+
+  
   if(realData.stock > 0){
     //soldout이 없는 템플릿
     const detailWrap = `
@@ -74,41 +102,6 @@ const fetchDetailData = async () => {
         </div>
         <!-- 서브이미지들 sub_image1~5 -->
         <div class="detail-l-bottom">
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}            
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
         </div>
       </div>
       <div class="detail-right">
@@ -214,6 +207,10 @@ const fetchDetailData = async () => {
     </div>
    `
     detailContent.insertAdjacentHTML('afterbegin', detailWrap);
+
+
+        // 서브이미지 추가 함수 호출
+        insertSubImages(realData.sub_image);
   }else{
   //soldout이 있는 템플릿
   const detailWrap = `
@@ -230,41 +227,6 @@ const fetchDetailData = async () => {
       </div>
       <!-- 서브이미지들 sub_image1~5 -->
       <div class="detail-l-bottom">
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}            
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
       </div>
     </div>
     <div class="detail-right">
@@ -368,8 +330,13 @@ const fetchDetailData = async () => {
   </div>
   `
   detailContent.insertAdjacentHTML('afterbegin', detailWrap);
+
+        // 서브이미지 추가 함수 호출
+        insertSubImages(realData.sub_image);
   }
   
+}
+insertDetailWrap(realData);
   const cartButton = document.querySelector(".buy-cart");
 const id = realData._id;
 const price = realData.price;

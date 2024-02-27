@@ -63,13 +63,13 @@
     border: 1px solid #000;
 }
 
-#productList li:nth-child(n+13) {
+#product-list li:nth-child(n+13) {
     display: none;
-}
+} 
 
-.product-more {
+/* .product-more {
     display: none;
-}
+} */
 
 .site-footer{
     margin-top: 88px;
