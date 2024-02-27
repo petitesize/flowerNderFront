@@ -371,9 +371,10 @@ function handleDeleteProduct(e) {
     },
   })
     .then(response => {
-      if (response.redirected) {
-        // window.location.href = response.url
-        window.location.href = `http://localhost:8080/admin/products.html`
+      if (response.ok) {
+        location.reload()
+      } else {
+        console.error('상품삭제를 실패하였습니다.')
       }
     })
     .catch(error => {
