@@ -140,14 +140,15 @@ opacity: 1;
     justify-content: space-between;
     align-items: center;
 }
-.detail .dc-bottom .dcb-buy button{
+/* .detail .dc-bottom .dcb-buy button{
     width: 49%;
     background: #000;
     color: #fff;
-}
+} */
 .detail .dc-bottom .dcb-buy button.buy-cart{
-    background: #fff;
-    color: #000;
+    width: 100%;
+    background: #000;
+    color: #fff;
 }
 .detail .detail-b-text h4{
     font-size: 16px;
