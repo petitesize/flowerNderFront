@@ -83,7 +83,7 @@ function handleCreateProduct() {
         <option value="ACC">ACC</option>
       </select>
       <input / class="product-input title" type='text' placeholder="제품명 입력">
-      <label for="input-img" class="img-label">이미지첨부(5개)</label>
+      <label for="input-img" class="img-label">이미지첨부(6개)</label>
       <input / class="product-input image" id="input-img" type='file' accept='image/*' multiple>
       <input / class="product-input price" type='number' placeholder="가격 입력">
       <input / class="product-input stock" type='number' placeholder="재고 입력">
@@ -135,7 +135,7 @@ function handleCreateBtn(e) {
   const stock = select('.stock')
   const description = select('.description')
   const attribute = select('.attribute')
-  const files = select('.image').files
+  const file = select('.image')
   const category = select('.category')
   const size = select('.size')
   const origin = select('.origin')
@@ -146,7 +146,7 @@ function handleCreateBtn(e) {
     !title.value.trim() ||
     !price.value ||
     !price.value.trim() ||
-    files.length !== 5 ||
+    file.files.length !== 6 ||
     !stock.value ||
     !stock.value.trim() ||
     !description ||
@@ -154,7 +154,7 @@ function handleCreateBtn(e) {
     !attribute.value ||
     !attribute.value.trim()
   ) {
-    alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 5개)')
+    alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 6개)')
     return
   }
 
@@ -168,24 +168,26 @@ function handleCreateBtn(e) {
     origin: origin.value,
     description: description.value,
     attribute: attribute.value,
-    main_image: 'img url',
-    sub_image1: 'img url',
-    sub_image2: 'img url',
-    sub_image3: 'img url',
-    sub_image4: 'img url',
-    sub_image5: 'img url',
+    main_image: file.files[0],
+    sub_image1: file.files[1],
+    sub_image2: file.files[2],
+    sub_image3: file.files[3],
+    sub_image4: file.files[4],
+    sub_image5: file.files[5],
   }
 
   // 제품 데이터 전송
-  fetch('/admin/products', {
+  const token = localStorage.getItem('jwt')
+  fetch(`http://localhost:8081/api/v1/admin/products`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token,
+    },
     body: JSON.stringify(datas),
   })
     .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url
-      }
+      console.log(response)
     })
     .catch(error => console.error('Error:', error))
 
@@ -361,12 +363,17 @@ function handleDeleteProduct(e) {
   if (!e.target.classList.contains('product-delete')) return
   const parent = e.target.parentNode.parentNode
   const id = parent.querySelector('.product-id').innerHTML
-  fetch(`/admin/products/${id}`, {
+  const token = localStorage.getItem('jwt')
+  fetch(`http://localhost:8081/api/v1/admin/products/${id}`, {
     method: 'DELETE',
+    headers: {
+      Authorization: token,
+    },
   })
     .then(response => {
       if (response.redirected) {
-        window.location.href = response.url
+        // window.location.href = response.url
+        window.location.href = `http://localhost:8080/admin/products.html`
       }
     })
     .catch(error => {
@@ -384,7 +391,6 @@ function handleUpdateSave(e) {
   // 수정 저장
   // 수정된 폼 데이터 수집 및 유효성 검사 후 서버로 PUT 요청
   if (e.target.innerHTML !== '저장') return
-  console.log(1)
   const datas = {
     category: document.querySelector('.category1').value,
     title: document.querySelector('.title1').value,
@@ -403,10 +409,12 @@ function handleUpdateSave(e) {
   }
   const id =
     e.target.parentNode.parentNode.querySelector('.product-id').innerHTML
-  fetch(`/admin/products/${id}`, {
+  const token = localStorage.getItem('jwt')
+  fetch(`http://localhost:8081/api/v1/admin/products/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: token,
     },
     body: JSON.stringify(datas),
   })

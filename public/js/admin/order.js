@@ -96,15 +96,7 @@ function handleUpdateOrder(e) {
       selector: '.order-status',
       type: 'select',
       class: 'product-input order-status1',
-      options: [
-        '입금확인중',
-        '입금완료',
-        '배송준비중',
-        '배송중',
-        '배송지연',
-        '배송완료',
-        '주문처리완료',
-      ],
+      options: ['입금확인중', '배송준비중', '배송중', '배송완료'],
       prop: 'value',
       from: 'innerHTML',
     },
@@ -163,12 +155,18 @@ function handleDeleteOrder(e) {
   if (!e.target.classList.contains('order-delete')) return
   const parent = e.target.parentNode.parentNode
   const id = parent.querySelector('.order-id').innerHTML
-  fetch(`/admin/orders/${id}`, {
+  const token = localStorage.getItem('jwt')
+  fetch(`http://localhost:8081/api/v1/admin/orders/${id}`, {
     method: 'DELETE',
+    headers: {
+      Authorization: token,
+    },
   })
     .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url
+      if (response.ok) {
+        location.reload()
+      } else {
+        console.error('주문삭제를 실패하였습니다.')
       }
     })
     .catch(error => {
@@ -189,17 +187,21 @@ function handleOrderSave(e) {
   const datas = {
     order_status: document.querySelector('.order-status1').value,
   }
-  const id = e.target.parentNode.parentNode.querySelector('.order-id').orderId
-  fetch(`/admin/orders/${id}`, {
+  const parent = e.target.parentNode.parentNode
+  const token = localStorage.getItem('jwt')
+  fetch(`http://localhost:8081/api/v1/admin/orders`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: token,
     },
     body: JSON.stringify(datas),
   })
     .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url
+      if (response.ok) {
+        location.reload()
+      } else {
+        console.error('주문수정을 실패하였습니다.')
       }
     })
     .catch(error => {
