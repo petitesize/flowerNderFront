@@ -1,3 +1,40 @@
+import { API_URL } from '/public/js/constants.js'
+
+const getProducts = async () => {
+  const res = await fetch('http://localhost:8081/api/v1/admin/products', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ACCESS_TOKEN',
+    },
+  })
+  const datas = await res.json()
+  const adminContainerEl = document.querySelector('.admin-container')
+  datas.forEach(data => {
+    adminContainerEl.insertAdjacentHTML(
+      'beforeend',
+      `
+      <div class="admin-product-data">
+          <p class="product-id">${data._id}</p>
+          <p class="product-category">${data.category}</p>
+          <p class="product-title">${data.title}</p>
+          <img src="${data.main_image}" class="product-img"></img>
+          <p class="product-price">${data.price}</p>
+          <p class="product-stock">${data.stock}</p>
+          <p class="product-description">${data.description}</p>
+          <p class="product-size">${data.size}</p>
+          <p class="product-origin">${data.origin}</p>
+          <p class="product-attribute">${data.attribute}</p>
+          <div>
+            <button class="btn product-update">상품수정</button>
+            <button class="btn product-delete">상품삭제</button>
+          </div>
+        </div>
+      `
+    )
+  })
+}
+getProducts()
+
 // 상품 추가 버튼 이벤트 리스너
 const productAddBtn = document.querySelector('.product-add')
 if (productAddBtn) {
@@ -6,21 +43,24 @@ if (productAddBtn) {
 
 // 관리자 데이터에서 발생하는 클릭 이벤트 처리
 const adminContainer = document.querySelector('.admin-container')
-adminContainer.addEventListener('click', e => {
-  if (e.target.className.includes('product-cancel')) {
-    handleProductAddCancel(e)
-  } else if (e.target.className.includes('product-create')) {
-    handleCreateBtn(e)
-  } else if (e.target.className.includes('product-update')) {
-    handleUpdateProduct(e)
-  } else if (e.target.className.includes('product-delete')) {
-    handleDeleteProduct(e)
-  } else if (e.target.className.includes('update-cancel')) {
-    handleUpdateCancel(e)
-  } else if (e.target.className.includes('update-save')) {
-    handleUpdateSave(e)
-  }
-})
+if (adminContainer) {
+  adminContainer.addEventListener('click', e => {
+    if (e.target.className.includes('product-cancel')) {
+      handleProductAddCancel(e)
+    } else if (e.target.className.includes('product-create')) {
+      handleCreateBtn(e)
+    } else if (e.target.className.includes('product-update')) {
+      handleUpdateProduct(e)
+    } else if (e.target.className.includes('product-delete')) {
+      handleDeleteProduct(e)
+    } else if (e.target.className.includes('update-cancel')) {
+      handleUpdateCancel(e)
+    } else if (e.target.className.includes('update-save')) {
+      handleUpdateSave(e)
+    }
+  })
+}
+
 function handleCreateProduct() {
   // 상품 추가 UI 생성
   // 상품 생성 UI 핸들러
@@ -92,15 +132,23 @@ function handleCreateBtn(e) {
   const description = select('.description')
   const attribute = select('.attribute')
   const files = select('.image').files
+  const category = select('.category')
+  const size = select('.size')
+  const origin = select('.origin')
 
   // 제품 생성할 때 input 올바르게 작성했는지 검사
   if (
     !title.value ||
+    !title.value.trim() ||
     !price.value ||
+    !price.value.trim() ||
     files.length !== 5 ||
-    !stock ||
+    !stock.value ||
+    !stock.value.trim() ||
     !description ||
-    !attribute
+    !description.value.trim() ||
+    !attribute.value ||
+    !attribute.value.trim()
   ) {
     alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 5개)')
     return
@@ -108,12 +156,12 @@ function handleCreateBtn(e) {
 
   // 데이터 객체 생성
   const datas = {
-    category: select('.category').value,
+    category: category.value,
     title: title.value,
     price: price.value,
     stock: stock.value,
-    size: select('.size').value,
-    origin: select('.origin').value,
+    size: size.value,
+    origin: origin.value,
     description: description.value,
     attribute: attribute.value,
     main_image: 'img url',

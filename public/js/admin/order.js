@@ -1,6 +1,47 @@
+import { API_URL } from '/public/js/constants.js'
+
+const getOrders = async () => {
+  const res = await fetch('http://localhost:8081/v1/admin/orders', {
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ACCESS_TOKEN',
+    },
+  })
+  const datas = await res.json()
+  const adminContainerEl = document.querySelector('.admin-container')
+  datas.forEach(data => {
+    adminContainerEl.insertAdjacentHTML(
+      'beforeend',
+      `
+      <div class="admin-content-data">
+          <p class="order-id" data-order-id=${data._id}>${data._id}</p>
+          <p class="order-status">${data.order_status}</p>
+          <p class="order-date">${data.order_date}</p>
+          <div class="user-data">
+            <p class="user-name">${data.customer_info.name}</p>
+            <p class="user-email">${data.customer_info.email}</p>
+            <p class="user-number">${data.customer_info.phone_number}</p>
+            <p class="user-address">
+              ${data.shipping_info.address}<br /> ${data.shipping_info.address}
+            </p>
+          </div>
+          <p class="order-product">
+          ${data.order_items[0].title}...
+          </p>
+          <div>
+            <button class="btn order-update">주문수정</button>
+            <button class="btn order-delete">주문취소</button>
+          </div>
+        </div>
+      `
+    )
+  })
+}
+getOrders()
+
 // 관리자 컨테이너에서 발생하는 클릭 이벤트 처리
-const adminContainer = document.querySelector('.admin-container')
-adminContainer.addEventListener('click', e => {
+const adminContainerEl = document.querySelector('.admin-container')
+adminContainerEl.addEventListener('click', e => {
   if (e.target.className.includes('order-update')) {
     handleUpdateOrder(e)
   } else if (e.target.className.includes('order-delete')) {
@@ -143,7 +184,7 @@ function handleOrderSave(e) {
   const datas = {
     order_status: document.querySelector('.order-status1').value,
   }
-  const id = e.target.parentNode.parentNode.querySelector('.order-id').innerHTML
+  const id = e.target.parentNode.parentNode.querySelector('.order-id').orderId
   fetch(`/admin/orders/${id}`, {
     method: 'PATCH',
     headers: {

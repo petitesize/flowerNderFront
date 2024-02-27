@@ -7,7 +7,7 @@
   <title>MODIFY</title>
   <link rel="stylesheet" href="/public/css/reset.css">
   <link rel="stylesheet" href="/public/css/common.css">
-  <link rel="stylesheet" href="/public/css/modify.css">
+  <link rel="stylesheet" href="/public/css/mypage.css">
 </head>
 
 <body>
@@ -16,12 +16,12 @@
     <header class="header">
       <div class="header-wrap">
         <h1>
-          <a href="../index.html">
+          <a href="/index.html">
             <img src="/public/img/logo.png" alt="로고">
           </a>
         </h1>
         <div class="h-right">
-          <a href="./login.html">LOGIN</a>
+          <a href="/user/login.html">LOGIN</a>
           <a href="#">MY PAGE</a>
           <a href="#" class="nav-cart">CART<span class="cart-num">1</span></a>
         </div>
@@ -31,7 +31,7 @@
       <div class="nav-wrap">
         <div class="nav-left">
           <a href="/orders/orderlist.html">주문 조회</a>
-          <a href="./modify.html">정보 수정</a>
+          <a href="/user/mypage.html">정보 수정</a>
           <a href="#">회원 탈퇴</a>
         </div>
       </div>
@@ -45,7 +45,7 @@
             <div class="label-box">
               <label for="email">계정 정보&nbsp;<span>•</span></label>
             </div>
-            <div class="top-box">
+            <div class="top-box email-box">
               <input type="text" placeholder="이메일" id="email" class="email">
             </div>
             <div class="top-box">
@@ -63,7 +63,7 @@
               <label for="name">이름&nbsp;<span>•</span></label>
             </div>
 
-            <div class="bottom-box">
+            <div class="bottom-box name-box">
               <input type="text" placeholder="이름" id="name" class="name">
             </div>
           </div>
@@ -72,7 +72,7 @@
             <div class="label-box">
               <label for="tel">연락처&nbsp;<span>•</span></label>
             </div>
-            <div class="bottom-box">
+            <div class="bottom-box tel-box">
               <input type="tel" placeholder="연락처" id="tel" class="tel">
             </div>
           </div>
@@ -112,5 +112,5 @@
     </footer>
   </div>
 </body>
-<script src="/public/js/modify.js"></script>
+<script src="/public/js/mypage.js"></script>
 </html>
