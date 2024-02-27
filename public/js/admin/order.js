@@ -20,6 +20,7 @@ const getOrders = async () => {
       <div class="admin-content-data">
           <p class="order-id" data-order-id=${data._id}>${data._id}</p>
           <p class="order-status">${data.order_status}</p>
+          <p class="order-cancel-req">${data.cancel_req}</p>
           <p class="order-date">${data.order_date.slice(0, 10)}</p>
           <div class="user-data">
             <p class="user-name">${data.customer_info.name}</p>
@@ -62,7 +63,6 @@ function handleUpdateOrder(e) {
   // 주문 수정 모드 진입
   // 기존 주문 정보를 기반으로 수정 폼 생성 및 데이터 세팅
   if (!e.target.innerHTML === '주문수정') return
-  console.log(1)
   function createElement(type, attributes, ...children) {
     const element = document.createElement(type)
     for (const key in attributes) {
@@ -188,8 +188,9 @@ function handleOrderSave(e) {
     order_status: document.querySelector('.order-status1').value,
   }
   const parent = e.target.parentNode.parentNode
+  const id = parent.querySelector('.order-id').innerHTML
   const token = localStorage.getItem('jwt')
-  fetch(`http://localhost:8081/api/v1/admin/orders`, {
+  fetch(`http://localhost:8081/api/v1/admin/orders/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
