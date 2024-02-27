@@ -26,7 +26,7 @@
 .admin-container > .admin-content-category {
   border-bottom: 1px solid #000;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: 40px;
   align-items: center;
   padding: 20px 40px;
@@ -39,7 +39,7 @@
 .admin-container > .admin-content-data {
   display: grid;
   border-bottom: 1px solid #000;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-template-rows: 80px;
   align-items: center;
   padding: 20px 40px;
