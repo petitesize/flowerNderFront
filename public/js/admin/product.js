@@ -1,15 +1,19 @@
-import { API_URL } from '/public/js/constants.js'
+// import { API_URL } from '/public/js/constants.js'
 
 const getProducts = async () => {
+  const token = localStorage.getItem('jwt')
   const res = await fetch('http://localhost:8081/api/v1/admin/products', {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer ACCESS_TOKEN',
+      Authorization: token,
     },
   })
-  const datas = await res.json()
+  if (!res.ok) {
+    throw new Error('서버에서 데이터를 가져오는 데 실패했습니다.')
+  }
+  const productsDatas = await res.json()
   const adminContainerEl = document.querySelector('.admin-container')
-  datas.forEach(data => {
+  productsDatas.data.forEach(data => {
     adminContainerEl.insertAdjacentHTML(
       'beforeend',
       `
@@ -17,7 +21,7 @@ const getProducts = async () => {
           <p class="product-id">${data._id}</p>
           <p class="product-category">${data.category}</p>
           <p class="product-title">${data.title}</p>
-          <img src="${data.main_image}" class="product-img"></img>
+          <img src="${data.main_image.url}" class="product-img"></img>
           <p class="product-price">${data.price}</p>
           <p class="product-stock">${data.stock}</p>
           <p class="product-description">${data.description}</p>

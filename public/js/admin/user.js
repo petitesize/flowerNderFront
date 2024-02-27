@@ -1,4 +1,4 @@
-import { API_URL } from '/public/js/constants.js'
+// import { API_URL } from '/public/js/constants.js'
 
 const getUsers = async () => {
   const res = await fetch('http://localhost:8081/v1/admin/users', {
