@@ -1,33 +1,38 @@
 // import { API_URL } from '/public/js/constants.js'
 
 const getOrders = async () => {
-  const res = await fetch('http://localhost:8081/v1/admin/orders', {
+  const token = localStorage.getItem('jwt')
+  const res = await fetch('http://localhost:8081/api/v1/admin/orders', {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer ACCESS_TOKEN',
+      Authorization: token,
     },
   })
-  const datas = await res.json()
+  const orderDatas = await res.json()
+  console.log(orderDatas)
   const adminContainerEl = document.querySelector('.admin-container')
-  datas.forEach(data => {
+
+  orderDatas.data.forEach(data => {
+    const itemTitles = data.order_items.map(item => item.title).join(', ')
     adminContainerEl.insertAdjacentHTML(
       'beforeend',
       `
       <div class="admin-content-data">
           <p class="order-id" data-order-id=${data._id}>${data._id}</p>
           <p class="order-status">${data.order_status}</p>
-          <p class="order-date">${data.order_date}</p>
+          <p class="order-date">${data.order_date.slice(0, 10)}</p>
           <div class="user-data">
             <p class="user-name">${data.customer_info.name}</p>
             <p class="user-email">${data.customer_info.email}</p>
             <p class="user-number">${data.customer_info.phone_number}</p>
             <p class="user-address">
-              ${data.shipping_info.address}<br /> ${data.shipping_info.address}
+              ${data.shipping_info.address}<br /> ${
+        data.shipping_info.address_detail
+      }
             </p>
           </div>
-          <p class="order-product">
-          ${data.order_items[0].title}...
-          </p>
+          <p class="order-product">${itemTitles}</p>
+          <p>${data.order_amount}원</p>
           <div>
             <button class="btn order-update">주문수정</button>
             <button class="btn order-delete">주문취소</button>

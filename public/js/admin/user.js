@@ -1,15 +1,20 @@
 // import { API_URL } from '/public/js/constants.js'
 
 const getUsers = async () => {
-  const res = await fetch('http://localhost:8081/v1/admin/users', {
+  const token = localStorage.getItem('jwt')
+  const res = await fetch('http://localhost:8081/api/v1/admin/users', {
     method: 'GET',
     headers: {
-      Authorization: 'Bearer ACCESS_TOKEN',
+      Authorization: token,
     },
   })
-  const datas = await res.json()
+  if (!res.ok) {
+    throw new Error('서버에서 데이터를 가져오는 데 실패했습니다.')
+  }
+  const userDatas = await res.json()
+  console.log(userDatas)
   const adminContainerEl = document.querySelector('.admin-container')
-  datas.forEach(data => {
+  userDatas.data.forEach(data => {
     adminContainerEl.insertAdjacentHTML(
       'beforeend',
       `
@@ -18,6 +23,8 @@ const getUsers = async () => {
       <p class="user-name">${data.user_name}</p>
       <p class="user-phone-num">${data.phone_number}</p>
       <p class="user-email">${data.email}</p>
+      <p class="user-address">${data.address}, ${data.address_detail}</p>
+      <p class="user-createdAt">${data.createdAt.slice(0, 9)}</p>
     </div>
         `
     )
