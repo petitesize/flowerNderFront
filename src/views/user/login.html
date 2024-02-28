@@ -30,23 +30,20 @@
 
         <section class="login">
             <div class="login-wrap">
-                <form action="">
-                    <div class="login-box">
-                        <div class="email-box">
-                            <input type="text" placeholder="이메일" class="email">
-                        </div>
-                        <div class="password-box">
-                            <input type="password" placeholder="비밀번호" class="password">
-                        </div>
-                        <div class="enter-box">
-                            <input type="submit" class="login-button" value="로그인">
-                        </div>
-                        <div class="join-box">
-                            <a href="/user/signup.html"><input type="button" class="join-button" value="회원가입"></a>
-                        </div>
+                <div class="login-box">
+                    <div class="border-box">
+                        <input type="text" placeholder="이메일" class="email">
                     </div>
-
-                </form>
+                    <div class="border-box">
+                        <input type="password" placeholder="비밀번호" class="password">
+                    </div>
+                    <div class="enter-box">
+                        <button type="button" class="login-button">로그인</button>
+                    </div>
+                    <div class="join-box">
+                        <a href="/user/signup.html"><button type="button" class="join-button">회원가입</button></a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -65,4 +62,5 @@
     </div>
 </body>
 <script src="/public/js/login.js"></script>
+
 </html>
