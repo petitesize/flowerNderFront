@@ -141,6 +141,7 @@ function handleCreateBtn(e) {
   const category = select('.category')
   const size = select('.size')
   const origin = select('.origin')
+  const image = select('.image')
 
   // 제품 생성할 때 input 올바르게 작성했는지 검사
   if (
@@ -156,26 +157,11 @@ function handleCreateBtn(e) {
     !attribute.value ||
     !attribute.value.trim()
   ) {
-    alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 최대 5개)')
+    alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 최대 6개)')
     return
   }
 
-  // const formData = new FormData()
-  // formData.append('category', category.value)
-  // formData.append('title', title.value)
-  // formData.append('price', price.value)
-  // formData.append('stock', stock.value)
-  // formData.append('size', size.value)
-  // formData.append('origin', origin.value)
-  // formData.append('description', description.value)
-  // formData.append('attribute', attribute.value)
-  // formData.append('main_image', file.files[0])
-  // formData.append('sub_image1', file.files[1])
-  // formData.append('sub_image2', file.files[2])
-  // formData.append('sub_image3', file.files[3])
-  // formData.append('sub_image4', file.files[4])
-  // formData.append('sub_image5', file.files[5])
-
+  // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
   const formData = new FormData()
   formData.append('category', category.value)
   formData.append('title', title.value)
@@ -185,27 +171,56 @@ function handleCreateBtn(e) {
   formData.append('size', size.value)
   formData.append('origin', origin.value)
   formData.append('attribute', attribute.value)
-
-  // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
-  const imagesInput = document.querySelector('.image')
-  for (let i = 0; i < imagesInput.files.length; i++) {
-    if (i === 0) {
-      // 첫 번째 파일을 메인 이미지로 간주
-      formData.append('main_image', imagesInput.files[i])
-    } else {
-      // 나머지 파일을 서브 이미지로 간주
-      formData.append(`sub_image${i}`, imagesInput.files[i])
-    }
+  formData.append('main_image', image.files[0])
+  for (let i = 1; i < image.files.length; i++) {
+    formData.append(`sub_image[${i}]`, image.files[i])
   }
+  // const datas = {
+  //   category: 'Custom',
+  //   title: 'Awesome Product',
+  //   price: 30000,
+  //   stock: 45,
+  //   description: 'This is an amazing product with great features.',
+  //   size: 'Large',
+  //   origin: 'korea',
+  //   attribute: '튤립은 ~~특징이 있어요~',
+  //   main_image: {
+  //     url: 'https://ibb.co/4Mv17pm',
+  //     alt: '',
+  //   },
+  //   sub_image: [
+  //     {
+  //       url: 'https://ibb.co/rby4m2f',
+  //       alt: '',
+  //     },
+  //     {
+  //       url: 'https://ibb.co/4Mv17pm',3
+  //       alt: '',
+  //     },
+  //     {
+  //       url: 'https://ibb.co/4Mv17pm',
+  //       alt: '',
+  //     },
+  //     {
+  //       url: 'https://ibb.co/4Mv17pm',
+  //       alt: '',
+  //     },
+  //     {
+  //       url: 'https://ibb.co/4Mv17pm',
+  //       alt: '',
+  //     },
+  //   ],
+  // }
+
   // 제품 데이터 전송
   const token = localStorage.getItem('jwt')
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`)
-  }
+  // for (let [key, value] of formData.entries()) {
+  //   console.log(`${key}: ${value}`)
+  // }
   fetch(`http://localhost:8081/api/v1/admin/products`, {
     method: 'POST',
     headers: {
-      // 'Content-Type': 'multipart/form-data',
+      'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
     body: formData,
@@ -265,7 +280,7 @@ function handleUpdateProduct(e) {
       selector: '.product-img',
       type: 'label',
       class: 'img-label',
-      innerHTML: '이미지첨부 (최대 5개)',
+      innerHTML: '이미지첨부 (최대 6개)',
       child: {
         type: 'input',
         id: 'input-img',
@@ -416,22 +431,7 @@ function handleUpdateSave(e) {
   // 수정 저장
   // 수정된 폼 데이터 수집 및 유효성 검사 후 서버로 PUT 요청
   if (e.target.innerHTML !== '저장') return
-  // const datas = {
-  //   category: document.querySelector('.category1').value,
-  //   title: document.querySelector('.title1').value,
-  //   price: document.querySelector('.price1').value,
-  //   stock: document.querySelector('.stock1').value,
-  //   size: document.querySelector('.size1').value,
-  //   origin: document.querySelector('.origin1').value,
-  //   description: document.querySelector('.description1').value,
-  //   attribute: document.querySelector('.attribute1').value,
-  //   main_image: 'img url',
-  //   sub_image1: 'img url',
-  //   sub_image2: 'img url',
-  //   sub_image3: 'img url',
-  //   sub_image4: 'img url',
-  //   sub_image5: 'img url',
-  // }
+
   // 생성버튼을 올바르게 눌렀다면 ↓실행
   // 요소 선택을 위한 helper 함수
   function select(selector) {
@@ -446,7 +446,9 @@ function handleUpdateSave(e) {
   const category = select('.category1')
   const size = select('.size1')
   const origin = select('.origin1')
+  const image = select('.image1')
 
+  // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
   const formData = new FormData()
   formData.append('category', category.value)
   formData.append('title', title.value)
@@ -456,22 +458,16 @@ function handleUpdateSave(e) {
   formData.append('size', size.value)
   formData.append('origin', origin.value)
   formData.append('attribute', attribute.value)
+  formData.append('main_image', image.files[0])
 
-  // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
-  const imagesInput = document.querySelector('.image1')
-  for (let i = 0; i < imagesInput.files.length; i++) {
-    if (i === 0) {
-      // 첫 번째 파일을 메인 이미지로 간주
-      formData.append('main_image', imagesInput.files[i])
-    } else {
-      // 나머지 파일을 서브 이미지로 간주
-      formData.append(`sub_image${i}`, imagesInput.files[i])
-    }
+  for (let i = 0; i < image.files.length; i++) {
+    formData.append(`sub_image[${i}]`, image.files[i])
   }
 
   const id =
     e.target.parentNode.parentNode.querySelector('.product-id').innerHTML
   const token = localStorage.getItem('jwt')
+
   for (let [key, value] of formData.entries()) {
     console.log(`${key}: ${value}`)
   }
