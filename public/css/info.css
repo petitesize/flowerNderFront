@@ -75,8 +75,12 @@
 /* ----- bottom > answer ----- */
 .info .info-wrap .info-box .faq-list .list-bottom .answer.off {
     display: none;
-    transition: all .35s;
     overflow: hidden;
-    margin-left: 92px;
-    margin-bottom: 12px;
+}
+
+.info .info-wrap .info-box .faq-list .list-bottom .answer p {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 12px;
+    padding-left: 94px;
 }

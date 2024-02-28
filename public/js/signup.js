@@ -175,7 +175,15 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
 
-    fetch('http://localhost:8081/api/v1/auth/signup', {
+    // 유효성 검사 모두 통과한 후 border color가 red인 박스가 있다면 모두 기본값으로 변경
+    borderBox.forEach(e => {
+        if (e.classList.contains('on')) {
+            e.removeChild(e.lastChild);
+            e.classList.remove('on');
+        }
+    })
+
+    fetch('http://localhost:3000/api/v1/auth/signup', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -190,6 +198,7 @@ signUpButton.addEventListener('click', e => {
         .then(res => {
             if (res.error) alert('이미 가입된 이메일입니다.');
             else {
+                console.log(res.error);
                 alert('가입이 완료되었습니다. 로그인해주세요.')
                 location.href = '/user/login.html';
             }
