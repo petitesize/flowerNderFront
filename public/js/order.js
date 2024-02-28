@@ -213,7 +213,7 @@ function isPurchase() {
           throw new Error(`HTTP Error, Status: ${res.status}`);
         }
         alert("주문이 완료되었습니다.");
-        window.location.href = "/";
+        window.location.href = "/orders/orderlist.html";
         localStorage.removeItem(LOCALSTORAGE_CART);
         return res.json();
       })
