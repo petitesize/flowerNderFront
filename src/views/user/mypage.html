@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MODIFY</title>
+  <title>회원정보 수정</title>
   <link rel="stylesheet" href="/public/css/reset.css">
   <link rel="stylesheet" href="/public/css/common.css">
   <link rel="stylesheet" href="/public/css/mypage.css">
@@ -39,62 +39,61 @@
     <section class="modify">
       <div class="modify-wrap">
         <p class="modify-title">정보 수정</p>
-        <form action="">
-          <p class="authority">일반회원</p>
-          <div class="info-box">
-            <div class="label-box">
-              <label for="email">계정 정보&nbsp;<span>•</span></label>
-            </div>
-            <div class="top-box email-box">
-              <input type="text" placeholder="이메일" id="email" class="email">
-            </div>
-            <div class="top-box">
-              <input type="password" placeholder="기본 비밀번호 입력" class="password">
-            </div>
-            <div class="top-box">
-              <input type="password" placeholder="비밀번호를 변경하는 경우 입력하세요" class="new-password">
-            </div>
-            <div class="bottom-box">
-              <input type="password" placeholder="비밀번호 확인" class="confirm">
-            </div>
+        <p class="authority">일반회원</p>
+        <div class="info-box">
+          <div class="label-box">
+            <label for="email">계정 정보&nbsp;<span>•</span></label>
           </div>
-          <div class="info-box">
-            <div class="label-box">
-              <label for="name">이름&nbsp;<span>•</span></label>
-            </div>
-
-            <div class="bottom-box name-box">
-              <input type="text" placeholder="이름" id="name" class="name">
-            </div>
+          <div class="border-box email-box">
+            <input type="text" placeholder="이메일" id="email" class="email">
+          </div>
+          <div class="border-box password-box">
+            <input type="password" placeholder="비밀번호를 변경하는 경우 입력하세요" class="password">
+          </div>
+          <div class="border-box confirm-box">
+            <input type="password" placeholder="비밀번호 확인" class="confirm">
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="label-box">
+            <label for="name">이름&nbsp;<span>•</span></label>
           </div>
 
-          <div class="info-box">
-            <div class="label-box">
-              <label for="tel">연락처&nbsp;<span>•</span></label>
-            </div>
-            <div class="bottom-box tel-box">
-              <input type="tel" placeholder="연락처" id="tel" class="tel">
-            </div>
+          <div class="border-box name-box">
+            <input type="text" placeholder="이름" id="name" class="name">
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="label-box">
+            <label for="tel">연락처&nbsp;<span>•</span></label>
+          </div>
+          <div class="border-box tel-box">
+            <input type="tel" placeholder="연락처" id="tel" class="tel">
+          </div>
+        </div>
+
+        <div class="info-box">
+          <div class="label-box">
+            <label for="address">주소&nbsp;<span>•</span></label>
           </div>
 
-          <div class="info-box">
-            <div class="label-box">
-              <label for="address">주소&nbsp;<span>•</span></label>
-            </div>
-
-            <div class="top-box">
-              <input type="text" placeholder="주소" id="address" class="address">
-            </div>
-            <div class="bottom-box">
-              <input type="text" placeholder="상세주소" class="detail">
-            </div>
+          <div class="border-box address-box">
+            <input type="text" placeholder="주소" id="address" class="address">
+          </div>
+          <div class="wrap">
+            <img src="//t1.daumcdn.net/postcode/resource/images/close.png" class="fold-button"
+              style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
           </div>
 
-          <div class="modify-box">
-            <input type="submit" class="modify-button" value="확인">
+          <div class="border-box">
+            <input type="text" placeholder="상세주소" class="detail">
           </div>
+        </div>
 
-        </form>
+        <div class="modify-box">
+          <button type="button" class="modify-button">확인</button>
+        </div>
       </div>
     </section>
 
@@ -112,5 +111,7 @@
     </footer>
   </div>
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/public/js/mypage.js"></script>
+
 </html>
