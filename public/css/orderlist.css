@@ -20,9 +20,14 @@
   border-collapse: collapse;
 }
 
-.order-table th,
-.order-table td {
+.order-table th {
   border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.order-table td {
   text-align: center;
   vertical-align: middle;
 }
@@ -36,7 +41,7 @@ th {
 }
 
 td {
-  padding: 10px;
+  padding: 20px;
   line-height: 1.5;
 }
 
@@ -222,6 +227,9 @@ input {
 }
 
 .span-td {
-  padding: 20px;
   /* border-left: 1px solid #999; */
+}
+
+.row-border {
+  border-top: 1px solid black;
 }
