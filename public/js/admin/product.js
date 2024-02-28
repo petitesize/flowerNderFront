@@ -1,4 +1,8 @@
 // import { API_URL } from '/public/js/constants.js'
+const token = localStorage.getItem('jwt')
+if (!token) {
+  alert('관리자 계정으로 접속해 주세요')
+}
 
 const getProducts = async () => {
   const token = localStorage.getItem('jwt')
@@ -486,3 +490,9 @@ function handleUpdateSave(e) {
       console.error('Error:', error)
     })
 }
+
+//logOut
+const logOut_btn = document.querySelector('.logOut-btn')
+logOut_btn.addEventListener('click', () => {
+  localStorage.removeItem('jwt')
+})
