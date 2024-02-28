@@ -73,18 +73,16 @@ function handleCreateProduct() {
   <div class="admin-product-data">
       <div></div>
       <select class="product-input category">
-        <option value="CUSTOM">CUSTOM</option>
-        <option value="MORDERN">MORDERN</option>
-        <option value="LOVELY">LOVELY</option>
-        <option value="DESKTERIOR">DESKTERIOR</option>
-        <option value="CLASSIC">CLASSIC</option>
-        <option value="DESKTERIOR">DESKTERIOR</option>
-        <option value="CLASSIC">CLASSIC</option>
-        <option value="ACC">ACC</option>
+        <option value="Custom">Custom</option>
+        <option value="Modern">Modern</option>
+        <option value="Lovely">Lovely</option>
+        <option value="Deskterior">Deskterior</option>
+        <option value="Classic">Classic</option>
+        <option value="Acc">Acc</option>
       </select>
       <input / class="product-input title" type='text' placeholder="제품명 입력">
-      <label for="input-img" class="img-label">이미지첨부(6개)</label>
-      <input / class="product-input image" id="input-img" type='file' accept='image/*' multiple>
+      <label for="input-img" class="img-label">이미지첨부(최대 5개)</label>
+      <input / class="product-input image" id="input-img" type='file' name='images' accept='image/*' multiple>
       <input / class="product-input price" type='number' placeholder="가격 입력">
       <input / class="product-input stock" type='number' placeholder="재고 입력">
       <textarea class="product-input description" rows=2 cols=25 maxlength=50 placeholder="제품 상세 설명 입력"></textarea>
@@ -146,7 +144,7 @@ function handleCreateBtn(e) {
     !title.value.trim() ||
     !price.value ||
     !price.value.trim() ||
-    file.files.length !== 6 ||
+    // file.files.length !== 6 ||
     !stock.value ||
     !stock.value.trim() ||
     !description ||
@@ -154,37 +152,57 @@ function handleCreateBtn(e) {
     !attribute.value ||
     !attribute.value.trim()
   ) {
-    alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 6개)')
+    alert('빈칸을 전부 작성하셔야 생성 가능합니다.(이미지 최대 5개)')
     return
   }
 
-  // 데이터 객체 생성
-  const datas = {
-    category: category.value,
-    title: title.value,
-    price: price.value,
-    stock: stock.value,
-    size: size.value,
-    origin: origin.value,
-    description: description.value,
-    attribute: attribute.value,
-    main_image: file.files[0],
-    sub_image1: file.files[1],
-    sub_image2: file.files[2],
-    sub_image3: file.files[3],
-    sub_image4: file.files[4],
-    sub_image5: file.files[5],
-  }
+  // const formData = new FormData()
+  // formData.append('category', category.value)
+  // formData.append('title', title.value)
+  // formData.append('price', price.value)
+  // formData.append('stock', stock.value)
+  // formData.append('size', size.value)
+  // formData.append('origin', origin.value)
+  // formData.append('description', description.value)
+  // formData.append('attribute', attribute.value)
+  // formData.append('main_image', file.files[0])
+  // formData.append('sub_image1', file.files[1])
+  // formData.append('sub_image2', file.files[2])
+  // formData.append('sub_image3', file.files[3])
+  // formData.append('sub_image4', file.files[4])
+  // formData.append('sub_image5', file.files[5])
 
+  const formData = new FormData()
+  formData.append('category', category.value)
+  formData.append('title', title.value)
+  formData.append('price', price.value)
+  formData.append('stock', stock.value)
+  formData.append('description', description.value)
+  formData.append('size', size.value)
+  formData.append('origin', origin.value)
+  formData.append('attribute', attribute.value)
+
+  // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
+  const imagesInput = document.getElementById('images')
+  for (let i = 0; i < imagesInput.files.length; i++) {
+    if (i === 0) {
+      // 첫 번째 파일을 메인 이미지로 간주
+      formData.append('main_image', imagesInput.files[i])
+    } else {
+      // 나머지 파일을 서브 이미지로 간주
+      formData.append(`sub_image${i}`, imagesInput.files[i])
+    }
+  }
   // 제품 데이터 전송
   const token = localStorage.getItem('jwt')
+
   fetch(`http://localhost:8081/api/v1/admin/products`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
-    body: JSON.stringify(datas),
+    body: formData,
   })
     .then(response => {
       console.log(response)
@@ -241,7 +259,7 @@ function handleUpdateProduct(e) {
       selector: '.product-img',
       type: 'label',
       class: 'img-label',
-      innerHTML: '이미지첨부 (5개)',
+      innerHTML: '이미지첨부 (최대 5개)',
       child: {
         type: 'input',
         id: 'input-img',
@@ -271,7 +289,7 @@ function handleUpdateProduct(e) {
       selector: '.product-category',
       type: 'select',
       class: 'product-input category1',
-      options: ['CUSTOM', 'MODERN', 'LOVELY', 'DESKTERIOR', 'CLASSIC', 'ACC'],
+      options: ['Custom', 'Modern', 'Lovely', 'Deskterior', 'Classic', 'Acc'],
       prop: 'value',
       from: 'innerHTML',
     },
@@ -392,32 +410,64 @@ function handleUpdateSave(e) {
   // 수정 저장
   // 수정된 폼 데이터 수집 및 유효성 검사 후 서버로 PUT 요청
   if (e.target.innerHTML !== '저장') return
-  const datas = {
-    category: document.querySelector('.category1').value,
-    title: document.querySelector('.title1').value,
-    price: document.querySelector('.price1').value,
-    stock: document.querySelector('.stock1').value,
-    size: document.querySelector('.size1').value,
-    origin: document.querySelector('.origin1').value,
-    description: document.querySelector('.description1').value,
-    attribute: document.querySelector('.attribute1').value,
-    main_image: 'img url',
-    sub_image1: 'img url',
-    sub_image2: 'img url',
-    sub_image3: 'img url',
-    sub_image4: 'img url',
-    sub_image5: 'img url',
+  // const datas = {
+  //   category: document.querySelector('.category1').value,
+  //   title: document.querySelector('.title1').value,
+  //   price: document.querySelector('.price1').value,
+  //   stock: document.querySelector('.stock1').value,
+  //   size: document.querySelector('.size1').value,
+  //   origin: document.querySelector('.origin1').value,
+  //   description: document.querySelector('.description1').value,
+  //   attribute: document.querySelector('.attribute1').value,
+  //   main_image: 'img url',
+  //   sub_image1: 'img url',
+  //   sub_image2: 'img url',
+  //   sub_image3: 'img url',
+  //   sub_image4: 'img url',
+  //   sub_image5: 'img url',
+  // }
+  // 생성버튼을 올바르게 눌렀다면 ↓실행
+  // 요소 선택을 위한 helper 함수
+  function select(selector) {
+    return document.querySelector(selector)
   }
+  // 필수 입력 필드 선택
+  const title = select('.title1')
+  const price = select('.price1')
+  const stock = select('.stock1')
+  const description = select('.description1')
+  const attribute = select('.attribute1')
+  const file = select('.image1')
+  const category = select('.category1')
+  const size = select('.size1')
+  const origin = select('.origin1')
+
+  const formData = new FormData()
+  formData.append('category', category.value)
+  formData.append('title', title.value)
+  formData.append('price', price.value)
+  formData.append('stock', stock.value)
+  formData.append('size', size.value)
+  formData.append('origin', origin.value)
+  formData.append('description', description.value)
+  formData.append('attribute', attribute.value)
+  formData.append('main_image', file.files[0])
+  formData.append('sub_image1', file.files[1])
+  formData.append('sub_image2', file.files[2])
+  formData.append('sub_image3', file.files[3])
+  formData.append('sub_image4', file.files[4])
+  formData.append('sub_image5', file.files[5])
+
   const id =
     e.target.parentNode.parentNode.querySelector('.product-id').innerHTML
   const token = localStorage.getItem('jwt')
   fetch(`http://localhost:8081/api/v1/admin/products/${id}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
-    body: JSON.stringify(datas),
+    body: formData,
   })
     .then(response => {
       if (response.redirected) {
