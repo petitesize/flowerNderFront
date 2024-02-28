@@ -183,7 +183,7 @@ function handleCreateBtn(e) {
   formData.append('attribute', attribute.value)
 
   // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
-  const imagesInput = document.getElementById('images')
+  const imagesInput = document.querySelector('.image')
   for (let i = 0; i < imagesInput.files.length; i++) {
     if (i === 0) {
       // 첫 번째 파일을 메인 이미지로 간주
@@ -195,7 +195,9 @@ function handleCreateBtn(e) {
   }
   // 제품 데이터 전송
   const token = localStorage.getItem('jwt')
-
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`)
+  }
   fetch(`http://localhost:8081/api/v1/admin/products`, {
     method: 'POST',
     headers: {
@@ -437,7 +439,6 @@ function handleUpdateSave(e) {
   const stock = select('.stock1')
   const description = select('.description1')
   const attribute = select('.attribute1')
-  const file = select('.image1')
   const category = select('.category1')
   const size = select('.size1')
   const origin = select('.origin1')
@@ -447,20 +448,29 @@ function handleUpdateSave(e) {
   formData.append('title', title.value)
   formData.append('price', price.value)
   formData.append('stock', stock.value)
+  formData.append('description', description.value)
   formData.append('size', size.value)
   formData.append('origin', origin.value)
-  formData.append('description', description.value)
   formData.append('attribute', attribute.value)
-  formData.append('main_image', file.files[0])
-  formData.append('sub_image1', file.files[1])
-  formData.append('sub_image2', file.files[2])
-  formData.append('sub_image3', file.files[3])
-  formData.append('sub_image4', file.files[4])
-  formData.append('sub_image5', file.files[5])
+
+  // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
+  const imagesInput = document.querySelector('.image1')
+  for (let i = 0; i < imagesInput.files.length; i++) {
+    if (i === 0) {
+      // 첫 번째 파일을 메인 이미지로 간주
+      formData.append('main_image', imagesInput.files[i])
+    } else {
+      // 나머지 파일을 서브 이미지로 간주
+      formData.append(`sub_image${i}`, imagesInput.files[i])
+    }
+  }
 
   const id =
     e.target.parentNode.parentNode.querySelector('.product-id').innerHTML
   const token = localStorage.getItem('jwt')
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`)
+  }
   fetch(`http://localhost:8081/api/v1/admin/products/${id}`, {
     method: 'PUT',
     headers: {
@@ -470,9 +480,7 @@ function handleUpdateSave(e) {
     body: formData,
   })
     .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url
-      }
+      console.log(response)
     })
     .catch(error => {
       console.error('Error:', error)
