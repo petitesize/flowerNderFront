@@ -3,10 +3,12 @@ document.querySelector('.email').readOnly = true;
 document.querySelector('.tel').readOnly = true;
 
 // input 감싸고 있는 박스
-const borderBox = document.querySelectorAll('.border-box');
 const passwordBox = document.querySelector('.password-box');
 const passwordConfirmBox = document.querySelector('.confirm-box');
+const userNameBox = document.querySelector('.name-box');
 const addressBox = document.querySelector('.address-box');
+const addressDetailBox = document.querySelector('.detail-box');
+const borderBox = document.querySelectorAll('.border-box');
 
 // input
 const email = document.querySelector('.email');
@@ -76,10 +78,15 @@ addressBox.addEventListener('click', () => {
             // 커서를 상세주소 필드로 이동한다.
             document.querySelector(".detail").focus();
 
+            // border color가 red로 표시되어있을 경우 기본값으로 변경
+            if (addressBox.classList.contains('on')) {
+                addressBox.removeChild(addressBox.lastChild);
+                addressBox.classList.remove('on');
+            }
+
             // iframe을 넣은 element를 안보이게 한다.
             // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
             postalCodeBox.style.display = 'none';
-            addressBox.style.display = 'block';
 
             // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
             document.body.scrollTop = currentScroll;
@@ -95,14 +102,12 @@ addressBox.addEventListener('click', () => {
 
     // iframe을 넣은 element를 보이게 한다.
     postalCodeBox.style.display = 'block';
-    addressBox.style.display = 'none';
 })
 
 // 우편번호 찾기 닫기
 foldButton.addEventListener('click', () => {
     // iframe을 넣은 element를 안보이게 한다.
     postalCodeBox.style.display = 'none';
-    addressBox.style.display = 'block';
 })
 
 // 회원정보 수정 PATCH
@@ -162,16 +167,63 @@ modifyButton.addEventListener('click', e => {
             }
             return false;
         }
-        // 유효성 검사 모두 통과한 후 border color가 red인 박스가 있다면 모두 기본값으로 변경
+    }
+
+    // 이름
+    if (!userNameVal) {
         borderBox.forEach(e => {
             if (e.classList.contains('on')) {
                 e.removeChild(e.lastChild);
                 e.classList.remove('on');
             }
         })
+
+        if (!userNameBox.classList.contains('on')) {
+            userNameBox.classList.add('on');
+            userNameBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>이름을 입력하세요.</p></div');
+        }
+        return false;
     }
 
-    // 새 비밀번호 입력값이 없을 경우 or 비밀번호 유효성 검사 통과할 경우 PATCH
+    // 주소
+    if (!addressVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
+        if (!addressBox.classList.contains('on')) {
+            addressBox.classList.add('on');
+            addressBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>주소를 입력하세요.</p></div');
+        }
+        return false;
+    }
+    if (!addressDetailVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
+        if (!addressDetailBox.classList.contains('on')) {
+            addressDetailBox.classList.add('on');
+            addressDetailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>주소를 입력하세요.</p></div');
+        }
+        return false;
+    }
+
+    // 유효성 검사 모두 통과한 후 border color가 red인 박스가 있다면 모두 기본값으로 변경
+    borderBox.forEach(e => {
+        if (e.classList.contains('on')) {
+            e.removeChild(e.lastChild);
+            e.classList.remove('on');
+        }
+    })
+
+    // 유효성 검사 모두 통과할 경우 PATCH
     // 비밀번호 변경할 경우
     if (passwordVal) {
         if (localStorage.getItem('jwt')) {
@@ -191,7 +243,11 @@ modifyButton.addEventListener('click', e => {
                 }),
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    if (res.error) alert('정보 수정에 실패했습니다. 정보를 다시 확인해주세요.');
+                    else {
+                        alert('정보 수정이 완료되었습니다.')
+                        location.href = '/index.html';
+                    }
                 })
                 .catch(err => console.log(err))
         }
@@ -218,9 +274,17 @@ modifyButton.addEventListener('click', e => {
                 }),
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    if (res.error) alert('정보 수정에 실패했습니다. 정보를 다시 확인해주세요.');
+                    else {
+                        alert('정보 수정이 완료되었습니다.')
+                        location.href = '/index.html';
+                    }
                 })
                 .catch(err => console.log(err))
+        }
+        else {
+            alert('올바른 접근이 아닙니다.');
+            location.href = '/user/login.html';
         }
     }
 })

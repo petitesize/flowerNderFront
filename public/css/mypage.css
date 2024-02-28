@@ -47,6 +47,14 @@
     border-top: 1px solid red;
 }
 
+.modify .modify-wrap .address-box.on ~ .detail-box {
+    border-top: 1px solid red;
+}
+
+.modify .modify-wrap .address-box.on + .wrap {
+    border-top: 1px solid red;
+}
+
 .modify .modify-wrap .check-font p {
     font-size: 10px;
     color: red;
