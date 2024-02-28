@@ -36,7 +36,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // 헤더 업데이트 함수
     function updateHeader() {
         const loginLink = document.querySelector('.h-right a[href="/user/login.html"]');
-        
+        const myPageLink = document.querySelector('.h-right a[href="/orders/orderlist.html"]');
+
 
         if (jwtToken) {
             // 로그인 상태인 경우
@@ -46,6 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // 로그아웃 상태인 경우
             loginLink.textContent = 'LOGIN';
             loginLink.href = '/user/login.html';  // 로그인 페이지로 이동하도록 설정
+
+            myPageLink.textContent = 'ORDER';
         }
     }
 
