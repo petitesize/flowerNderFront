@@ -141,24 +141,48 @@ inputAll.addEventListener('change', () => {
 });
 
 
-// 선택된 상품 삭제
+// ----------------- 선택된 상품 삭제
 const selectedItemsDeleteBtn = document.querySelector('.cart-ck-delete button:first-child');
+
 selectedItemsDeleteBtn.addEventListener('click', () => {
+    // 선택한 상품들의 체크박스 요소를 가져옵니다.
     const selectedItems = document.querySelectorAll('input[name="cart-input"]:checked');
 
+    // 추적할 인덱스 배열을 초기화합니다.
+    const selectedIndexes = [];
+
     selectedItems.forEach(item => {
+        // 선택한 체크박스 요소의 부모인 cart-list 클래스를 가진 요소를 찾습니다.
         const listItem = item.closest('.cart-list');
+
+        // 체크박스의 id에서 인덱스를 추출합니다.
         const index = parseInt(item.id.replace('cart-ck', ''), 10);
 
+        // 추적할 인덱스 배열에 추가합니다.
+        selectedIndexes.push(index);
+
+        // 화면에서 해당 상품 요소를 삭제합니다.
         listItem.remove();
+    });
+
+    // 추적한 인덱스 배열을 역순으로 정렬합니다.
+    selectedIndexes.sort((a, b) => b - a);
+
+    // 선택한 인덱스에 해당하는 상품을 saveCart 배열에서 삭제합니다.
+    selectedIndexes.forEach(index => {
         saveCart.splice(index, 1);
     });
 
-    // 로컬 스토리지 업데이트
+    // 로컬 스토리지를 업데이트합니다.
     localStorage.setItem('cart', JSON.stringify(saveCart));
 
+    // 장바구니 표시를 갱신합니다.
     refreshCartDisplay();
+
+    // 페이지를 새로고침합니다.
+    location.reload(true);
 });
+
 
 // 모든 상품 삭제
 const allItemsDeleteBtn = document.querySelector('.cart-ck-delete button:last-child');
@@ -235,6 +259,8 @@ document.querySelectorAll('.cart-common-btn').forEach((btn) => {
         saveCart[index].quantity = newQuantity; 
         // 장바구니의 해당 상품 수량 업데이트
 
+
+        // location.reload(true);
         refreshCartDisplay(); // 장바구니 화면 갱신
     });
 });
@@ -256,6 +282,4 @@ function updateLocalStorage() {
     
 // 초기 로드 시 장바구니 업데이트
 refreshCartDisplay();
-
-
 

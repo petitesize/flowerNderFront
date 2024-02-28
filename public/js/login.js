@@ -16,21 +16,26 @@ loginButton.addEventListener('click', e => {
     // 비밀번호 입력값이 없을 경우
     else if (!passwordVal) alert('비밀번호를 입력하세요.');
 
-    // 로그인 정보 POST
-    fetch('http://localhost:8081/api/v1/auth/login', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-            email: emailVal,
-            password: passwordVal,
-        }),
-    }).then(res => res.json())
-    .then(res => {
-        if (res.error) alert('잘못된 아이디 또는 비밀번호입니다.');
-        else {
-            localStorage.setItem("jwt", res.data);
-            location.href = '/index.html';
-        }
-    })
-    .catch(err => console.log(err))
+    // 아이디, 비밀번호 입력값이 모두 있을 경우 로그인 정보 POST
+    else {
+        fetch('http://localhost:8081/api/v1/auth/login', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                email: emailVal,
+                password: passwordVal,
+            }),
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res);
+                if (res.error) alert('잘못된 아이디 또는 비밀번호입니다.');
+                else {
+                    localStorage.setItem("jwt", res.data);
+                    location.href = '/index.html';
+                }
+            })
+            .catch(err => console.log(err))
+    }
 })
+
+// 로그아웃 버튼 누를 경우 or 브라우저 닫을 경우 jwt 토큰 삭제

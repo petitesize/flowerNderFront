@@ -98,9 +98,9 @@
     background: #fff;
 }
 /* 선택시 bold 추가함 */
-.nav-wrap .nav-left .nav-bold{
+/* .nav-wrap .nav-left .nav-bold{
     font-weight: 600;
-}
+} */
 .nav-wrap .nav-right{
     width: 10%;
     padding: 10px 0;
