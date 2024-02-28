@@ -57,319 +57,144 @@ const fetchDetailData = async () => {
   navWrap.insertAdjacentHTML('beforeend', detailItemNav);
 
 
-  // ========================= 상품목록 템플릿 =======================
-  if(realData.stock > 0){
-    //soldout이 없는 템플릿
-    const detailWrap = `
-    <!-- 상품 이미지 & 상품설명 + 상품선택이 있습니다! -->
-    <div class="dc-top">
-      <div class="detail-left">
-        <!-- 이미지들 url로 한다고 하심 main_image -->
-        <div class="detail-l-top">
-          <img
-            src=${realData.main_image.url}
-            alt="상품사진"
-            id="product-main-img"
-          />
-        </div>
-        <!-- 서브이미지들 sub_image1~5 -->
-        <div class="detail-l-bottom">
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-          <div class="detail-lb-inner">
-            <img
-              src=${realData.sub_image[0].url}            
-              alt="다른상품 사진들"
-              class="product-sub-img"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="detail-right">
-        <div class="detail-r-top">
-          <div class="detail-title">
-            <!-- *** 상품의 이름! title -->
-            <h2>${realData.title}</h2>
-          </div>
+  // ========================= 상품목록 템플릿 너무 길어져서 요소 추가하는걸로 수정함 =======================
 
-          <!-- *** 상품의 가격! price -->
-          <div class="detail-price">
-            <h3>${realData.price.toLocaleString()}원</h3>
-          </div>
-          <!-- *** 상품 설명 description -->
-          <div class="detail-info">
-            <p>
-              ${realData.description}
-            </p>
-          </div>
-        </div>
-        <div class="detail-r-mid">
-          <div class="drm-top">
-            <!-- 사이즈 size -->
-            <div class="detail-flex df-two">
-              <p class="dft-title">Volume</p>
-              <span class="dft-text">${realData.size}</span>
-            </div>
-            <!-- 원산지! origin -->
-            <div class="detail-flex df-two">
-              <p class="dft-title">Origin</p>
-              <span class="dft-text">${realData.origin}</span>
-            </div>
-          </div>
+  // ----------------- 재고가 0일때
 
-          <div class="drm-bottom">
-            <div class="detail-flex df-two">
-              <!-- 꽃의 특징이 들어가는곳! attribute -->
-              <p class="dft-title">특성</p>
-              <span class="dft-text"
-                >${realData.attribute}
-              </span>
-            </div>
 
-            <!-- 고정된 텍스트들 개발필요 x -->
-            <div class="detail-flex df-two">
-              <p class="dft-title">상세 내용</p>
-              <span class="dft-text"
-                >꽃, 이렇게 배송 돼요. Flora & Dér 꽃시장은 국내 농장의
-                신선한 꽃을 최소한의 컨디셔닝만 거쳐 보내드립니다. 배송
-                중에도 꽃에 물을 공급하기 위해 플로럴 폼(오아시스)을
-                사용합니다. 꽃을 보호하기 위해 포장지로 감싸고 Flora & Dér
-                시그니처 로고가 적용된 패키지에 담아 배송됩니다.
-              </span>
-            </div>
-            <div class="detail-flex df-two">
-              <p class="dft-title">컨디셔닝</p>
-              <span class="dft-text"
-                >잎은 꽃받침 아래 2~3개를 제외하고 전부 제거하여 물에 잠기는
-                부분에 잎이 없도록 합니다. 잎 정리 후 줄기의 끝부분을 잘라
-                물에 담가줍니다.
-              </span>
-            </div>
-            <div class="detail-flex df-two">
-              <p class="dft-title">관리 방법</p>
-              <span class="dft-text"
-                >신선한 물로 화병을 자주 갈아 주며, 줄기 끝을 다시 잘라
-                수화작용을 원활하게 해주세요.
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="detail-r-bottom">
-          <p class="detail-warning">
-            ※ 구매 수량에 따라 배송되는 박스는 이미지와 다를 수 있습니다.
-          </p>
-          <div class="detail-delivery">
-            <p class="dd-title">배송비</p>
-            <p class="dd-text">착불</p>
-          </div>
-          <div class="detail-choice">
-            <div class="dc-inner dc-sel-top">
-              <p>필수 선택 *</p>
-              <select name="selectAgree" id="selectAgree" required>
-                <option value="0">교환 및 환불 동의</option>
-                <option value="1">
-                  제품을 개봉하거나 상품가치가 훼손된 경우에는 제품의 교환
-                  및 환불 불가 안내에 동의합니다.
-                </option>
-              </select>
-            </div>
+if(realData.stock > 0){
+  // ----------------- 품절아닐경우
+  // 메인 이미지 삽입
+  const mainimg = document.querySelector('.main-img-box');
+  mainimg.innerHTML = `<img src="${realData.main_image.url}" alt="상품사진" id="product-main-img" />`;
 
-            <div class="dc-bottom">
-              <!-- *** 장바구니는 로컬스토리지로 연결~~~~ -->
-              <div class="dcb-btn dcb-buy">
-                <button type="submit" class="buy-cart" onclick="addToCart()">
-                  장바구니
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-   `
-    detailContent.insertAdjacentHTML('afterbegin', detailWrap);
-  }else{
-  //soldout이 있는 템플릿
-  const detailWrap = `
-  <!-- 상품 이미지 & 상품설명 + 상품선택이 있습니다! -->
-  <div class="dc-top">
-    <div class="detail-left">
-      <!-- 이미지들 url로 한다고 하심 main_image -->
-      <div class="detail-l-top">
-        <img
-          src=${realData.main_image.url}
-          alt="상품사진"
-          id="product-main-img"
-        />
-      </div>
-      <!-- 서브이미지들 sub_image1~5 -->
-      <div class="detail-l-bottom">
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-        <div class="detail-lb-inner">
-          <img
-            src=${realData.sub_image[0].url}            
-            alt="다른상품 사진들"
-            class="product-sub-img"
-          />
-        </div>
-      </div>
-    </div>
-    <div class="detail-right">
-      <div class="detail-r-top">
-        <div class="detail-title">
-          <!-- *** 상품의 이름! title -->
-          <h2>${realData.title}</h2>
-          <img src="/public/img/sold.jpg" alt="" />
-        </div>
+  // 서브이미지 삽입
+  // 서브이미지 삽입// 서브이미지 삽입
+  const subImageContainer = document.querySelector('.detail-l-bottom');
 
-        <!-- *** 상품의 가격! price -->
-        <div class="detail-price">
-          <h3>${realData.price.toLocaleString()}원</h3>
-        </div>
-        <!-- *** 상품 설명 description -->
-        <div class="detail-info">
-          <p>
-            ${realData.description}
-          </p>
-        </div>
-      </div>
-      <div class="detail-r-mid">
-        <div class="drm-top">
-          <!-- 사이즈 size -->
-          <div class="detail-flex df-two">
-            <p class="dft-title">Volume</p>
-            <span class="dft-text">${realData.size}</span>
-          </div>
-          <!-- 원산지! origin -->
-          <div class="detail-flex df-two">
-            <p class="dft-title">Origin</p>
-            <span class="dft-text">${realData.origin}</span>
-          </div>
-        </div>
+  // 서브이미지 배열이 있다고 가정
+  const subImages = realData.sub_image;
 
-        <div class="drm-bottom">
-          <div class="detail-flex df-two">
-            <!-- 꽃의 특징이 들어가는곳! attribute -->
-            <p class="dft-title">특성</p>
-            <span class="dft-text"
-              >${realData.attribute}
-            </span>
-          </div>
+  // 빈 박스 제거
+  const emptyBoxes = document.querySelectorAll('.detail-lb-inner.sub-img-box');
+  emptyBoxes.forEach(box => box.remove());
 
-          <!-- 고정된 텍스트들 개발필요 x -->
-          <div class="detail-flex df-two">
-            <p class="dft-title">상세 내용</p>
-            <span class="dft-text"
-              >꽃, 이렇게 배송 돼요. Flora & Dér 꽃시장은 국내 농장의
-              신선한 꽃을 최소한의 컨디셔닝만 거쳐 보내드립니다. 배송
-              중에도 꽃에 물을 공급하기 위해 플로럴 폼(오아시스)을
-              사용합니다. 꽃을 보호하기 위해 포장지로 감싸고 Flora & Dér
-              시그니처 로고가 적용된 패키지에 담아 배송됩니다.
-            </span>
-          </div>
-          <div class="detail-flex df-two">
-            <p class="dft-title">컨디셔닝</p>
-            <span class="dft-text"
-              >잎은 꽃받침 아래 2~3개를 제외하고 전부 제거하여 물에 잠기는
-              부분에 잎이 없도록 합니다. 잎 정리 후 줄기의 끝부분을 잘라
-              물에 담가줍니다.
-            </span>
-          </div>
-          <div class="detail-flex df-two">
-            <p class="dft-title">관리 방법</p>
-            <span class="dft-text"
-              >신선한 물로 화병을 자주 갈아 주며, 줄기 끝을 다시 잘라
-              수화작용을 원활하게 해주세요.
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="detail-r-bottom">
-        <p class="detail-warning">
-          ※ 구매 수량에 따라 배송되는 박스는 이미지와 다를 수 있습니다.
-        </p>
-        <div class="detail-delivery">
-          <p class="dd-title">배송비</p>
-          <p class="dd-text">착불</p>
-        </div>
-        <div class="detail-choice">
-          <div class="dc-inner dc-sel-top">
-            <p>필수 선택 *</p>
-            <select name="selectAgree" id="selectAgree" required>
-              <option value="0">교환 및 환불 동의</option>
-              <option value="1">
-                제품을 개봉하거나 상품가치가 훼손된 경우에는 제품의 교환
-                및 환불 불가 안내에 동의합니다.
-              </option>
-            </select>
-          </div>
+  if (subImages && subImages.length > 0) {
+    const maxSubImages = Math.min(subImages.length, 5);
 
-          <div class="dc-bottom">
-            <div class="dcb-btn dcb-soldout">
-              <button type="button">품절된상품입니다.</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  `
-  detailContent.insertAdjacentHTML('afterbegin', detailWrap);
+    for (let i = 0; i < maxSubImages; i++) {
+      const subImageElement = document.createElement('div');
+      subImageElement.className = 'detail-lb-inner sub-img-box';
+
+      const imageElement = document.createElement('img');
+      imageElement.src = subImages[i].url;
+      imageElement.alt = `서브이미지${i + 1}`;
+
+      subImageElement.appendChild(imageElement);
+      subImageContainer.appendChild(subImageElement);
+    }
+  } else {
+    // 서브이미지가 없는 경우에 대한 처리
+    const noSubImageElement = document.createElement('p');
+    noSubImageElement.textContent = '서브이미지가 없습니다.';
+    subImageContainer.appendChild(noSubImageElement);
+  }
+
+  // 제목 삽입
+  const titleElement = document.querySelector('.title-box');
+  titleElement.innerHTML = `${realData.title}`;
+
+  // 가격 삽입
+  const priceElement = document.querySelector('.price-box');
+  priceElement.innerHTML = `${realData.price.toLocaleString()}원`;
+
+  // 상품 설명 삽입
+  const descriptionElement = document.querySelector('.description-box');
+  descriptionElement.innerHTML = `${realData.description}`;
+
+  // 사이즈 삽입
+  const sizeElement = document.querySelector('.volume-box');
+  sizeElement.textContent = realData.size;
+
+  // 원산지 삽입
+  const originElement = document.querySelector('.origin-box');
+  originElement.textContent = realData.origin;
+
+  // 특성 삽입
+  const attributeElement = document.querySelector('.attribute-box');
+  attributeElement.textContent = realData.attribute;
+
+  document.querySelector('.sold-out-img').style.display = 'none';
+  document.querySelector('.dcb-soldout').style.display = 'none';
+}else {
+  // ----------------- 품절일 경우 
+
+  // 메인 이미지 삽입
+  const mainimg = document.querySelector('.main-img-box');
+  mainimg.innerHTML = `<img src="${realData.main_image.url}" alt="상품사진" id="product-main-img" />`;
+  
+  
+  // 서브이미지 삽입
+  // 서브이미지 삽입// 서브이미지 삽입
+  const subImageContainer = document.querySelector('.detail-l-bottom');
+  
+  // 서브이미지 배열이 있다고 가정
+  const subImages = realData.sub_image;
+  
+  // 빈 박스 제거
+  const emptyBoxes = document.querySelectorAll('.detail-lb-inner.sub-img-box');
+  emptyBoxes.forEach(box => box.remove());
+  
+  if (subImages && subImages.length > 0) {
+    const maxSubImages = Math.min(subImages.length, 5);
+  
+    for (let i = 0; i < maxSubImages; i++) {
+      const subImageElement = document.createElement('div');
+      subImageElement.className = 'detail-lb-inner sub-img-box';
+  
+      const imageElement = document.createElement('img');
+      imageElement.src = subImages[i].url;
+      imageElement.alt = `서브이미지${i + 1}`;
+  
+      subImageElement.appendChild(imageElement);
+      subImageContainer.appendChild(subImageElement);
+    }
+  } else {
+    // 서브이미지가 없는 경우에 대한 처리
+    const noSubImageElement = document.createElement('p');
+    noSubImageElement.textContent = '서브이미지가 없습니다.';
+    subImageContainer.appendChild(noSubImageElement);
   }
   
+  // 제목 삽입
+  const titleElement = document.querySelector('.title-box');
+  titleElement.innerHTML = `${realData.title}`;
+  
+  // 가격 삽입
+  const priceElement = document.querySelector('.price-box');
+  priceElement.innerHTML = `${realData.price.toLocaleString()}원`;
+  
+  // 상품 설명 삽입
+  const descriptionElement = document.querySelector('.description-box');
+  descriptionElement.innerHTML = `${realData.description}`;
+  
+  // 사이즈 삽입
+  const sizeElement = document.querySelector('.volume-box');
+  sizeElement.textContent = realData.size;
+  
+  // 원산지 삽입
+  const originElement = document.querySelector('.origin-box');
+  originElement.textContent = realData.origin;
+  
+  // 특성 삽입
+  const attributeElement = document.querySelector('.attribute-box');
+  attributeElement.textContent = realData.attribute;
+  
+  document.querySelector('.dcb-buy').style.display = 'none';
+}
+
+
+insertDetailWrap(realData);
   const cartButton = document.querySelector(".buy-cart");
 const id = realData._id;
 const price = realData.price;

@@ -1,10 +1,11 @@
 const emailBox = document.querySelector('.email-box');
 const passwordBox = document.querySelector('.password-box');
 const passwordConfirmBox = document.querySelector('.confirm-box');
-const nameBox = document.querySelector('.name-box');
+const userNameBox = document.querySelector('.name-box');
 const phoneNumberBox = document.querySelector('.tel-box');
 const addressBox = document.querySelector('.address-box');
 const addressDetailBox = document.querySelector('.detail-box');
+const borderBox = document.querySelectorAll('.border-box');
 
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');
@@ -18,75 +19,180 @@ const signUpButton = document.querySelector('.signup-button');
 signUpButton.addEventListener('click', e => {
     e.preventDefault();
 
-    const emailVal = email.value;
-    const passwordVal = password.value;
-    const passwordConfirmVal = passwordConfirm.value;
-    const userNameVal = userName.value;
-    const phoneNumberVal = phoneNumber.value;
-    const addressVal = address.value;
-    const addressDetailVal = addressDetail.value;
+    let emailVal = email.value;
+    let passwordVal = password.value;
+    let passwordConfirmVal = passwordConfirm.value;
+    let userNameVal = userName.value;
+    let phoneNumberVal = phoneNumber.value;
+    let addressVal = address.value;
+    let addressDetailVal = addressDetail.value;
 
     const emailPattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-    const passwordPattern = '';
-    const phoneNumberPattern = '';
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+    const phoneNumberPattern = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/
 
     // 이메일 유효성 검사
     if (!emailVal || !emailPattern.test(emailVal)) {
-        console.log(emailPattern.test(emailVal));
-        console.log(email.value);
+        console.log('email 유효성 검사', emailPattern.test(emailVal));
         if (!emailBox.classList.contains('on')) {
             emailBox.classList.add('on');
-            passwordBox.style = 'border-top: 0px';
-            emailBox.style = 'height: 56px';
-            emailBox.innerHTML += '<div><p class="check-font">이메일을 정확히 입력하세요</p></div>';
-            console.log('on ---');
+            emailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>이메일을 정확히 입력하세요.</p></div');
         }
-        
+        return false;
     }
 
     // 비밀번호 유효성 검사
-    else if (!passwordVal) {
+    if (!passwordVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
         if (!passwordBox.classList.contains('on')) {
             passwordBox.classList.add('on');
-            passwordConfirmBox.style = 'border-top: 0px';
-            passwordBox.style = 'height: 56px';
-            passwordBox.innerHTML += '<div><p class="check-font">비밀번호를 입력하세요.</p></div>';
+            passwordBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호를 입력하세요.</p></div');
         }
+        return false;
     }
-    else if (!passwordPattern.test(passwordVal)) {
+    if (!passwordPattern.test(passwordVal)) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
+        if (!passwordBox.classList.contains('on')) {
+            passwordBox.classList.add('on');
+            passwordBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>최소 8글자 이상, 영어·숫자 포함 필수</p></div');
+        }
+        return false;
     }
-    else if (!passwordConfirmVal) {
+    if (!passwordConfirmVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
+        if (!passwordConfirmBox.classList.contains('on')) {
+            passwordConfirmBox.classList.add('on');
+            passwordConfirmBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호를 한번 더 입력하세요.</p></div');
+        }
+        return false;
     }
-    else if (passwordVal !== passwordConfirmVal) {
+    if (passwordVal !== passwordConfirmVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
-    }
-    else if (!userNameVal) {
-
-    }
-    else if (!phoneNumberVal) {
-
-    }
-    else if (!phoneNumberPattern.test(phoneNumberVal)) {
-
-    }
-    else if (!addressVal) {
-
-    }
-    else if (!addressDetailVal) {
-
+        if (!passwordConfirmBox.classList.contains('on')) {
+            passwordConfirmBox.classList.add('on');
+            passwordConfirmBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호가 일치하지 않습니다.</p></div');
+        }
+        return false;
     }
 
+    // 이름
+    if (!userNameVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
-    // 비밀번호 형식 검사 (최소 8글자 이상, 숫자 포함 필수)
+        if (!userNameBox.classList.contains('on')) {
+            userNameBox.classList.add('on');
+            userNameBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>이름을 입력하세요.</p></div');
+        }
+        return false;
+    }
 
-    // 비밀번호가 8글자 미만 or 숫자 포함하지 않을 경우 > '최소 8글자 이상, 숫자 포함 필수', border red
+    // 연락처 유효성 검사
+    if (!phoneNumberVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
-    // 비밀번호 - 비밀번호 확인 일치 검사
-    // 일치하지 않을 경우 > '비밀번호가 일치하지 않습니다', border red
+        if (!phoneNumberBox.classList.contains('on')) {
+            phoneNumberBox.classList.add('on');
+            phoneNumberBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>휴대폰 번호를 입력하세요.</p></div');
+        }
+        return false;
+    }
+    if (!phoneNumberPattern.test(phoneNumberVal)) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
 
+        if (!phoneNumberBox.classList.contains('on')) {
+            phoneNumberBox.classList.add('on');
+            phoneNumberBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>(-)을 포함한 휴대폰 번호를 입력하세요.</p></div');
+        }
+        return false;
+    }
 
-    // 값이 없을 경우 '비밀번호를 입력하세요', border red
-    // '비밀번호를 한번 더 입력하세요' '주소를 입력하세요' '상세 주소를 입력하세요'
+    // 주소
+    if (!addressVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
+        if (!addressBox.classList.contains('on')) {
+            addressBox.classList.add('on');
+            addressBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>주소를 입력하세요.</p></div');
+        }
+        return false;
+    }
+    if (!addressDetailVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
+        if (!addressDetailBox.classList.contains('on')) {
+            addressDetailBox.classList.add('on');
+            addressDetailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>주소를 입력하세요.</p></div');
+        }
+        return false;
+    }
+
+    fetch('http://localhost:8081/api/v1/auth/signup', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            email: emailVal,
+            password: passwordVal,
+            user_name: userNameVal,
+            phone_number: phoneNumberVal,
+            address: addressVal,
+            address_detail: addressDetailVal
+        }),
+    }).then(res => res.json())
+        .then(res => {
+            if (res.error) alert('이미 가입된 이메일입니다.');
+            else {
+                alert('가입이 완료되었습니다. 로그인해주세요.')
+                location.href = '/user/login.html';
+            }
+        })
+        .catch(err => console.log(err))
 })
