@@ -141,7 +141,7 @@ inputAll.addEventListener('change', () => {
 });
 
 
-// 선택된 상품 삭제
+// ----------------- 선택된 상품 삭제
 const selectedItemsDeleteBtn = document.querySelector('.cart-ck-delete button:first-child');
 
 selectedItemsDeleteBtn.addEventListener('click', () => {
@@ -259,6 +259,8 @@ document.querySelectorAll('.cart-common-btn').forEach((btn) => {
         saveCart[index].quantity = newQuantity; 
         // 장바구니의 해당 상품 수량 업데이트
 
+
+        // location.reload(true);
         refreshCartDisplay(); // 장바구니 화면 갱신
     });
 });
@@ -280,5 +282,4 @@ function updateLocalStorage() {
     
 // 초기 로드 시 장바구니 업데이트
 refreshCartDisplay();
-
 
