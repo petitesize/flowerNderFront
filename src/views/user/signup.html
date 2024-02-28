@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGN UP</title>
+    <title>회원가입</title>
     <link rel="stylesheet" href="/public/css/reset.css">
     <link rel="stylesheet" href="/public/css/common.css">
     <link rel="stylesheet" href="/public/css/signup.css">
@@ -75,6 +75,12 @@
                     <div class="border-box address-box">
                         <input type="text" placeholder="주소" id="address" class="address">
                     </div>
+
+                    <div class="wrap">
+                        <img src="//t1.daumcdn.net/postcode/resource/images/close.png" class="fold-button"
+                            style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
+                    </div>
+
                     <div class="border-box detail-box">
                         <input type="text" placeholder="상세주소" class="detail">
                     </div>
@@ -100,6 +106,7 @@
         </footer>
     </div>
 </body>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/public/js/signup.js"></script>
 
 </html>

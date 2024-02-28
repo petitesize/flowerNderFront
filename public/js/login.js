@@ -41,5 +41,3 @@ loginButton.addEventListener('click', e => {
         })
         .catch(err => console.log(err))
 })
-
-// 로그아웃 버튼 누를 경우 or 브라우저 닫을 경우 jwt 토큰 삭제
