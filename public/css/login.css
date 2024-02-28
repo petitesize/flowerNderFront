@@ -10,28 +10,15 @@
     margin-top: 100px;
 }
 
-.login .login-wrap .login-box .email-box {
+.login .login-wrap .login-box .border-box {
     width: 94%;
     max-width: 550px;
     height: 44px;
     display: flex;
     margin: 0 auto;
     padding-left: 10px;
-    border-top: 1px solid #000;
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
-    box-sizing: border-box;
-}
-
-.login .login-wrap .login-box .password-box {
-    width: 94%;
-    max-width: 550px;
-    height: 44px;
-    display: flex;
-    margin: 0 auto;
-    padding-left: 10px;
-    border: 1px solid #000;
-    box-sizing: border-box;
+    margin: -1px auto;
+    border: 1px solid;
 }
 
 .login .login-wrap .login-box input {
