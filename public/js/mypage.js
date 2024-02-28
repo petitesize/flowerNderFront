@@ -2,16 +2,11 @@
 document.querySelector('.email').readOnly = true;
 document.querySelector('.tel').readOnly = true;
 
-// 우편번호 찾기, 주소 입력
-const addressBox = document.querySelector('.address-box');
-const postalCodeBox = document.querySelector('.wrap');
-const foldButton = document.querySelector('.fold-button');
-let postalCodeVal = '';
-
 // input 감싸고 있는 박스
 const borderBox = document.querySelectorAll('.border-box');
 const passwordBox = document.querySelector('.password-box');
 const passwordConfirmBox = document.querySelector('.confirm-box');
+const addressBox = document.querySelector('.address-box');
 
 // input
 const email = document.querySelector('.email');
@@ -21,6 +16,11 @@ const address = document.querySelector('.address');
 const addressDetail = document.querySelector('.detail');
 const password = document.querySelector('.password');
 const passwordConfirm = document.querySelector('.confirm');
+
+// 우편번호 찾기, 주소 입력
+const postalCodeBox = document.querySelector('.wrap');
+const foldButton = document.querySelector('.fold-button');
+let postalCodeVal = '';
 
 // 확인 버튼
 const modifyButton = document.querySelector('.modify-button');
@@ -176,7 +176,7 @@ modifyButton.addEventListener('click', e => {
     if (passwordVal) {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
-            fetch('http://localhost:3000/api/vi/user/mypage', {
+            fetch('http://localhost:3000/api/v1/user/mypage', {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
