@@ -178,3 +178,6 @@ opacity: 1;
 .detail .detail-b-text ul.delivery-info{
     margin-bottom: 90px;
 }
+.acc-none{
+    display: none;
+}

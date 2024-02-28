@@ -43,7 +43,7 @@ const plusList = () => {
                             <span>필수</span> 제품을 개봉하거나 상품가치가 훼손된 경우에는 제품의 교환 및 환불 불가 안내에 동의합니다.
                         </span>
                     </span>
-                    <button class="cart-del-btn"><img src="/public/img/delete.png" alt="삭제버튼"></button>
+                    <button class="cart-del-btn" data-index="${i}"><img src="/public/img/delete.png" alt="삭제버튼"></button>
                 </span>
                 <span class="cl-list-3">
                     <span class="cart-count">
@@ -184,7 +184,7 @@ selectedItemsDeleteBtn.addEventListener('click', () => {
 });
 
 
-// 모든 상품 삭제
+// ----------------- 모든 상품 삭제
 const allItemsDeleteBtn = document.querySelector('.cart-ck-delete button:last-child');
 allItemsDeleteBtn.addEventListener('click', () => {
     wrapBox.innerHTML = '';
@@ -196,6 +196,32 @@ allItemsDeleteBtn.addEventListener('click', () => {
     // 장바구니 화면 갱신
     refreshCartDisplay();
 });
+
+
+// ----------------- 장바구니 X버튼 이벤트리스너
+document.querySelectorAll('.cart-del-btn').forEach((deleteBtn, index) => {
+    deleteBtn.addEventListener('click', () => {
+        removeCartItem(index);
+    });
+});
+
+
+// ----------------- 개별 상품 삭제 함수
+function removeCartItem(index) {
+    // 화면에서 해당 상품 삭제
+    const listItem = document.querySelector(`.cart-list:nth-child(${index + 1})`);
+    listItem.remove();
+
+    // saveCart 배열에서 해당 인덱스 상품 삭제
+    saveCart.splice(index, 1);
+
+    // 로컬 스토리지를 업데이트
+    updateLocalStorage();
+
+    refreshCartDisplay();
+    
+    location.reload(true);
+}
 
 // ========================= 상품 가격 계산 함수 =========================
 function calculateProductsPrice() {
