@@ -1,3 +1,3 @@
 // 스크립트에 type="module" 넣어서 써야함!
 // VM 서버 올라오면 http://34.47.78.146/api/v1/
-export const API_URL = "http://localhost:8081/api/v1/";
+export const API_URL = 'http://localhost:8081/api/v1/'

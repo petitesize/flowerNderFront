@@ -3,39 +3,11 @@
 
 
 
-
-// ================ 교환 환불 동의 셀렉트박스 선택안될시 얼럿창 ================
-// ---------- 주문하기 버튼
-function goToBuy() {
-  const selectAgree = document.getElementById("selectAgree");
-
-  if (selectAgree.value === "0") {
-    alert("교환 및 환불 동의 항목을 선택하세요.");
-  }
-}
-// goToBuy()
-// ---------- 장바구니 담기 버튼
-function addToCart() {
-  console.log("addToCart 함수 호출"); // 디버깅을 위한 콘솔 로그
-  const selectAgree = document.getElementById("selectAgree");
-
-  // if (selectAgree.value === "0") {
-  //   alert("교환 및 환불 동의 항목을 선택하세요.");
-  // } else {
-  //   location.href = "./cart.html";
-  // }
-}
-
-// ================ 로컬스토리지 사용해서 담기 아직 데이터가 없기때문에 대충 만들어 놓음 ================
-
-
-// *** 나중 개발~~
-// vm 서버 올라가면 34..~~그거로 ..ㅎㅎ
-
 const thisItemId = window.location.search.slice(2);
 console.log(thisItemId);
 
 
+// ========================= API 불러오기 시작 =========================
 const fetchDetailData = async () => {
   const res = await fetch(`http://localhost:8081/api/v1/products/${thisItemId}`, {
       method: 'GET',
@@ -47,7 +19,6 @@ const fetchDetailData = async () => {
   console.log(realData.category);
 
   const navWrap = document.querySelector('.nav-left')
-  const detailContent = document.querySelector('.detail-content')
 
 
   // ----------------- **** nav에 가져온 카테고리명 넣기
@@ -57,11 +28,8 @@ const fetchDetailData = async () => {
   navWrap.insertAdjacentHTML('beforeend', detailItemNav);
 
 
-  // ========================= 상품목록 템플릿 너무 길어져서 요소 추가하는걸로 수정함 =======================
-
-  // ----------------- 재고가 0일때
-
-
+// ========================= *** 상품목록 요소추가 시작 =======================
+// ----------------- 모든 상품 디테일에 적용됨
 if(realData.stock > 0){
   // ----------------- 품절아닐경우
   // 메인 이미지 삽입
@@ -193,9 +161,36 @@ if(realData.stock > 0){
   document.querySelector('.dcb-buy').style.display = 'none';
 }
 
+// ----------------- 카테고리 ACC에서 필요없는 요소들 안보이게 하기
+const realDataCategory = realData.category.toLowerCase();
 
-insertDetailWrap(realData);
-  const cartButton = document.querySelector(".buy-cart");
+if (realDataCategory === 'acc') {
+  // 숨길 요소들의 부모 요소를 찾아서 display 속성을 'none'으로 설정
+  const accBoxes = document.querySelectorAll('.detail-flex.acc-box');
+  accBoxes.forEach(box => {
+    box.style.display = 'none';
+  });
+
+  // acc-bottom 클래스를 가진 요소의 보더 탑을 없앰
+  const accBottomElements = document.querySelectorAll('.acc-bottom');
+  accBottomElements.forEach(element => {
+    element.style.borderTop = 'none';
+  });
+}
+
+// ----------------- 카테고리 CUSTOM에서 필요없는 요소들 안보이게 하기
+if (realDataCategory === 'custom') {
+  // 숨길 요소들의 부모 요소를 찾아서 display 속성을 'none'으로 설정
+  const accBoxes = document.querySelectorAll('.detail-flex.custom-box');
+  accBoxes.forEach(box => {
+    box.style.display = 'none';
+  });
+}
+
+// ========================= *** 상품목록 요소추가 끝 =======================
+
+
+const cartButton = document.querySelector(".buy-cart");
 const id = realData._id;
 const price = realData.price;
 const title = realData.title;
@@ -224,6 +219,7 @@ cartButton.addEventListener("click", () => {
     localCart.push(cartSend);
   }
 
+  fetchDetailData();
   // 로컬 스토리지에 저장
   const selectAgree = document.getElementById("selectAgree");
 
@@ -233,34 +229,33 @@ cartButton.addEventListener("click", () => {
   } else {
     alert("교환 및 환불 동의 항목을 선택하세요.");
   }
-  
 });
 
 
+// ================  ***마우스 올렸을때의 이미지가 메인이미지 부분에 보이게 만들기 ================
+const mainImg = document.getElementById("product-main-img");
+const subImgs = document.querySelectorAll(".product-sub-img");
 
+// ** 부모 컨테이너에 이벤트 위임하기!
+document.querySelector('.detail-left').addEventListener('mouseover', (e) => {
+    const targetImg = e.target;
+    // console.log(targetImg);
+
+    if (targetImg.classList.contains('product-sub-img')) {
+        mainImg.src = targetImg.src;
+
+        // 모든 subImgs에서 'hover' 클래스 제거
+        subImgs.forEach((img) => img.classList.remove('hover'));
+
+        // 현재 subImg에 'hover' 클래스 추가
+        targetImg.classList.add('hover');
+    }
+});
 
 
 }
-
 fetchDetailData()
+// ========================= API 불러오기 끝 =========================
 
 
 
-
-// ================  ***마우스 올렸을때의 이미지가 메인이미지 부분에 보이게 만들기 ================
-// const mainImg = document.getElementById("product-main-img");
-// const subImgs = document.querySelectorAll(".product-sub-img");
-
-// // ** 부모 컨테이너에 이벤트 위임하기!
-// document.querySelector('.detail-left').addEventListener('mouseover', (e) => {
-//     const targetImg = e.target;
-//     if (targetImg.classList.contains('product-sub-img')) {
-//         mainImg.src = targetImg.src;
-
-//         // 모든 subImgs에서 'hover' 클래스 제거
-//         subImgs.forEach((img) => img.classList.remove('hover'));
-
-//         // 현재 subImg에 'hover' 클래스 추가
-//         targetImg.classList.add('hover');
-//     }
-// });
