@@ -50,13 +50,16 @@ addressBox.addEventListener('click', () => {
             // 커서를 상세주소 필드로 이동한다.
             document.querySelector(".detail").focus();
 
-            // iframe을 넣은 element를 안보이게 한다.
-            // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+            // border color가 red로 표시되어있을 경우 기본값으로 변경
             if (addressBox.classList.contains('on')) {
                 addressBox.removeChild(addressBox.lastChild);
                 addressBox.classList.remove('on');
             }
+            
+            // iframe을 넣은 element를 안보이게 한다.
+            // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
             postalCodeBox.style.display = 'none';
+
 
             // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
             document.body.scrollTop = currentScroll;
@@ -263,7 +266,6 @@ signUpButton.addEventListener('click', e => {
         .then(res => {
             if (res.error) alert('이미 가입된 이메일입니다.');
             else {
-                console.log(res.error);
                 alert('가입이 완료되었습니다. 로그인해주세요.')
                 location.href = '/user/login.html';
             }
