@@ -194,7 +194,11 @@ function handleCreateBtn(e) {
   //       alt: '',
   //     },
   //     {
+<<<<<<< HEAD
   //       url: 'https://ibb.co/4Mv17pm',
+=======
+  //       url: 'https://ibb.co/4Mv17pm',3
+>>>>>>> feature/admin
   //       alt: '',
   //     },
   //     {
