@@ -52,6 +52,7 @@ td {
 .product-row {
   margin: 10px;
   display: table;
+  min-width: 160px;
 }
 
 .img-block {
@@ -59,8 +60,9 @@ td {
   display: table-cell;
 }
 
-.img-block > img {
+.img-block img {
   width: 100%;
+  min-width: 80px;
 }
 
 .product-info {

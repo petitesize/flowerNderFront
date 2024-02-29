@@ -28,13 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((res) => {
         const data = res.data;
-        console.log(data);
+        // console.log(data);
 
         if (data === null) {
           handleNoOrderMessage();
           return;
         }
 
+        let imgArr = [];
         // 회원은 data가 무조건 배열로 온다
         data.forEach((order, index) => {
           const {
@@ -48,20 +49,43 @@ document.addEventListener("DOMContentLoaded", () => {
           showSearchResult(orderItems, orderDate, orderId, orderStatus);
           changeStatus(cancelReq, index);
           setShippingInfo(shippingInfo);
+          orderItems.forEach((item) => {
+            imgArr.push(item.product_id);
+          });
         });
+        handleNoOrderMessage();
+        handleChangeAddressButton();
         /* 배송지 변경창을 조회자 정보로 setting
           이후 템플릿리터럴을 조회 정보로 변경
           조회된 주문이 취소된 주문인지 확인 */
+        // console.log(imgArr);
+        return imgArr;
       })
-      .then(() => {
-        handleNoOrderMessage();
-        handleChangeAddressButton();
+      .then((arr) => {
+        renderImg(arr);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 });
+
+function renderImg(arr) {
+  console.log(arr);
+  const $img = document.querySelectorAll(".push-img");
+  console.log($img);
+  arr.forEach((id, index) => {
+    fetch(`${API_URL}products/${id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const data = res.data.main_image;
+        console.log(data.url);
+        $img[index].src = data.url;
+      });
+  });
+}
 
 const $orderId = document.querySelector(".search-order-id");
 
@@ -80,30 +104,22 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
   orderItems.forEach((item) => {
     paymentAmount += parseInt(item.total_amount) * parseInt(item.quantity);
   });
-
   orderItems.forEach((item, index) => {
     const { product_id: id, title, quantity, total_amount: totalAmount } = item;
-    // TODO : orderItems의 ID를 가져와서 GET 해서 mainImage를 가져와야함!!!
-    fetch(`${API_URL}products/${id}`, {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        const img = res.data.main_image;
-        console.log(img.url);
-        const imgURL = img.url;
-        const rowspanAttribute = index === 0 ? `rowspan="${rowspan}"` : "";
-        const borderTableRow = index === 0 ? `class="row-border"` : "";
-        htmlContent += `
+
+    /* 첫 번째 td만 rowspan, border를 적용하기 위한 변수 */
+    const rowspanAttribute = index === 0 ? `rowspan="${rowspan}"` : "";
+    const borderTableRow = index === 0 ? `class="row-border"` : "";
+    htmlContent += `
     <tr ${borderTableRow}>
       <td>
         <div class="product-row">
-          <a href="/main/detail.html?=${id}" class="img-block">
-            <img src="${imgURL}" alt="상품사진" />
+          <a href = "/main/detail.html?=${id}" class="img-block">
+            <img class="push-img" src="" alt="상품사진" />
           </a>
           <ul class="product-info">
             <li class="name">
-              <a href="/main/detail.html?=${id}">${title}</a>
+              <a href = "/main/detail.html?=${id}">${title}</a>
             </li>
           </ul>
         </div>
@@ -141,29 +157,16 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
       
     </tr>
   `;
-        const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
-        /* 데이터 형식 다를 때 작성해둔거라 다시 생각해봐야함.. 일단 Keep */
-        if (jwtJSON) {
-          $orderlistBody.innerHTML += htmlContent;
-        } else {
-          $orderlistBody.innerHTML = htmlContent;
-        }
-      })
-      .catch((e) => console.log(e));
-
-    // const imgURL = getImgURL(id);
-    // const imgURL = "";
-    // const imageURL = await getURL();
-    // console.log(item.image.url + `item`);
-    /* 첫 번째 td만 rowspan, border를 적용하기 위한 변수 */
   });
-  // const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
-  // /* 데이터 형식 다를 때 작성해둔거라 다시 생각해봐야함.. 일단 Keep */
-  // if (jwtJSON) {
-  //   $orderlistBody.innerHTML += htmlContent;
-  // } else {
-  //   $orderlistBody.innerHTML = htmlContent;
-  // }
+
+  const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
+  /* 데이터 형식 다를 때 작성해둔거라 다시 생각해봐야함.. 일단 Keep */
+  if (jwtJSON) {
+    $orderlistBody.innerHTML += htmlContent;
+  } else {
+    console.log(htmlContent);
+    $orderlistBody.innerHTML = htmlContent;
+  }
 }
 
 /* 1. 취소요청(cancelReq) 확인하여 true인 것이 있다면, 배송상태를 주문취소요청으로 변경
@@ -270,7 +273,6 @@ function setShippingInfo(shippingInfo) {
 /* 4. 주문내역이 없을 경우 확인: table row가 없을 경우를 확인한다. 
   비회원은 주문 내역이 없으면 조회불가하니까 회원만 사용할 듯 */
 function handleNoOrderMessage() {
-  console.log("왜나옴???????????");
   const tableRows = document.querySelectorAll(".orderlist-tbody tr");
   if (tableRows.length < 1) {
     tableBody.innerHTML = `<tr class="no-order">
@@ -447,6 +449,8 @@ $searchBtn.addEventListener("click", (e) => {
       /*****  비회원 조회 data는 무조건 객체로만 오니까 배열로 감싸줌 *****/
       const data = [res.data];
 
+      let imgArrNotLogin = [];
+
       /* 회원 조회와 동일한 로직이고, 루프가 한 번만 돌지만 아래 함수들이 배열을 기준으로 작성되어있으니.. */
       data.forEach((order, index) => {
         const {
@@ -460,12 +464,20 @@ $searchBtn.addEventListener("click", (e) => {
         showSearchResult(orderItems, orderDate, orderId, orderStatus);
         changeStatus(cancelReq, index);
         setShippingInfo(shippingInfo);
+        console.log(imgArrNotLogin);
+        orderItems.forEach((item) => {
+          imgArrNotLogin.push(item.product_id);
+        });
       });
       handleNoOrderMessage();
       handleChangeAddressButton();
       /* 배송지 변경창을 조회자 정보로 setting
         이후 템플릿리터럴을 조회 정보로 변경
         조회된 주문이 취소된 주문인지 확인 */
+      return imgArrNotLogin;
+    })
+    .then((arr) => {
+      renderImg(arr);
     })
     .catch((err) => {
       /* 일치하는 주문이 없으면 바로 이곳으로 넘어올 것 */
