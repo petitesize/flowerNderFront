@@ -25,8 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
   
 
 
-
-
 // ========================== 헤더 로그인, 로그아웃시 text 변경 ==========================
 // 페이지 로드 시 실행
 document.addEventListener('DOMContentLoaded', function () {
