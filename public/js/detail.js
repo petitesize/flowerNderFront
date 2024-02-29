@@ -9,7 +9,7 @@ console.log(thisItemId);
 
 // ========================= API 불러오기 시작 =========================
 const fetchDetailData = async () => {
-  const res = await fetch(`http://localhost:8081/api/v1/products/${thisItemId}`, {
+  const res = await fetch(`http://localhost:8080/api/v1/products/${thisItemId}`, {
       method: 'GET',
   });
   

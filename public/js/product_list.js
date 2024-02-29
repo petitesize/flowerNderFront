@@ -6,7 +6,7 @@ const categoryList = async () => {
     console.log('urlParams:', urlParams);
     const category = urlParams.get('category');
 
-    const res = await fetch('http://localhost:8081/api/v1/products', {
+    const res = await fetch('http://localhost:8080/api/v1/products', {
         method: 'GET',
     });
     const data = await res.json();
