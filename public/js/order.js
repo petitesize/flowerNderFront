@@ -14,18 +14,21 @@ function handleCheckboxChange() {
   const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
   const $address = document.querySelector(".address-input");
   const $addressDetail = document.querySelector(".address-detail-input");
+  const $postcode = document.querySelector(".postcode-input");
   const name = ordererName.value;
   const phone = ordererPhone.value;
   if (checkbox.checked) {
     recipientName.value = name;
     recipientPhone.value = phone;
     if (jwtJSON) {
+      $postcode.value = userAddress.postCode;
       $address.value = userAddress.address;
       $addressDetail.value = userAddress.addressDetail;
     }
   } else {
     recipientName.value = "";
     recipientPhone.value = "";
+    $postcode.value = "";
     $address.value = "";
     $addressDetail.value = "";
   }
@@ -108,6 +111,7 @@ function getCustomerInfo(jwt) {
         user_name: userName,
         phone_number: phoneNumber,
         email: email,
+        postal_code: postCode,
         address,
         address_detail: addressDetail,
       } = res.data;
@@ -122,12 +126,13 @@ function getCustomerInfo(jwt) {
         $el.readOnly = "true";
         $el.style.color = "#888";
       });
-      setUserAddress(address, addressDetail);
+      setUserAddress(postCode, address, addressDetail);
     });
 }
 
-function setUserAddress(address, addressDetail) {
+function setUserAddress(postCode, address, addressDetail) {
   userAddress = {
+    postCode,
     address,
     addressDetail,
   };
@@ -198,7 +203,7 @@ function isPurchase() {
         },
         shipping_info: {
           recipient: $recipientName.value.trim(),
-          // 전화번호 양식 통일 시키면 좋을 듯
+          // 전화번호 양식 통일 시키면 좋을 듯 :: 회원가입 시 000-0000-0000 형식으로밖에 안됨
           phone_number: $recipientPhone.value.trim(),
           postal_code: $postcode.value.trim(),
           address: $address.value.trim(),
