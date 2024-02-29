@@ -9,7 +9,8 @@
 }
 
 .info .info-wrap {
-    width: 600px;
+    width: 800px;
+    min-width: 600px;
     height: 1200px;
 }
 

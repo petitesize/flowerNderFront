@@ -18,7 +18,8 @@
 
 .modify .modify-wrap .label-box {
     width: 94%;
-    max-width: 320px;
+    max-width: 600px;
+    min-width: 320px;
     margin: 6px auto;
 }
 
@@ -29,7 +30,8 @@
 
 .modify .modify-wrap .border-box {
     width: 94%;
-    max-width: 320px;
+    max-width: 600px;
+    min-width: 320px;
     height: 44px;
     display: flex;
     flex-direction: column;
@@ -65,7 +67,8 @@
     display: none;
     border: 1px solid;
     width: 94%;
-    max-width: 320px;
+    max-width: 600px;
+    min-width: 320px;
     margin: 0 auto; 
     position: relative;
 }
@@ -89,7 +92,8 @@
 
 .modify .modify-wrap .modify-box {
     width: 94%;
-    max-width: 320px;
+    max-width: 600px;
+    min-width: 320px;
     height: 44px;
     display: flex;
     align-items: center;

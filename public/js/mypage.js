@@ -274,6 +274,7 @@ modifyButton.addEventListener('click', e => {
                 }),
             }).then(res => res.json())
                 .then(res => {
+                    console.log(res);
                     if (res.error) alert('정보 수정에 실패했습니다. 정보를 다시 확인해주세요.');
                     else {
                         alert('정보 수정이 완료되었습니다.')
