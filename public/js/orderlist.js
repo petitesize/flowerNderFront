@@ -49,11 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
           changeStatus(cancelReq, index);
           setShippingInfo(shippingInfo);
         });
-        handleNoOrderMessage();
-        handleChangeAddressButton();
         /* 배송지 변경창을 조회자 정보로 setting
           이후 템플릿리터럴을 조회 정보로 변경
           조회된 주문이 취소된 주문인지 확인 */
+      })
+      .then(() => {
+        handleNoOrderMessage();
+        handleChangeAddressButton();
       })
       .catch((err) => {
         console.log(err);
@@ -80,21 +82,28 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
   });
 
   orderItems.forEach((item, index) => {
-    const { title, quantity, total_amount: totalAmount } = item;
-
-    /* 첫 번째 td만 rowspan, border를 적용하기 위한 변수 */
-    const rowspanAttribute = index === 0 ? `rowspan="${rowspan}"` : "";
-    const borderTableRow = index === 0 ? `class="row-border"` : "";
-    htmlContent += `
+    const { product_id: id, title, quantity, total_amount: totalAmount } = item;
+    // TODO : orderItems의 ID를 가져와서 GET 해서 mainImage를 가져와야함!!!
+    fetch(`${API_URL}products/${id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const img = res.data.main_image;
+        console.log(img.url);
+        const imgURL = img.url;
+        const rowspanAttribute = index === 0 ? `rowspan="${rowspan}"` : "";
+        const borderTableRow = index === 0 ? `class="row-border"` : "";
+        htmlContent += `
     <tr ${borderTableRow}>
       <td>
         <div class="product-row">
-          <a href="#" class="img-block">
-            <img src="" alt="상품사진" />
+          <a href="/main/detail.html?=${id}" class="img-block">
+            <img src="${imgURL}" alt="상품사진" />
           </a>
           <ul class="product-info">
             <li class="name">
-              <a href="#">${title}</a>
+              <a href="/main/detail.html?=${id}">${title}</a>
             </li>
           </ul>
         </div>
@@ -132,15 +141,29 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
       
     </tr>
   `;
-  });
+        const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
+        /* 데이터 형식 다를 때 작성해둔거라 다시 생각해봐야함.. 일단 Keep */
+        if (jwtJSON) {
+          $orderlistBody.innerHTML += htmlContent;
+        } else {
+          $orderlistBody.innerHTML = htmlContent;
+        }
+      })
+      .catch((e) => console.log(e));
 
-  const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
-  /* 데이터 형식 다를 때 작성해둔거라 다시 생각해봐야함.. 일단 Keep */
-  if (jwtJSON) {
-    $orderlistBody.innerHTML += htmlContent;
-  } else {
-    $orderlistBody.innerHTML = htmlContent;
-  }
+    // const imgURL = getImgURL(id);
+    // const imgURL = "";
+    // const imageURL = await getURL();
+    // console.log(item.image.url + `item`);
+    /* 첫 번째 td만 rowspan, border를 적용하기 위한 변수 */
+  });
+  // const jwtJSON = window.localStorage.getItem(LOCALSTORAGE_JWT);
+  // /* 데이터 형식 다를 때 작성해둔거라 다시 생각해봐야함.. 일단 Keep */
+  // if (jwtJSON) {
+  //   $orderlistBody.innerHTML += htmlContent;
+  // } else {
+  //   $orderlistBody.innerHTML = htmlContent;
+  // }
 }
 
 /* 1. 취소요청(cancelReq) 확인하여 true인 것이 있다면, 배송상태를 주문취소요청으로 변경
@@ -247,6 +270,7 @@ function setShippingInfo(shippingInfo) {
 /* 4. 주문내역이 없을 경우 확인: table row가 없을 경우를 확인한다. 
   비회원은 주문 내역이 없으면 조회불가하니까 회원만 사용할 듯 */
 function handleNoOrderMessage() {
+  console.log("왜나옴???????????");
   const tableRows = document.querySelectorAll(".orderlist-tbody tr");
   if (tableRows.length < 1) {
     tableBody.innerHTML = `<tr class="no-order">

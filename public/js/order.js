@@ -69,12 +69,12 @@ const carts = JSON.parse(cartsJSON);
 let orderAmount = 0;
 let htmlContent = "";
 carts.forEach((item) => {
-  const { title, quantity, price, mainImage } = item;
+  const { id, title, quantity, price, mainImage } = item;
   const itemAmount = parseInt(price) * parseInt(quantity);
   orderAmount += itemAmount;
   htmlContent += `
  <div class="order-item">
-                <a href="#">
+                <a href="/main/detail.html?=${id}">
                   <div class="img-wrap">
                     <img src="${mainImage}" alt="주문 상품 이미지" />
                   </div>
@@ -191,7 +191,12 @@ function isPurchase() {
         cancel_req: false,
         order_items: carts.map((item) => {
           const { id, title, quantity, price, mainImage } = item;
-          return { product_id: id, title, quantity, total_amount: price };
+          return {
+            product_id: id,
+            title,
+            quantity,
+            total_amount: price,
+          };
         }),
         // trim 하나하나 다해줘야하는지..
         customer_info: {
