@@ -1,3 +1,5 @@
+import { API_URL } from "/public/js/constants.js";
+
 // 우편번호 찾기, 주소 입력
 const postalCodeBox = document.querySelector('.wrap');
 const foldButton = document.querySelector('.fold-button');
@@ -250,7 +252,7 @@ signUpButton.addEventListener('click', e => {
         }
     })
 
-    fetch('http://localhost:3000/api/v1/auth/signup', {
+    fetch( `${API_URL}api/v1/auth/signup`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

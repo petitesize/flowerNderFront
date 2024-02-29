@@ -17,16 +17,19 @@
       <div class="header-wrap">
         <h1>
           <a href="/index.html">
-            <img src="/public/img/logo.png" alt="로고">
+            <img src="/public/img/logo.png" alt="로고" />
           </a>
         </h1>
         <div class="h-right">
           <a href="/user/login.html">LOGIN</a>
-          <a href="#">MY PAGE</a>
-          <a href="#" class="nav-cart">CART<span class="cart-num">1</span></a>
+          <a href="/orders/orderlist.html">MY PAGE</a>
+          <a href="/main/cart.html" class="nav-cart"
+            >CART<span class="cart-num">1</span></a
+          >
         </div>
       </div>
     </header>
+
     <nav class="nav">
       <div class="nav-wrap">
         <div class="nav-left">
@@ -48,7 +51,10 @@
             <input type="text" placeholder="이메일" id="email" class="email">
           </div>
           <div class="border-box password-box">
-            <input type="password" placeholder="비밀번호를 변경하는 경우 입력하세요" class="password">
+            <input type="password" placeholder="기존 비밀번호" class="password">
+          </div>
+          <div class="border-box new-box">
+            <input type="password" placeholder="비밀번호를 변경하는 경우 입력하세요" class="new-password">
           </div>
           <div class="border-box confirm-box">
             <input type="password" placeholder="비밀번호 확인" class="confirm">
@@ -113,6 +119,6 @@
 </body>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="/public/js/common.js"></script>
-<script src="/public/js/mypage.js"></script>
+<script type="module" src="/public/js/mypage.js"></script>
 
 </html>
