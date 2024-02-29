@@ -6,7 +6,7 @@ if (!token) {
 
 const getProducts = async () => {
   const token = localStorage.getItem('jwt')
-  const res = await fetch('http://localhost:8081/api/v1/admin/products', {
+  const res = await fetch('http://localhost:8080/api/v1/admin/products', {
     method: 'GET',
     headers: {
       Authorization: token,
@@ -217,7 +217,7 @@ function handleCreateBtn(e) {
   // for (let [key, value] of formData.entries()) {
   //   console.log(`${key}: ${value}`)
   // }
-  fetch(`http://localhost:8081/api/v1/admin/products`, {
+  fetch(`http://localhost:8080/api/v1/admin/products`, {
     method: 'POST',
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -403,7 +403,7 @@ function handleDeleteProduct(e) {
   const parent = e.target.parentNode.parentNode
   const id = parent.querySelector('.product-id').innerHTML
   const token = localStorage.getItem('jwt')
-  fetch(`http://localhost:8081/api/v1/admin/products/${id}`, {
+  fetch(`http://localhost:8080/api/v1/admin/products/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: token,
@@ -471,7 +471,7 @@ function handleUpdateSave(e) {
   for (let [key, value] of formData.entries()) {
     console.log(`${key}: ${value}`)
   }
-  fetch(`http://localhost:8081/api/v1/admin/products/${id}`, {
+  fetch(`http://localhost:8080/api/v1/admin/products/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'multipart/form-data',
