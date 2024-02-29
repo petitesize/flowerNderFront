@@ -6,7 +6,7 @@ if (!token) {
 
 const getUsers = async () => {
   const token = localStorage.getItem('jwt')
-  const res = await fetch('http://localhost:8081/api/v1/admin/users', {
+  const res = await fetch('http://localhost:8080/api/v1/admin/users', {
     method: 'GET',
     headers: {
       Authorization: token,
@@ -28,7 +28,7 @@ const getUsers = async () => {
       <p class="user-phone-num">${data.phone_number}</p>
       <p class="user-email">${data.email}</p>
       <p class="user-address">${data.address}, ${data.address_detail}</p>
-      <p class="user-createdAt">${data.createdAt.slice(0, 9)}</p>
+      <p class="user-createdAt">${data.createdAt.slice(0, 10)}</p>
     </div>
         `
     )
