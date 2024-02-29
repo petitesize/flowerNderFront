@@ -1,14 +1,11 @@
 import { API_URL } from "/public/js/constants.js";
 
-// 이메일, 연락처 input 태그 readOnly
-document.querySelector('.email').readOnly = true;
-document.querySelector('.tel').readOnly = true;
-
 // input 감싸고 있는 박스
 const passwordBox = document.querySelector('.password-box');
 const newPasswordBox = document.querySelector('.new-box');
 const newPasswordConfirmBox = document.querySelector('.confirm-box');
 const userNameBox = document.querySelector('.name-box');
+const postalCodeBox = document.querySelector('.postal-box');
 const addressBox = document.querySelector('.address-box');
 const addressDetailBox = document.querySelector('.detail-box');
 const borderBox = document.querySelectorAll('.border-box');
@@ -17,6 +14,7 @@ const borderBox = document.querySelectorAll('.border-box');
 const email = document.querySelector('.email');
 const userName = document.querySelector('.name');
 const phoneNumber = document.querySelector('.tel');
+const postalCode = document.querySelector('.postal-code');
 const address = document.querySelector('.address');
 const addressDetail = document.querySelector('.detail');
 const password = document.querySelector('.password');
@@ -24,12 +22,17 @@ const newPassword = document.querySelector('.new-password');
 const newPasswordConfirm = document.querySelector('.confirm');
 
 // 우편번호 찾기, 주소 입력
-const postalCodeBox = document.querySelector('.wrap');
+const searchPostalCodeBox = document.querySelector('.wrap');
 const foldButton = document.querySelector('.fold-button');
-let postalCodeVal = '';
 
 // 확인 버튼
 const modifyButton = document.querySelector('.modify-button');
+
+// 이메일, 연락처, 우편번호, 주소 input 태그 readOnly
+email.readOnly = true;
+phoneNumber.readOnly = true;
+postalCode.readOnly = true;
+address.readOnly = true;
 
 // 회원정보 불러오기 GET
 window.addEventListener('load', () => {
@@ -46,9 +49,10 @@ window.addEventListener('load', () => {
                 email.value = res.data.email;
                 userName.value = res.data.user_name;
                 phoneNumber.value = res.data.phone_number;
-                postalCodeVal = res.data.postal_code;
+                postalCode.value = res.data.postal_code;
                 address.value = res.data.address;
                 addressDetail.value = res.data.address_detail;
+                console.log(res);
             })
     }
     else {
@@ -58,7 +62,7 @@ window.addEventListener('load', () => {
 })
 
 // 우편번호 찾기
-addressBox.addEventListener('click', () => {
+postalCodeBox.addEventListener('click', () => {
     // 현재 scroll 위치를 저장해놓는다.
     const currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
     new daum.Postcode({
@@ -77,12 +81,16 @@ addressBox.addEventListener('click', () => {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            postalCodeVal = data.zonecode;
-            document.querySelector(".address").value = addr;
+            document.querySelector('.postal-code').value = data.zonecode;
+            document.querySelector('.address').value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.querySelector(".detail").focus();
+            document.querySelector('.detail').focus();
 
             // border color가 red로 표시되어있을 경우 기본값으로 변경
+            if (postalCodeBox.classList.contains('on')) {
+                postalCodeBox.removeChild(addressBox.lastChild);
+                postalCodeBox.classList.remove('on');
+            }
             if (addressBox.classList.contains('on')) {
                 addressBox.removeChild(addressBox.lastChild);
                 addressBox.classList.remove('on');
@@ -90,28 +98,28 @@ addressBox.addEventListener('click', () => {
 
             // iframe을 넣은 element를 안보이게 한다.
             // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
-            postalCodeBox.style.display = 'none';
+            searchPostalCodeBox.style.display = 'none';
 
             // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
             document.body.scrollTop = currentScroll;
         },
         // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
         onresize: function (size) {
-            postalCodeBox.style.height = size.height + 'px';
-            postalCodeBox.style.maxHeight = '466px';
+            searchPostalCodeBox.style.height = size.height + 'px';
+            searchPostalCodeBox.style.maxHeight = '466px';
         },
         width: '100%',
         height: '100%'
-    }).embed(postalCodeBox);
+    }).embed(searchPostalCodeBox);
 
     // iframe을 넣은 element를 보이게 한다.
-    postalCodeBox.style.display = 'block';
+    searchPostalCodeBox.style.display = 'block';
 })
 
 // 우편번호 찾기 닫기
 foldButton.addEventListener('click', () => {
     // iframe을 넣은 element를 안보이게 한다.
-    postalCodeBox.style.display = 'none';
+    searchPostalCodeBox.style.display = 'none';
 })
 
 // 회원정보 수정 PATCH
@@ -122,6 +130,7 @@ modifyButton.addEventListener('click', e => {
     const newPasswordVal = newPassword.value;
     const newPasswordConfirmVal = newPasswordConfirm.value;
     const userNameVal = userName.value;
+    const postalCodeVal = postalCode.value;
     const addressVal = address.value;
     const addressDetailVal = addressDetail.value;
 
@@ -206,8 +215,8 @@ modifyButton.addEventListener('click', e => {
         return false;
     }
 
-    // 주소
-    if (!addressVal) {
+    // 우편번호 + 주소
+    if (!postalCodeVal || !addressVal) {
         borderBox.forEach(e => {
             if (e.classList.contains('on')) {
                 e.removeChild(e.lastChild);
@@ -215,12 +224,18 @@ modifyButton.addEventListener('click', e => {
             }
         })
 
+        if (!postalCodeBox.classList.contains('on')) {
+            postalCodeBox.classList.add('on');
+            postalCodeBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>우편번호를 입력하세요.</p></div');
+        }
         if (!addressBox.classList.contains('on')) {
             addressBox.classList.add('on');
             addressBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>주소를 입력하세요.</p></div');
         }
         return false;
     }
+
+    // 상세주소
     if (!addressDetailVal) {
         borderBox.forEach(e => {
             if (e.classList.contains('on')) {
@@ -231,7 +246,7 @@ modifyButton.addEventListener('click', e => {
 
         if (!addressDetailBox.classList.contains('on')) {
             addressDetailBox.classList.add('on');
-            addressDetailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>주소를 입력하세요.</p></div');
+            addressDetailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>상세주소를 입력하세요.</p></div');
         }
         return false;
     }
