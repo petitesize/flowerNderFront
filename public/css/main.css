@@ -15,7 +15,7 @@
     border-bottom: 1px solid #000;
     box-sizing: border-box;
     /* *** 이미지 사이즈 맞추기 위한 코드 임시로 넣어놓고 주석 처리 */
-    min-height: 654px;
+    /* min-height: 654px; */
 }
 .product .list-top{
     width: 100%;
@@ -25,7 +25,7 @@
     text-align:  center;
     overflow: hidden;
     /* *** 이미지 사이즈 맞추기 위한 코드 임시로 넣어놓고 주석 처리 */
-    height: 502px;
+    /* height: 502px; */
 }
 .product .list-top a:hover img{
     transform: scale(1.13);
