@@ -1,10 +1,13 @@
+import { API_URL } from "/public/js/constants.js";
+
 // 이메일, 연락처 input 태그 readOnly
 document.querySelector('.email').readOnly = true;
 document.querySelector('.tel').readOnly = true;
 
 // input 감싸고 있는 박스
 const passwordBox = document.querySelector('.password-box');
-const passwordConfirmBox = document.querySelector('.confirm-box');
+const newPasswordBox = document.querySelector('.new-box');
+const newPasswordConfirmBox = document.querySelector('.confirm-box');
 const userNameBox = document.querySelector('.name-box');
 const addressBox = document.querySelector('.address-box');
 const addressDetailBox = document.querySelector('.detail-box');
@@ -17,7 +20,8 @@ const phoneNumber = document.querySelector('.tel');
 const address = document.querySelector('.address');
 const addressDetail = document.querySelector('.detail');
 const password = document.querySelector('.password');
-const passwordConfirm = document.querySelector('.confirm');
+const newPassword = document.querySelector('.new-password');
+const newPasswordConfirm = document.querySelector('.confirm');
 
 // 우편번호 찾기, 주소 입력
 const postalCodeBox = document.querySelector('.wrap');
@@ -28,10 +32,10 @@ let postalCodeVal = '';
 const modifyButton = document.querySelector('.modify-button');
 
 // 회원정보 불러오기 GET
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
     if (localStorage.getItem('jwt')) {
         const jwt = localStorage.getItem('jwt');
-        fetch('http://localhost:3000/api/v1/user/mypage', {
+        fetch(`${API_URL}api/v1/user/mypage`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -48,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
     }
     else {
-        alert('올바른 접근이 아닙니다.');
+        alert('로그인 인증이 만료되었습니다.');
         location.href = '/user/login.html';
     }
 })
@@ -115,17 +119,34 @@ modifyButton.addEventListener('click', e => {
     e.preventDefault();
 
     const passwordVal = password.value;
-    const passwordConfirmVal = passwordConfirm.value;
+    const newPasswordVal = newPassword.value;
+    const newPasswordConfirmVal = newPasswordConfirm.value;
     const userNameVal = userName.value;
     const addressVal = address.value;
     const addressDetailVal = addressDetail.value;
 
-    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+    const newPasswordPattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+
+    // 기존 비밀번호
+    if (!passwordVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
+        if (!passwordBox.classList.contains('on')) {
+            passwordBox.classList.add('on');
+            passwordBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호를 입력하세요.</p></div');
+        }
+        return false;
+    }
 
     // 새 비밀번호 입력값 여부 확인
-    if (passwordVal) {
+    if (newPasswordVal) {
         // 새 비밀번호 유효성 검사
-        if (!passwordPattern.test(passwordVal)) {
+        if (!newPasswordPattern.test(newPasswordVal)) {
             borderBox.forEach(e => {
                 if (e.classList.contains('on')) {
                     e.removeChild(e.lastChild);
@@ -133,13 +154,13 @@ modifyButton.addEventListener('click', e => {
                 }
             })
 
-            if (!passwordBox.classList.contains('on')) {
-                passwordBox.classList.add('on');
-                passwordBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>최소 8글자 이상, 영어·숫자 포함 필수</p></div');
+            if (!newPasswordBox.classList.contains('on')) {
+                newPasswordBox.classList.add('on');
+                newPasswordBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>최소 8글자 이상, 영어·숫자 포함 필수</p></div');
             }
             return false;
         }
-        if (passwordVal && !passwordConfirmVal) {
+        if (newPasswordVal && !newPasswordConfirmVal) {
             borderBox.forEach(e => {
                 if (e.classList.contains('on')) {
                     e.removeChild(e.lastChild);
@@ -147,13 +168,13 @@ modifyButton.addEventListener('click', e => {
                 }
             })
 
-            if (!passwordConfirmBox.classList.contains('on')) {
-                passwordConfirmBox.classList.add('on');
-                passwordConfirmBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호를 한번 더 입력하세요.</p></div');
+            if (!newPasswordConfirmBox.classList.contains('on')) {
+                newPasswordConfirmBox.classList.add('on');
+                newPasswordConfirmBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호를 한번 더 입력하세요.</p></div');
             }
             return false;
         }
-        if (passwordVal !== passwordConfirmVal) {
+        if (newPasswordVal !== newPasswordConfirmVal) {
             borderBox.forEach(e => {
                 if (e.classList.contains('on')) {
                     e.removeChild(e.lastChild);
@@ -161,9 +182,9 @@ modifyButton.addEventListener('click', e => {
                 }
             })
 
-            if (!passwordConfirmBox.classList.contains('on')) {
-                passwordConfirmBox.classList.add('on');
-                passwordConfirmBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호가 일치하지 않습니다.</p></div');
+            if (!newPasswordConfirmBox.classList.contains('on')) {
+                newPasswordConfirmBox.classList.add('on');
+                newPasswordConfirmBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>비밀번호가 일치하지 않습니다.</p></div');
             }
             return false;
         }
@@ -228,7 +249,40 @@ modifyButton.addEventListener('click', e => {
     if (passwordVal) {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
-            fetch('http://localhost:3000/api/v1/user/mypage', {
+            fetch(`${API_URL}api/v1/user/mypage`, {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json",
+                    "authorization": `${jwt}`
+                },
+                body: JSON.stringify({
+                    password: passwordVal,
+                    new_password: newPasswordVal,
+                    user_name: userNameVal,
+                    postal_code: postalCodeVal,
+                    address: addressVal,
+                    address_detail: addressDetailVal
+                }),
+            }).then(res => res.json())
+                .then(res => {
+                    if (res.error) alert('기존 비밀번호를 다시 확인해주세요.');
+                    else {
+                        alert('회원정보 수정이 성공적으로 완료되었습니다.');
+                        location.href = '/orders/orderlist.html';
+                    }
+                })
+                .catch(err => console.log(err))
+        }
+        else {
+            alert('로그인 인증이 만료되었습니다.');
+            location.href = '/user/login.html';
+        }
+    }
+    // 비밀번호 변경하지 않을 경우
+    else {
+        if (localStorage.getItem('jwt')) {
+            const jwt = localStorage.getItem('jwt');
+            fetch(`${API_URL}api/v1/user/mypage`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
@@ -243,48 +297,17 @@ modifyButton.addEventListener('click', e => {
                 }),
             }).then(res => res.json())
                 .then(res => {
-                    if (res.error) alert('정보 수정에 실패했습니다. 정보를 다시 확인해주세요.');
-                    else {
-                        alert('정보 수정이 완료되었습니다.')
-                        location.href = '/index.html';
-                    }
-                })
-                .catch(err => console.log(err))
-        }
-        else {
-            alert('올바른 접근이 아닙니다.');
-            location.href = '/user/login.html';
-        }
-    }
-    // 비밀번호 변경하지 않을 경우
-    else {
-        if (localStorage.getItem('jwt')) {
-            const jwt = localStorage.getItem('jwt');
-            fetch('http://localhost:3000/api/v1/user/mypage', {
-                method: 'PATCH',
-                headers: {
-                    "Content-Type": "application/json",
-                    "authorization": `${jwt}`
-                },
-                body: JSON.stringify({
-                    user_name: userNameVal,
-                    postal_code: postalCodeVal,
-                    address: addressVal,
-                    address_detail: addressDetailVal
-                }),
-            }).then(res => res.json())
-                .then(res => {
                     console.log(res);
-                    if (res.error) alert('정보 수정에 실패했습니다. 정보를 다시 확인해주세요.');
+                    if (res.error) alert('기존 비밀번호를 다시 확인해주세요.');
                     else {
-                        alert('정보 수정이 완료되었습니다.')
-                        location.href = '/index.html';
+                        alert('회원정보 수정이 성공적으로 완료되었습니다.');
+                        location.href = '/orders/orderlist.html';
                     }
                 })
                 .catch(err => console.log(err))
         }
         else {
-            alert('올바른 접근이 아닙니다.');
+            alert('로그인 인증이 만료되었습니다.');
             location.href = '/user/login.html';
         }
     }

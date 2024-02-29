@@ -1,4 +1,4 @@
-// import { API_URL } from '/public/js/constants.js'
+import { API_URL } from "/public/js/constants.js";
 
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');
@@ -23,7 +23,7 @@ loginButton.addEventListener('click', e => {
     }
 
     // 아이디, 비밀번호 입력값이 모두 있을 경우 로그인 정보 POST
-    fetch('http://localhost:3000/api/v1/auth/login', {
+    fetch(`${API_URL}api/v1/auth/login`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
