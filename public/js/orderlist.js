@@ -331,6 +331,9 @@ function openChangeAddressModal(event) {
   }
   // 데이터셋으로 해보려다가 실패..
   const confirmButtonClickHandler = function () {
+    if (validation()) {
+      return;
+    }
     changeShippingAddress(orderId);
     closeChangeAddressModal();
     confirmButton.removeEventListener("click", confirmButtonClickHandler);
@@ -533,3 +536,36 @@ document.addEventListener("click", function (event) {
   }
   handleNoOrderMessage();
 });
+
+/* validation order.js 복붙 */
+function validation() {
+  const $nameInput = document.querySelector(".input-name input");
+  const $phoneInput = document.querySelector(".input-phone input");
+  const $postcodeInput = document.querySelector(".input-postcode input");
+  const $addressInput = document.querySelector(".input-address input");
+  const $addressDetailInput = document.querySelector(
+    ".input-address-detail input"
+  );
+  if (!$nameInput.value.trim()) {
+    alert("수령인 이름을 입력해주세요.");
+    return true;
+  }
+  if (!$phoneInput.value.trim()) {
+    alert("수령인 전화번호를 입력해주세요.");
+    return true;
+  }
+  if (!$postcodeInput.value.trim()) {
+    alert("수령인 우편번호를 입력해주세요.");
+    return true;
+  }
+
+  if (!$addressInput.value.trim()) {
+    alert("수령인 주소를 입력해주세요.");
+    return true;
+  }
+  if (!$addressDetailInput.value.trim()) {
+    alert("수령인 상세주소를 입력해주세요.");
+    return true;
+  }
+  return false;
+}
