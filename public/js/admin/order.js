@@ -1,4 +1,4 @@
-// import { API_URL } from '/public/js/constants.js'
+import { API_URL } from '/public/js/constants.js'
 const token = localStorage.getItem('jwt')
 if (!token) {
   alert('관리자 계정으로 접속해 주세요')
@@ -6,7 +6,7 @@ if (!token) {
 
 const getOrders = async () => {
   const token = localStorage.getItem('jwt')
-  const res = await fetch('http://localhost:8080/api/v1/admin/orders', {
+  const res = await fetch(`${API_URL}admin/orders`, {
     method: 'GET',
     headers: {
       Authorization: token,
@@ -160,7 +160,7 @@ function handleDeleteOrder(e) {
   const parent = e.target.parentNode.parentNode
   const id = parent.querySelector('.order-id').innerHTML
   const token = localStorage.getItem('jwt')
-  fetch(`http://localhost:8080/api/v1/admin/orders/${id}`, {
+  fetch(`${API_URL}admin/orders/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: token,
@@ -194,7 +194,7 @@ function handleOrderSave(e) {
   const parent = e.target.parentNode.parentNode
   const id = parent.querySelector('.order-id').innerHTML
   const token = localStorage.getItem('jwt')
-  fetch(`http://localhost:8080/api/v1/admin/orders/${id}`, {
+  fetch(`${API_URL}admin/orders/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
