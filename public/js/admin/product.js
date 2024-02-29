@@ -220,13 +220,20 @@ function handleCreateBtn(e) {
   fetch(`${API_URL}admin/products`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
     body: formData,
   })
     .then(response => {
-      console.log(response)
+      if (!response.ok) {
+        throw new Error('네트워크 응답이 실패했습니다.');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // 서버로부터 받은 데이터 처리
+      console.log(data);
     })
     .catch(error => console.error('Error:', error))
 
