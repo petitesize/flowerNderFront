@@ -223,7 +223,7 @@ function handleCreateBtn(e) {
       'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
-    body: JSON.stringify(datas),
+    body: formData,
   })
     .then(response => {
       console.log(response)
