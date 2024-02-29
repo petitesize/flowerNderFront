@@ -91,7 +91,7 @@ $orderContainer.innerHTML = htmlContent;
 
 /* 회원일 경우, 주문자 정보 불러오기 */
 function getCustomerInfo(jwt) {
-  fetch(`${API_URL}user/mypage`, {
+  fetch(`${API_URL}user/me`, {
     method: "GET",
     headers: {
       authorization: jwt,
