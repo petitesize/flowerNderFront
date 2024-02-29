@@ -35,7 +35,7 @@ const modifyButton = document.querySelector('.modify-button');
 window.addEventListener('load', () => {
     if (localStorage.getItem('jwt')) {
         const jwt = localStorage.getItem('jwt');
-        fetch(`${API_URL}api/v1/user/mypage`, {
+        fetch(`${API_URL}user/mypage`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
