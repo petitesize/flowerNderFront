@@ -28,7 +28,7 @@ const getProducts = async () => {
           <img src="${data.main_image.url}" class="product-img"></img>
           <p class="product-price">${data.price}</p>
           <p class="product-stock">${data.stock}</p>
-          <p class="product-description">${data.description}</p>
+          <p class="product-description">${data.description.slice(0,30)}...</p>
           <p class="product-size">${data.size}</p>
           <p class="product-origin">${data.origin}</p>
           <p class="product-attribute">${data.attribute}</p>
