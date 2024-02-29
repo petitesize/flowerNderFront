@@ -28,13 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .then((res) => {
         const data = res.data;
-        console.log(data);
+        // console.log(data);
 
         if (data === null) {
           handleNoOrderMessage();
           return;
         }
 
+        let imgArr = [];
         // 회원은 data가 무조건 배열로 온다
         data.forEach((order, index) => {
           const {
@@ -48,18 +49,43 @@ document.addEventListener("DOMContentLoaded", () => {
           showSearchResult(orderItems, orderDate, orderId, orderStatus);
           changeStatus(cancelReq, index);
           setShippingInfo(shippingInfo);
+          orderItems.forEach((item) => {
+            imgArr.push(item.product_id);
+          });
         });
         handleNoOrderMessage();
         handleChangeAddressButton();
         /* 배송지 변경창을 조회자 정보로 setting
           이후 템플릿리터럴을 조회 정보로 변경
           조회된 주문이 취소된 주문인지 확인 */
+        // console.log(imgArr);
+        return imgArr;
+      })
+      .then((arr) => {
+        renderImg(arr);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 });
+
+function renderImg(arr) {
+  console.log(arr);
+  const $img = document.querySelectorAll(".push-img");
+  console.log($img);
+  arr.forEach((id, index) => {
+    fetch(`${API_URL}products/${id}`, {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        const data = res.data.main_image;
+        console.log(data.url);
+        $img[index].src = data.url;
+      });
+  });
+}
 
 const $orderId = document.querySelector(".search-order-id");
 
@@ -78,9 +104,8 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
   orderItems.forEach((item) => {
     paymentAmount += parseInt(item.total_amount) * parseInt(item.quantity);
   });
-
   orderItems.forEach((item, index) => {
-    const { title, quantity, total_amount: totalAmount } = item;
+    const { product_id: id, title, quantity, total_amount: totalAmount } = item;
 
     /* 첫 번째 td만 rowspan, border를 적용하기 위한 변수 */
     const rowspanAttribute = index === 0 ? `rowspan="${rowspan}"` : "";
@@ -89,12 +114,12 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
     <tr ${borderTableRow}>
       <td>
         <div class="product-row">
-          <a href="#" class="img-block">
-            <img src="" alt="상품사진" />
+          <a href = "/main/detail.html?=${id}" class="img-block">
+            <img class="push-img" src="" alt="상품사진" />
           </a>
           <ul class="product-info">
             <li class="name">
-              <a href="#">${title}</a>
+              <a href = "/main/detail.html?=${id}">${title}</a>
             </li>
           </ul>
         </div>
@@ -139,6 +164,7 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
   if (jwtJSON) {
     $orderlistBody.innerHTML += htmlContent;
   } else {
+    console.log(htmlContent);
     $orderlistBody.innerHTML = htmlContent;
   }
 }
@@ -423,6 +449,8 @@ $searchBtn.addEventListener("click", (e) => {
       /*****  비회원 조회 data는 무조건 객체로만 오니까 배열로 감싸줌 *****/
       const data = [res.data];
 
+      let imgArrNotLogin = [];
+
       /* 회원 조회와 동일한 로직이고, 루프가 한 번만 돌지만 아래 함수들이 배열을 기준으로 작성되어있으니.. */
       data.forEach((order, index) => {
         const {
@@ -436,12 +464,20 @@ $searchBtn.addEventListener("click", (e) => {
         showSearchResult(orderItems, orderDate, orderId, orderStatus);
         changeStatus(cancelReq, index);
         setShippingInfo(shippingInfo);
+        console.log(imgArrNotLogin);
+        orderItems.forEach((item) => {
+          imgArrNotLogin.push(item.product_id);
+        });
       });
       handleNoOrderMessage();
       handleChangeAddressButton();
       /* 배송지 변경창을 조회자 정보로 setting
         이후 템플릿리터럴을 조회 정보로 변경
         조회된 주문이 취소된 주문인지 확인 */
+      return imgArrNotLogin;
+    })
+    .then((arr) => {
+      renderImg(arr);
     })
     .catch((err) => {
       /* 일치하는 주문이 없으면 바로 이곳으로 넘어올 것 */
