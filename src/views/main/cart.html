@@ -28,107 +28,100 @@
 
     <!-- 장바구니 시작 -->
     <section class="cart">
-      
-        <!-- *** 상품을 담았을때 ui -->
-        <div class="cart-content">
-
-          <!-- 상품정보 리스트 입니다 -->
-            <div class="cart-list-box">
-                <div class="cart-head">
-                    <div class="cart-head-left">
-                        <span class="chl1">
-                          <input type="checkbox" name="cart-all-ck" id="cart-all-ck">
-                          <label for="cart-all-ck"><em></em></label>
-                        </span>
-                        <span class="chl2">상품정보</span>
-                        <span class="chl3">수량</span>
-                        <span class="chl4">주문금액</span>
-                    </div>
-                    <div class="cart-head-right">
-                        <span>배송정보</span>
-                    </div>
-                </div>
-                <div class="cart-body">
-                    <div class="cart-body-left">
-                    </div>
-                    <div class="cart-body-right ">
-                        <p>착불<br>직접배송</p>
-                    </div>
-                </div>
+      <!-- *** 상품을 담았을때 ui -->
+      <div class="cart-content">
+        <!-- 상품정보 리스트 입니다 -->
+        <div class="cart-list-box">
+          <div class="cart-head">
+            <div class="cart-head-left">
+              <span class="chl1">
+                <input type="checkbox" name="cart-all-ck" id="cart-all-ck" />
+                <label for="cart-all-ck"><em></em></label>
+              </span>
+              <span class="chl2">상품정보</span>
+              <span class="chl3">수량</span>
+              <span class="chl4">주문금액</span>
             </div>
-            <div class="cart-ck-delete">
-                <button type="button">선택상품 삭제</button>
-                <button type="button">전체상품 삭제</button>
+            <div class="cart-head-right">
+              <span>배송정보</span>
             </div>
-
-            <!-- 상품가격의 합계가 들어가는 곳 -->
-            <div class="cart-total">
-                <div class="ct-title">총 주문 상품 <span class="products-quantity"></span>개</div>
-                <div class="ct-wrap">
-                    <div class="ct-common ct-left">
-                        <h4 class="products-price"></h4>
-                        <p>상품금액</p>
-                    </div>
-                    <div class="ct-common ct-add">
-                        <h4>+</h4>
-                        <span></span>
-                    </div>
-                    <div class="ct-common ct-mid">
-                        <h4 class="delivery-price">착불</h4>
-                        <p>배송비</p>
-                    </div>
-                    <div class="ct-common ct-add">
-                        <h4>=</h4>
-                        <span></span>
-                    </div>
-                    <div class="ct-common ct-right">
-                        <h4 class="total-price"></h4>
-                        <p>총 주문금액</p>
-                    </div>
-                </div>
+          </div>
+          <div class="cart-body">
+            <div class="cart-body-left"></div>
+            <div class="cart-body-right">
+              <p>착불<br />직접배송</p>
             </div>
-
-            <!-- 주문하기 - 주문하기 페이지로 이동 -->
-            <!-- 계속 쇼핑하기 - 홈이 all 상품이니까 all로 이동하면 될듯 -->
-            <div class="cart-last">
-                <a href="/orders/order.html" class="cl-baro1">주문하기</a>
-                <a href="/index.html" class="cl-baro2">계속 쇼핑하기</a>
-            </div>
+          </div>
+        </div>
+        <div class="cart-ck-delete">
+          <button type="button">선택상품 삭제</button>
+          <button type="button">전체상품 삭제</button>
         </div>
 
-        <!-- *** 상품을 아무것도 담지 없을때 ui -->
-        <div class="cart-content cart-content-none">
-
-          <!-- 상품정보 리스트 입니다 -->
-            <div class="cart-list-box">
-                <div class="cart-head">
-                    <div class="cart-head-left">
-                        <span class="chl1">
-                          <input type="checkbox" id="cart-all-ck">
-                          <label for="cart-all-ck"><em></em></label>
-                        </span>
-                        <span class="chl2">상품정보</span>
-                        <span class="chl3">수량</span>
-                        <span class="chl4">주문금액</span>
-                    </div>
-                    <div class="cart-head-right">
-                        <span>배송정보</span>
-                    </div>
-                </div>
-                <div class="cart-body">
-                    <div class="cb-text">
-                        장바구니가 비어있습니다.
-                    </div>
-                </div>
-
+        <!-- 상품가격의 합계가 들어가는 곳 -->
+        <div class="cart-total">
+          <div class="ct-title">
+            총 주문 상품 <span class="products-quantity"></span>개
+          </div>
+          <div class="ct-wrap">
+            <div class="ct-common ct-left">
+              <h4 class="products-price"></h4>
+              <p>상품금액</p>
             </div>
-
-
-            <div class="cart-last">
-                <a href="/index.html" class="cl-baro2">계속 쇼핑하기</a>
+            <div class="ct-common ct-add">
+              <h4>+</h4>
+              <span></span>
             </div>
+            <div class="ct-common ct-mid">
+              <h4 class="delivery-price">착불</h4>
+              <p>배송비</p>
+            </div>
+            <div class="ct-common ct-add">
+              <h4>=</h4>
+              <span></span>
+            </div>
+            <div class="ct-common ct-right">
+              <h4 class="total-price"></h4>
+              <p>총 주문금액</p>
+            </div>
+          </div>
         </div>
-        
+
+        <!-- 주문하기 - 주문하기 페이지로 이동 -->
+        <!-- 계속 쇼핑하기 - 홈이 all 상품이니까 all로 이동하면 될듯 -->
+        <div class="cart-last">
+          <a href="/orders/order.html" class="cl-baro1">주문하기</a>
+          <a href="/index.html" class="cl-baro2">계속 쇼핑하기</a>
+        </div>
+      </div>
+
+      <!-- *** 상품을 아무것도 담지 없을때 ui -->
+      <div class="cart-content cart-content-none">
+        <!-- 상품정보 리스트 입니다 -->
+        <div class="cart-list-box">
+          <div class="cart-head">
+            <div class="cart-head-left">
+              <span class="chl1">
+                <input type="checkbox" id="cart-all-ck" />
+                <label for="cart-all-ck"><em></em></label>
+              </span>
+              <span class="chl2">상품정보</span>
+              <span class="chl3">수량</span>
+              <span class="chl4">주문금액</span>
+            </div>
+            <div class="cart-head-right">
+              <span>배송정보</span>
+            </div>
+          </div>
+          <div class="cart-body">
+            <div class="cb-text">장바구니가 비어있습니다.</div>
+          </div>
+        </div>
+
+        <div class="cart-last">
+          <a href="/index.html" class="cl-baro2">계속 쇼핑하기</a>
+        </div>
+      </div>
     </section>
     <!-- 장바구니 끝 -->
 
@@ -149,6 +142,6 @@
       </div>
     </footer>
   </body>
-  <script src="/public/js/common.js"></script>
-  <script src="/public/js/cart.js"></script>  
+  <script type="module" src="/public/js/common.js"></script>
+  <script src="/public/js/cart.js"></script>
 </html>
