@@ -21,7 +21,7 @@ const mainList = async () => {
     "MODERN",
     "LOVELY",
     "DESKTERIOR",
-    "CLASIC",
+    "CLASSIC",
     "ACC",
   ];
 
