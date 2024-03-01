@@ -1,6 +1,8 @@
+import { API_URL } from "/public/js/constants.js";
+
 // ================ 메인 상품목록 api 불러오기! ================
 const mainList = async () => {
-  const res = await fetch("http://localhost:8080/api/v1/products", {
+  const res = await fetch(`${API_URL}products`, {
     method: "GET",
   });
   const data = await res.json();
