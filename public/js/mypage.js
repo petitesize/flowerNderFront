@@ -344,6 +344,7 @@ function setUserInfo(e) {
                 },
                 body: JSON.stringify({
                     password: passwordVal,
+                    new_password: null,
                     user_name: userNameVal,
                     postal_code: postalCodeVal,
                     address: addressVal,
