@@ -91,7 +91,7 @@ function setLogin(e) {
     }).then(res => res.json())
         .then(res => {
             if (res.error === '이메일 또는 비밀번호를 다시 확인하세요.') {
-                alert('잘못된 아이디 또는 비밀번호입니다.');
+                alert('잘못된 이메일 또는 비밀번호입니다.');
                 return false;
             }
 
