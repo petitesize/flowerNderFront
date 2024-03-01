@@ -28,7 +28,7 @@ const getProducts = async () => {
           <img src="${data.main_image.url}" class="product-img"></img>
           <p class="product-price">${data.price}</p>
           <p class="product-stock">${data.stock}</p>
-          <p class="product-description">${data.description.slice(0,30)}...</p>
+          <p class="product-description">${data.description.slice(0, 30)}...</p>
           <p class="product-size">${data.size}</p>
           <p class="product-origin">${data.origin}</p>
           <p class="product-attribute">${data.attribute}</p>
@@ -137,7 +137,6 @@ function handleCreateBtn(e) {
   const stock = select('.stock')
   const description = select('.description')
   const attribute = select('.attribute')
-  const file = select('.image')
   const category = select('.category')
   const size = select('.size')
   const origin = select('.origin')
@@ -149,7 +148,7 @@ function handleCreateBtn(e) {
     !title.value.trim() ||
     !price.value ||
     !price.value.trim() ||
-    // file.files.length !== 6 ||
+    image.files.length > 6 ||
     !stock.value ||
     !stock.value.trim() ||
     !description ||
@@ -162,19 +161,7 @@ function handleCreateBtn(e) {
   }
 
   // 이미지 파일 추가 (메인 이미지와 서브 이미지를 포함하여 모두 같은 input에서 선택)
-  const formData = new FormData()
-  formData.append('category', category.value)
-  formData.append('title', title.value)
-  formData.append('price', price.value)
-  formData.append('stock', stock.value)
-  formData.append('description', description.value)
-  formData.append('size', size.value)
-  formData.append('origin', origin.value)
-  formData.append('attribute', attribute.value)
-  formData.append('main_image', image.files[0])
-  for (let i = 1; i < image.files.length; i++) {
-    formData.append(`sub_image[${i}]`, image.files[i])
-  }
+
   // const datas = {
   //   category: 'Custom',
   //   title: 'Awesome Product',
@@ -212,28 +199,42 @@ function handleCreateBtn(e) {
   //   ],
   // }
 
+  const formData = new FormData()
+  formData.append('category', category.value)
+  formData.append('title', title.value)
+  formData.append('price', price.value)
+  formData.append('stock', stock.value)
+  formData.append('description', description.value)
+  formData.append('size', size.value)
+  formData.append('origin', origin.value)
+  formData.append('attribute', attribute.value)
+  formData.append('main_image', image.files[0])
+  for (let i = 0; i < image.files.length; i++) {
+    formData.append(`sub_image[${i}]`, image.files[i])
+  }
+
   // 제품 데이터 전송
   const token = localStorage.getItem('jwt')
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`)
-  }
+  // for (let [key, value] of formData.entries()) {
+  //   console.log(`${key}: ${value}`)
+  // }
   fetch(`${API_URL}admin/products`, {
     method: 'POST',
     headers: {
-      // 'Content-Type': 'multipart/form-data',
+      'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
     body: formData,
   })
     .then(response => {
       if (!response.ok) {
-        throw new Error('네트워크 응답이 실패했습니다.');
+        throw new Error('네트워크 응답이 실패했습니다.')
       }
-      return response.json();
+      return response.json()
     })
     .then(data => {
       // 서버로부터 받은 데이터 처리
-      console.log(data);
+      console.log(data)
     })
     .catch(error => console.error('Error:', error))
 
@@ -475,13 +476,13 @@ function handleUpdateSave(e) {
     e.target.parentNode.parentNode.querySelector('.product-id').innerHTML
   const token = localStorage.getItem('jwt')
 
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}: ${value}`)
-  }
+  // for (let [key, value] of formData.entries()) {
+  //   console.log(`${key}: ${value}`)
+  // }
   fetch(`${API_URL}admin/products/${id}`, {
     method: 'PUT',
     headers: {
-      // 'Content-Type': 'multipart/form-data',
+      'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
     body: formData,
