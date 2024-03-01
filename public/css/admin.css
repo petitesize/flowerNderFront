@@ -26,7 +26,7 @@
 .admin-container > .admin-content-category {
   border-bottom: 1px solid #000;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(8, minmax(180px, 1fr));
   grid-template-rows: 40px;
   align-items: center;
   padding: 20px 40px;
@@ -39,7 +39,7 @@
 .admin-container > .admin-content-data {
   display: grid;
   border-bottom: 1px solid #000;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(8, minmax(180px, 1fr));
   grid-template-rows: 80px;
   align-items: center;
   padding: 20px 40px;
@@ -65,7 +65,7 @@
 .admin-container > .admin-product-category {
   border-bottom: 1px solid #000;
   display: grid;
-  grid-template-columns: 230px repeat(9, 1fr) 170px;
+  grid-template-columns: 230px repeat(10, minmax(140px, 1fr));
   grid-template-rows: 40px;
   align-items: center;
   padding: 20px 40px;
@@ -77,7 +77,7 @@
 .admin-container > .admin-product-data {
   display: grid;
   border-bottom: 1px solid #000;
-  grid-template-columns: 230px repeat(9, 1fr) 170px;
+  grid-template-columns: 230px repeat(10, minmax(140px, 1fr));
   align-items: center;
   padding: 20px 40px;
   font-size: 16px;
@@ -177,7 +177,7 @@
 .admin-container > .admin-user-category {
   border-bottom: 1px solid #000;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(190px, 1fr));
   grid-template-rows: 30px;
   align-items: center;
   padding: 20px 40px;
@@ -189,7 +189,7 @@
 .admin-container > .admin-user-data {
   display: grid;
   border-bottom: 1px solid #000;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, minmax(190px, 1fr));
   grid-template-rows: 20px;
   align-items: center;
   padding: 20px 40px;
