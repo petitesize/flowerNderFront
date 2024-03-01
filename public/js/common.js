@@ -6,11 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartItems = JSON.parse(localStorage.getItem("cart"));
     const cartNumElement = document.querySelector(".cart-num");
 
+    // 이부분 뺌~~~~~~~~
     // 총 수량 계산
-    const totalQuantity = cartItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
+    // const totalQuantity = cartItems.reduce(
+    //   (total, item) => total + item.quantity,
+    //   0
+    // );
+
+    const totalQuantity = cartItems.length;
 
     // 장바구니 숫자 업데이트
     cartNumElement.textContent = totalQuantity;
