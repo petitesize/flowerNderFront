@@ -23,6 +23,8 @@
 }
 .detail .detail-left .detail-l-top img{
     width: 100%;
+    height: 735px;
+    object-fit: cover;
 }
 .detail .detail-left .detail-l-bottom{
     display: flex;
