@@ -334,7 +334,23 @@ function handleUpdateProduct(e) {
       selector: '.product-origin',
       type: 'select',
       class: 'product-input origin1',
-      options: ['Korea', 'Japan', 'China', 'America'],
+      options: [
+        '국산',
+        '남아공',
+        '네덜란드',
+        '베트남',
+        '이스라엘',
+        '에티오피아',
+        '이탈리아',
+        '일본',
+        '중국',
+        '짐바브웨',
+        '케냐',
+        '콜롬비아',
+        '탄자니아',
+        '프랑스',
+        '호수',
+      ],
       prop: 'value',
       from: 'innerHTML',
     },
@@ -500,11 +516,3 @@ const logOut_btn = document.querySelector('.logOut-btn')
 logOut_btn.addEventListener('click', () => {
   localStorage.removeItem('jwt')
 })
-
-// 토큰 유효기간 완료
-if (res.error === 'jwt expired') {
-  localStorage.removeItem('jwt')
-  alert('로그인 인증이 만료되었습니다.')
-  location.href = '/user/login.html'
-  return false
-}
