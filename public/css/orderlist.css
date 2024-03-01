@@ -41,7 +41,7 @@ th {
 }
 
 td {
-  padding: 20px;
+  padding: 20px 10px;
   line-height: 1.5;
 }
 
@@ -61,8 +61,11 @@ td {
 }
 
 .img-block img {
-  width: 100%;
   min-width: 80px;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #333;
 }
 
 .product-info {
@@ -70,7 +73,7 @@ td {
   vertical-align: middle;
   text-align: left;
   padding-left: 16px;
-  font-weight: bold;
+  /* font-weight: bold; */
 }
 
 .delivery-status {
@@ -234,4 +237,19 @@ input {
 
 .row-border {
   border-top: 1px solid black;
+}
+
+.order-id-td > p {
+  /* word-break: break-all; */
+  min-width: 80px;
+}
+
+.total-amount-p {
+  min-width: 60px;
+}
+
+.name > a {
+  font-size: 16px;
+  min-width: 80px;
+  font-weight: 500;
 }

@@ -125,15 +125,15 @@ function showSearchResult(orderItems, orderDate, orderId, orderStatus) {
         </div>
       </td>
       <td>
-        ${totalAmount.toLocaleString()}원
-        <br />
+        <p class="total-amount-p" >${totalAmount.toLocaleString()}원</p>
+        
         <span class="quantity-span">${quantity}개</span>
       </td>
       <td>${formattedDate}</td>
-      <td class="order-id-td">${orderId}</td>
+      <td class="order-id-td"><p>${orderId}</p></td>
       ${
         index === 0
-          ? `<td ${rowspanAttribute}>${paymentAmount.toLocaleString()}원</td>`
+          ? `<td ${rowspanAttribute}><p class="total-amount-p">${paymentAmount.toLocaleString()}원</p></td>`
           : ""
       }
       <!-- rowspan 적용된 곳은 빈 칸으로 비워둬야함 -->
