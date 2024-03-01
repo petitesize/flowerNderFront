@@ -256,13 +256,13 @@ function calculateProductsPrice() {
         productsPrice.textContent = calculateProductsPrice().toLocaleString() + '원';
                     
         // 배송비 설정
-        const deliveryPrice = document.querySelector('.delivery-price');
-        const fixedDeliveryFee = 3500;
-        deliveryPrice.textContent = '착불';
+        // const deliveryPrice = document.querySelector('.delivery-price');
+        // const fixedDeliveryFee = 3500;
+        // deliveryPrice.textContent = '착불';
 
         // 총 주문금액!!
         const totalPrice = document.querySelector('.total-price');
-        const totalOrderPrice = calculateProductsPrice() + fixedDeliveryFee;
+        const totalOrderPrice = calculateProductsPrice();
         totalPrice.textContent = totalOrderPrice.toLocaleString() + '원';
 
 
