@@ -53,11 +53,13 @@ window.addEventListener('load', () => {
                     localStorage.removeItem('jwt');
                     alert('로그인 인증이 만료되었습니다.');
                     location.href = '/user/login.html';
+                    return false;
                 }
 
-                if (res.error === 'Resource not found') {
+                if (res.error) {
                     alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
                     location.href = '/index.html';
+                    return false;
                 }
 
                 if (!res.error) {
@@ -67,6 +69,7 @@ window.addEventListener('load', () => {
                     postalCode.value = res.data.postal_code;
                     address.value = res.data.address;
                     addressDetail.value = res.data.address_detail;
+                    return false
                 }
             })
     }
@@ -312,7 +315,7 @@ function setUserInfo(e) {
                         return false;
                     }
 
-                    if (res.error === 'Resource not found') {
+                    if (res.error === '비밀번호를 다시 확인해주세요') {
                         alert('기존 비밀번호를 다시 확인하세요.');
                         return false;
                     }
@@ -355,7 +358,7 @@ function setUserInfo(e) {
                         return false;
                     }
 
-                    if (res.error === 'Resource not found') {
+                    if (res.error === '비밀번호를 다시 확인해주세요') {
                         alert('기존 비밀번호를 다시 확인하세요.');
                         return false;
                     }
@@ -392,11 +395,13 @@ deleteBox.addEventListener('click', () => {
                         localStorage.removeItem('jwt');
                         alert('로그인 인증이 만료되었습니다.');
                         location.href = '/user/login.html';
+                        return false;
                     }
 
-                    if (res.error === 'Resource not found') {
+                    if (res.error) {
                         alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
                         location.href = '/index.html';
+                        return false;
                     }
 
                     // 에러 없을 경우
@@ -438,7 +443,7 @@ function deleteAccount(jwt) {
                 return false;
             }
 
-            if (res.error === 'Resource not found') {
+            if (res.error) {
                 alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
                 location.href = '/index.html';
                 return false;

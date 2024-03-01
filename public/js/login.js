@@ -95,7 +95,7 @@ function setLogin(e) {
                 return false;
             }
 
-            if (res.error === 'Resource not found') {
+            if (res.error) {
                 alert('로그인 정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
                 location.href = '/index.html';
                 return false;
