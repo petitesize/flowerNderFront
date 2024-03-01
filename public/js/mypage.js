@@ -289,7 +289,7 @@ function setUserInfo(e) {
 
     // 유효성 검사 모두 통과할 경우 PATCH
     // 비밀번호 변경할 경우
-    if (passwordVal) {
+    if (newPasswordVal) {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
             fetch(`${API_URL}user/me`, {
