@@ -59,7 +59,7 @@ postalCodeBox.addEventListener('click', () => {
 
             // border color가 red로 표시되어있을 경우 기본값으로 변경
             if (postalCodeBox.classList.contains('on')) {
-                postalCodeBox.removeChild(addressBox.lastChild);
+                postalCodeBox.removeChild(postalCodeBox.lastChild);
                 postalCodeBox.classList.remove('on');
             }
             if (addressBox.classList.contains('on')) {
