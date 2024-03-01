@@ -79,11 +79,6 @@ if (subImages && subImages.length > 0) {
     subImageElement.appendChild(imageElement);
     subImageContainer.appendChild(subImageElement);
   }
-} else {
-  // 서브이미지가 없는 경우에 대한 처리
-  const noSubImageElement = document.createElement('p');
-  noSubImageElement.textContent = '서브이미지가 없습니다.';
-  subImageContainer.appendChild(noSubImageElement);
 }
 
   // 제목 삽입
