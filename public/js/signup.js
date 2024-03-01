@@ -111,10 +111,31 @@ signUpButton.addEventListener('click', e => {
     const phoneNumberPattern = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/
 
     // 이메일 유효성 검사
-    if (!emailVal || !emailPattern.test(emailVal)) {
+    if (!emailVal) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
         if (!emailBox.classList.contains('on')) {
             emailBox.classList.add('on');
-            emailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>이메일을 정확히 입력하세요.</p></div');
+            emailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>이메일을 입력하세요.</p></div');
+        }
+        return false;
+    }
+    if (!emailPattern.test(emailVal)) {
+        borderBox.forEach(e => {
+            if (e.classList.contains('on')) {
+                e.removeChild(e.lastChild);
+                e.classList.remove('on');
+            }
+        })
+
+        if (!emailBox.classList.contains('on')) {
+            emailBox.classList.add('on');
+            emailBox.insertAdjacentHTML('beforeend', '<div class="check-font"><p>올바른 이메일 형식이 아닙니다.</p></div');
         }
         return false;
     }
@@ -259,7 +280,7 @@ signUpButton.addEventListener('click', e => {
         return false;
     }
 
-    // 유효성 검사 모두 통과한 후 border color가 red인 박스가 있다면 모두 기본값으로 변경
+    // 입력값 문제없을 경우 border color가 red인 박스가 있다면 모두 기본값으로 변경
     borderBox.forEach(e => {
         if (e.classList.contains('on')) {
             e.removeChild(e.lastChild);
@@ -267,7 +288,7 @@ signUpButton.addEventListener('click', e => {
         }
     })
 
-    fetch( `${API_URL}auth/signup`, {
+    fetch(`${API_URL}auth/signup`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -281,11 +302,12 @@ signUpButton.addEventListener('click', e => {
         }),
     }).then(res => res.json())
         .then(res => {
-            if (res.error) alert('이미 가입된 이메일입니다.');
-            else {
-                alert('가입이 완료되었습니다. 로그인해주세요.')
-                location.href = '/user/login.html';
+            if (res.error === '리소스 중복 에러') {
+                alert('이미 가입된 이메일입니다.')
+                return false;
             }
+
+            alert('가입이 완료되었습니다. 로그인하세요.')
+            location.href = '/user/login.html';
         })
-        .catch(err => console.log(err))
 })
