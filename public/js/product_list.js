@@ -18,7 +18,7 @@ const categoryList = async () => {
     // 이전에 추가된 내용 모두 지우기
     navList.innerHTML = '';
     
-    const categories = ['ALL', 'CUSTOM', 'MODERN', 'LOVELY', 'DESKTERIOR', 'CLASIC', 'ACC'];
+    const categories = ['ALL', 'CUSTOM', 'MODERN', 'LOVELY', 'DESKTERIOR', 'CLASSIC', 'ACC'];
     
     for (let i = 0; i < categories.length; i++) {
         let categoryLink;

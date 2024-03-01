@@ -32,54 +32,54 @@ const fetchDetailData = async () => {
 // ----------------- 모든 상품 디테일에 적용됨
 if(realData.stock > 0){
   // ----------------- 품절아닐경우
-   // 메인 이미지 삽입
-const mainimg = document.querySelector('.main-img-box');
-mainimg.innerHTML = `<img src="${realData.main_image.url}" alt="상품사진" id="product-main-img" />`;
+  // 메인 이미지 삽입
+  const mainimg = document.querySelector('.main-img-box');
+  mainimg.innerHTML = `<img src="${realData.main_image.url}" alt="상품사진" id="product-main-img" />`;
 
-// 서브이미지 삽입
-const subImageContainer = document.querySelector('.detail-l-bottom');
+  // 서브이미지 삽입
+  const subImageContainer = document.querySelector('.detail-l-bottom');
 
-// 서브이미지 배열이 있다고 가정
-const subImages = realData.sub_image;
+  // 서브이미지 배열이 있다고 가정
+  const subImages = realData.sub_image;
 
-// 빈 박스 제거
-const emptyBoxes = document.querySelectorAll('.detail-lb-inner.sub-img-box');
-emptyBoxes.forEach(box => box.remove());
+  // 빈 박스 제거
+  const emptyBoxes = document.querySelectorAll('.detail-lb-inner.sub-img-box');
+  emptyBoxes.forEach(box => box.remove());
 
-// 마우스 오버 이벤트 핸들러 함수
-function handleMouseEnter(mainimg, src, imageElement, previousHoveredElement) {
-  mainimg.innerHTML = `<img src="${src}" alt="상품사진" id="product-main-img" />`;
-  if (previousHoveredElement) {
-    previousHoveredElement.classList.remove('hover');
+  // 마우스 오버 이벤트 핸들러 함수
+  function handleMouseEnter(mainimg, src, imageElement, previousHoveredElement) {
+    mainimg.innerHTML = `<img src="${src}" alt="상품사진" id="product-main-img" />`;
+    if (previousHoveredElement) {
+      previousHoveredElement.classList.remove('hover');
+    }
+    imageElement.classList.add('hover');
+    return imageElement;
   }
-  imageElement.classList.add('hover');
-  return imageElement;
-}
 
-// 서브이미지 삽입
-if (subImages && subImages.length > 0) {
-  const maxSubImages = Math.min(subImages.length, 5);
-  let previousHoveredElement = null;
+  // 서브이미지 삽입
+  if (subImages && subImages.length > 0) {
+    const maxSubImages = Math.min(subImages.length, 5);
+    let previousHoveredElement = null;
 
-  for (let i = 0; i < maxSubImages; i++) {
-    const subImageElement = document.createElement('div');
-    subImageElement.className = 'detail-lb-inner sub-img-box';
+    for (let i = 0; i < maxSubImages; i++) {
+      const subImageElement = document.createElement('div');
+      subImageElement.className = 'detail-lb-inner sub-img-box';
 
-    const imageElement = document.createElement('img');
-    imageElement.src = subImages[i].url;
-    imageElement.alt = `서브이미지${i + 1}`;
+      const imageElement = document.createElement('img');
+      imageElement.src = subImages[i].url;
+      imageElement.alt = `서브이미지${i + 1}`;
 
-    // 이미지 로딩이 끝나면 마우스 오버 이벤트 추가
-    imageElement.addEventListener('load', function() {
-      imageElement.addEventListener('mouseenter', () => {
-        previousHoveredElement = handleMouseEnter(mainimg, imageElement.src, imageElement, previousHoveredElement);
+      // 이미지 로딩이 끝나면 마우스 오버 이벤트 추가
+      imageElement.addEventListener('load', function() {
+        imageElement.addEventListener('mouseenter', () => {
+          previousHoveredElement = handleMouseEnter(mainimg, imageElement.src, imageElement, previousHoveredElement);
+        });
       });
-    });
 
-    subImageElement.appendChild(imageElement);
-    subImageContainer.appendChild(subImageElement);
+      subImageElement.appendChild(imageElement);
+      subImageContainer.appendChild(subImageElement);
+    }
   }
-}
 
   // 제목 삽입
   const titleElement = document.querySelector('.title-box');
@@ -111,58 +111,58 @@ if (subImages && subImages.length > 0) {
   // ----------------- 품절일 경우 
 
    // 메인 이미지 삽입
-const mainimg = document.querySelector('.main-img-box');
-mainimg.innerHTML = `<img src="${realData.main_image.url}" alt="상품사진" id="product-main-img" />`;
+  const mainimg = document.querySelector('.main-img-box');
+  mainimg.innerHTML = `<img src="${realData.main_image.url}" alt="상품사진" id="product-main-img" />`;
 
-// 서브이미지 삽입
-const subImageContainer = document.querySelector('.detail-l-bottom');
+  // 서브이미지 삽입
+  const subImageContainer = document.querySelector('.detail-l-bottom');
 
-// 서브이미지 배열이 있다고 가정
-const subImages = realData.sub_image;
+  // 서브이미지 배열이 있다고 가정
+  const subImages = realData.sub_image;
 
-// 빈 박스 제거
-const emptyBoxes = document.querySelectorAll('.detail-lb-inner.sub-img-box');
-emptyBoxes.forEach(box => box.remove());
+  // 빈 박스 제거
+  const emptyBoxes = document.querySelectorAll('.detail-lb-inner.sub-img-box');
+  emptyBoxes.forEach(box => box.remove());
 
-// 마우스 오버 이벤트 핸들러 함수
-function handleMouseEnter(mainimg, src, imageElement, previousHoveredElement) {
-  mainimg.innerHTML = `<img src="${src}" alt="상품사진" id="product-main-img" />`;
-  if (previousHoveredElement) {
-    previousHoveredElement.classList.remove('hover');
+  // 마우스 오버 이벤트 핸들러 함수
+  function handleMouseEnter(mainimg, src, imageElement, previousHoveredElement) {
+    mainimg.innerHTML = `<img src="${src}" alt="상품사진" id="product-main-img" />`;
+    if (previousHoveredElement) {
+      previousHoveredElement.classList.remove('hover');
+    }
+    imageElement.classList.add('hover');
+    return imageElement;
   }
-  imageElement.classList.add('hover');
-  return imageElement;
-}
 
-// 서브이미지 삽입
-if (subImages && subImages.length > 0) {
-  const maxSubImages = Math.min(subImages.length, 5);
-  let previousHoveredElement = null;
+  // 서브이미지 삽입
+  if (subImages && subImages.length > 0) {
+    const maxSubImages = Math.min(subImages.length, 5);
+    let previousHoveredElement = null;
 
-  for (let i = 0; i < maxSubImages; i++) {
-    const subImageElement = document.createElement('div');
-    subImageElement.className = 'detail-lb-inner sub-img-box';
+    for (let i = 0; i < maxSubImages; i++) {
+      const subImageElement = document.createElement('div');
+      subImageElement.className = 'detail-lb-inner sub-img-box';
 
-    const imageElement = document.createElement('img');
-    imageElement.src = subImages[i].url;
-    imageElement.alt = `서브이미지${i + 1}`;
+      const imageElement = document.createElement('img');
+      imageElement.src = subImages[i].url;
+      imageElement.alt = `서브이미지${i + 1}`;
 
-    // 이미지 로딩이 끝나면 마우스 오버 이벤트 추가
-    imageElement.addEventListener('load', function() {
-      imageElement.addEventListener('mouseenter', () => {
-        previousHoveredElement = handleMouseEnter(mainimg, imageElement.src, imageElement, previousHoveredElement);
+      // 이미지 로딩이 끝나면 마우스 오버 이벤트 추가
+      imageElement.addEventListener('load', function() {
+        imageElement.addEventListener('mouseenter', () => {
+          previousHoveredElement = handleMouseEnter(mainimg, imageElement.src, imageElement, previousHoveredElement);
+        });
       });
-    });
 
-    subImageElement.appendChild(imageElement);
-    subImageContainer.appendChild(subImageElement);
+      subImageElement.appendChild(imageElement);
+      subImageContainer.appendChild(subImageElement);
+    }
+  } else {
+    // 서브이미지가 없는 경우에 대한 처리
+    const noSubImageElement = document.createElement('p');
+    noSubImageElement.textContent = '서브이미지가 없습니다.';
+    subImageContainer.appendChild(noSubImageElement);
   }
-} else {
-  // 서브이미지가 없는 경우에 대한 처리
-  const noSubImageElement = document.createElement('p');
-  noSubImageElement.textContent = '서브이미지가 없습니다.';
-  subImageContainer.appendChild(noSubImageElement);
-}
 
   // 제목 삽입
   const titleElement = document.querySelector('.title-box');
@@ -259,27 +259,6 @@ cartButton.addEventListener("click", () => {
   } else {
     alert("교환 및 환불 동의 항목을 선택하세요.");
   }
-});
-
-
-// ================  ***마우스 올렸을때의 이미지가 메인이미지 부분에 보이게 만들기 ================
-const mainImg = document.getElementById("product-main-img");
-const subImgs = document.querySelectorAll(".product-sub-img");
-
-// ** 부모 컨테이너에 이벤트 위임하기!
-document.querySelector('.detail-left').addEventListener('mouseover', (e) => {
-    const targetImg = e.target;
-    // console.log(targetImg);
-
-    if (targetImg.classList.contains('product-sub-img')) {
-        mainImg.src = targetImg.src;
-
-        // 모든 subImgs에서 'hover' 클래스 제거
-        subImgs.forEach((img) => img.classList.remove('hover'));
-
-        // 현재 subImg에 'hover' 클래스 추가
-        targetImg.classList.add('hover');
-    }
 });
 
 
