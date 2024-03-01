@@ -12,14 +12,14 @@ const borderBox = document.querySelectorAll('.border-box');
 
 // input
 const email = document.querySelector('.email');
+const password = document.querySelector('.password');
+const newPassword = document.querySelector('.new-password');
+const newPasswordConfirm = document.querySelector('.confirm');
 const userName = document.querySelector('.name');
 const phoneNumber = document.querySelector('.tel');
 const postalCode = document.querySelector('.postal-code');
 const address = document.querySelector('.address');
 const addressDetail = document.querySelector('.detail');
-const password = document.querySelector('.password');
-const newPassword = document.querySelector('.new-password');
-const newPasswordConfirm = document.querySelector('.confirm');
 
 // 우편번호 찾기, 주소 입력
 const searchPostalCodeBox = document.querySelector('.wrap');
@@ -38,7 +38,7 @@ address.readOnly = true;
 window.addEventListener('load', () => {
     if (localStorage.getItem('jwt')) {
         const jwt = localStorage.getItem('jwt');
-        fetch(`${API_URL}user/mypage`, {
+        fetch(`${API_URL}user/me`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -46,13 +46,25 @@ window.addEventListener('load', () => {
             }
         }).then(res => res.json())
             .then(res => {
+                if (res.error === 'jwt expired') {
+                    localStorage.removeItem('jwt');
+                    alert('로그인 인증이 만료되었습니다.');
+                    location.href = '/user/login.html';
+                    return false;
+                }
+
+                if (res.error === 'Resource not found') {
+                    alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
+                    location.href = '/index.html';
+                    return false;
+                }
+
                 email.value = res.data.email;
                 userName.value = res.data.user_name;
                 phoneNumber.value = res.data.phone_number;
                 postalCode.value = res.data.postal_code;
                 address.value = res.data.address;
                 addressDetail.value = res.data.address_detail;
-                console.log(res);
             })
     }
     else {
@@ -122,8 +134,18 @@ foldButton.addEventListener('click', () => {
     searchPostalCodeBox.style.display = 'none';
 })
 
-// 회원정보 수정 PATCH
-modifyButton.addEventListener('click', e => {
+// 확인 버튼 클릭
+modifyButton.addEventListener('click', e => setUserInfo(e));
+
+// 엔터
+userName.addEventListener('keyup', e => {if (e.keyCode === 13) setUserInfo(e)});
+password.addEventListener('keyup', e => {if (e.keyCode === 13) setUserInfo(e)});
+newPassword.addEventListener('keyup', e => {if (e.keyCode === 13) setUserInfo(e)});
+newPasswordConfirm.addEventListener('keyup', e => {if (e.keyCode === 13) setUserInfo(e)});
+addressDetail.addEventListener('keyup', e => {if (e.keyCode === 13) setUserInfo(e)});
+
+// 회원정보 PATCH
+function setUserInfo(e) {
     e.preventDefault();
 
     const passwordVal = password.value;
@@ -251,7 +273,7 @@ modifyButton.addEventListener('click', e => {
         return false;
     }
 
-    // 유효성 검사 모두 통과한 후 border color가 red인 박스가 있다면 모두 기본값으로 변경
+    // 입력값 문제없을 경우 border color가 red인 박스가 있다면 모두 기본값으로 변경
     borderBox.forEach(e => {
         if (e.classList.contains('on')) {
             e.removeChild(e.lastChild);
@@ -264,7 +286,7 @@ modifyButton.addEventListener('click', e => {
     if (passwordVal) {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
-            fetch(`${API_URL}api/v1/user/mypage`, {
+            fetch(`${API_URL}api/v1/user/me`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
@@ -280,13 +302,21 @@ modifyButton.addEventListener('click', e => {
                 }),
             }).then(res => res.json())
                 .then(res => {
-                    if (res.error) alert('기존 비밀번호를 다시 확인해주세요.');
-                    else {
-                        alert('회원정보 수정이 성공적으로 완료되었습니다.');
-                        location.href = '/orders/orderlist.html';
+                    if (res.error === 'jwt expired') {
+                        localStorage.removeItem('jwt');
+                        alert('로그인 인증이 만료되었습니다.');
+                        location.href = '/user/login.html';
+                        return false;
                     }
+
+                    if (res.error === 'Resource not found') {
+                        alert('기존 비밀번호를 다시 확인하세요.');
+                        return false;
+                    }
+
+                    alert('회원정보 수정이 성공적으로 완료되었습니다.');
+                    location.href = '/orders/orderlist.html';
                 })
-                .catch(err => console.log(err))
         }
         else {
             alert('로그인 인증이 만료되었습니다.');
@@ -297,7 +327,7 @@ modifyButton.addEventListener('click', e => {
     else {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
-            fetch(`${API_URL}api/v1/user/mypage`, {
+            fetch(`${API_URL}api/v1/user/me`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
@@ -312,18 +342,25 @@ modifyButton.addEventListener('click', e => {
                 }),
             }).then(res => res.json())
                 .then(res => {
-                    console.log(res);
-                    if (res.error) alert('기존 비밀번호를 다시 확인해주세요.');
-                    else {
-                        alert('회원정보 수정이 성공적으로 완료되었습니다.');
-                        location.href = '/orders/orderlist.html';
+                    if (res.error === 'jwt expired') {
+                        localStorage.removeItem('jwt');
+                        alert('로그인 인증이 만료되었습니다.');
+                        location.href = '/user/login.html';
+                        return false;
                     }
+
+                    if (res.error === 'Resource not found') {
+                        alert('기존 비밀번호를 다시 확인하세요.');
+                        return false;
+                    }
+
+                    alert('회원정보 수정이 성공적으로 완료되었습니다.');
+                    location.href = '/orders/orderlist.html';
                 })
-                .catch(err => console.log(err))
         }
         else {
             alert('로그인 인증이 만료되었습니다.');
             location.href = '/user/login.html';
         }
     }
-})
+}
