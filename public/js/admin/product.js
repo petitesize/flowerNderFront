@@ -15,7 +15,15 @@ const getProducts = async () => {
   if (!res.ok) {
     throw new Error('서버에서 데이터를 가져오는 데 실패했습니다.')
   }
+
   const productsDatas = await res.json()
+  // JWT 만료 여부 검사
+  if (productsDatas.error === 'jwt expired') {
+    localStorage.removeItem('jwt')
+    alert('로그인 인증이 만료되었습니다.')
+    location.href = '/user/login.html'
+    return false
+  }
   const adminContainerEl = document.querySelector('.admin-container')
   productsDatas.data.forEach(data => {
     adminContainerEl.insertAdjacentHTML(
@@ -31,7 +39,7 @@ const getProducts = async () => {
           <p class="product-description">${data.description.slice(0, 30)}...</p>
           <p class="product-size">${data.size}</p>
           <p class="product-origin">${data.origin}</p>
-          <p class="product-attribute">${data.attribute}</p>
+          <p class="product-attribute">${data.attribute.slice(0, 30)}...</p>
           <div>
             <button class="btn product-update">상품수정</button>
             <button class="btn product-delete">상품삭제</button>
@@ -89,26 +97,37 @@ function handleCreateProduct() {
       <input / class="product-input image" id="input-img" type='file' name='images' accept='image/*' multiple>
       <input / class="product-input price" type='number' placeholder="가격 입력">
       <input / class="product-input stock" type='number' placeholder="재고 입력">
-      <textarea class="product-input description" rows=2 cols=25 maxlength=50 placeholder="제품 상세 설명 입력"></textarea>
+      <textarea class="product-input description" rows=2 cols=25 placeholder="제품 상세 설명 입력"></textarea>
       <select class="product-input size">
         <option value="Large">Large</option>
         <option value="Medium">Medium</option>
         <option value="Small">Small</option>
+        <option value="One-Size">One-Size</option>
       </select>
       <select class="product-input origin">
-        <option value="Korea">Korea</option>
-        <option value="Japan">Japan</option>
-        <option value="China">China</option>
-        <option value="America">America</option>
+        <option value="한국">한국</option>
+        <option value="남아공">남아공</option>
+        <option value="네덜란드">네덜란드</option>
+        <option value="베트남">베트남</option>
+        <option value="이스라엘">이스라엘</option>
+        <option value="에티오피아">에티오피아</option>
+        <option value="이탈리아">이탈리아</option>
+        <option value="일본">일본</option>
+        <option value="중국">중국</option>
+        <option value="짐바브웨">짐바브웨</option>
+        <option value="베트남">베트남</option>
+        <option value="케냐">케냐</option>
+        <option value="콜롬비아">콜롬비아</option>
+        <option value="탄자니아">탄자니아</option>
+        <option value="프랑스">프랑스</option>
+        <option value="호주">호주</option>
       </select>
-      <textarea class="product-input attribute" rows=2 cols=25 maxlength=50 placeholder="제품 특징 입력"></textarea>
+      <textarea class="product-input attribute" rows=2 cols=25 placeholder="제품 특징 입력"></textarea>
     <div>
       <button class="btn product-create">생성</button>
       <button class="btn product-cancel">취소</button>
     </div>
   </div>
-
-  
   `
   // 상품 추가 HTML 생성 함수 호출
   adminContainer.insertAdjacentHTML('beforeend', productHtml)
@@ -209,8 +228,8 @@ function handleCreateBtn(e) {
   formData.append('origin', origin.value)
   formData.append('attribute', attribute.value)
   formData.append('main_image', image.files[0])
-  for (let i = 0; i < image.files.length; i++) {
-    formData.append(`sub_image[${i}]`, image.files[i])
+  for (let i = 1; i < image.files.length; i++) {
+    formData.append(`sub_image`, image.files[i])
   }
 
   // 제품 데이터 전송
@@ -233,8 +252,15 @@ function handleCreateBtn(e) {
       return response.json()
     })
     .then(data => {
-      // 서버로부터 받은 데이터 처리
+      // JWT 만료 처리
+      if (data.error === 'jwt expired') {
+        localStorage.removeItem('jwt')
+        alert('로그인 인증이 만료되었습니다.')
+        location.href = '/user/login.html'
+        return false
+      }
       console.log(data)
+      location.reload()
     })
     .catch(error => console.error('Error:', error))
 
@@ -326,7 +352,7 @@ function handleUpdateProduct(e) {
       selector: '.product-size',
       type: 'select',
       class: 'product-input size1',
-      options: ['Large', 'Medium', 'Small'],
+      options: ['Large', 'Medium', 'Small', 'One-Size'],
       prop: 'value',
       from: 'innerHTML',
     },
@@ -434,6 +460,12 @@ function handleDeleteProduct(e) {
     },
   })
     .then(response => {
+      if (response.json().error === 'jwt expired') {
+        localStorage.removeItem('jwt')
+        alert('로그인 인증이 만료되었습니다.')
+        location.href = '/user/login.html'
+        return false
+      }
       if (response.ok) {
         location.reload()
       } else {
@@ -484,8 +516,8 @@ function handleUpdateSave(e) {
   formData.append('attribute', attribute.value)
   formData.append('main_image', image.files[0])
 
-  for (let i = 0; i < image.files.length; i++) {
-    formData.append(`sub_image[${i}]`, image.files[i])
+  for (let i = 1; i < image.files.length; i++) {
+    formData.append(`sub_image`, image.files[i])
   }
 
   const id =
@@ -504,7 +536,16 @@ function handleUpdateSave(e) {
     body: formData,
   })
     .then(response => {
-      console.log(response)
+      response.json()
+    })
+    .then(data => {
+      if (data.error === 'jwt expired') {
+        localStorage.removeItem('jwt')
+        alert('로그인 인증이 만료되었습니다.')
+        location.href = '/user/login.html'
+        return false
+      }
+      location.reload()
     })
     .catch(error => {
       console.error('Error:', error)

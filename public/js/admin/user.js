@@ -16,7 +16,12 @@ const getUsers = async () => {
     throw new Error('서버에서 데이터를 가져오는 데 실패했습니다.')
   }
   const userDatas = await res.json()
-  console.log(userDatas)
+  if (userDatas.error === 'jwt expired') {
+    localStorage.removeItem('jwt')
+    alert('로그인 인증이 만료되었습니다')
+    location.href = '/user/login.html'
+    return false
+  }
   const adminContainerEl = document.querySelector('.admin-container')
   userDatas.data.forEach(data => {
     adminContainerEl.insertAdjacentHTML(
