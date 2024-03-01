@@ -411,15 +411,16 @@ deleteBox.addEventListener('click', () => {
 
                         // 주문조회 결과 주문내역이 있을 경우
                         if (res.data) {
+                            let orderStatus;
                             res.data.forEach(e => {
-                                // '배송완료'를 제외한 주문이 있을 경우 회원탈퇴 불가
-                                if (e.order_status !== '배송완료') {
-                                    alert('진행중인 주문이 있어 회원탈퇴가 불가합니다.');
-                                    location.href = '/index.html';
-                                    return false;
-                                }
+                                // '배송완료'를 제외한 주문이 있을 경우 orderStatus = true;
+                                if (e.order_status !== '배송완료') orderStatus = true;
                             })
-                            deleteAccount(jwt);
+                            if (orderStatus) {
+                                alert('진행중인 주문이 있어 회원탈퇴가 불가합니다.');
+                                location.href = '/index.html';
+                            }
+                            else deleteAccount(jwt);
                         }
                     }
                 })
