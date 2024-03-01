@@ -95,7 +95,9 @@ function setLogin(e) {
                 return false;
             }
 
-            localStorage.setItem("jwt", res.data);
-            location.href = '/index.html';
+            if (!res.error) {
+                localStorage.setItem("jwt", res.data);
+                location.href = '/index.html';
+            }
         })
 }
