@@ -221,7 +221,7 @@ function handleCreateBtn(e) {
   fetch(`${API_URL}admin/products`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
     body: formData,
@@ -318,7 +318,7 @@ function handleUpdateProduct(e) {
       selector: '.product-category',
       type: 'select',
       class: 'product-input category1',
-      options: ['Custom', 'Modern', 'Lovely', 'Deskterior', 'Classic', 'Acc'],
+      options: ['Custom', 'MODERN', 'Lovely', 'Deskterior', 'Classic', 'Acc'],
       prop: 'value',
       from: 'innerHTML',
     },
@@ -335,7 +335,7 @@ function handleUpdateProduct(e) {
       type: 'select',
       class: 'product-input origin1',
       options: [
-        '국산',
+        '한국',
         '남아공',
         '네덜란드',
         '베트남',
@@ -349,7 +349,7 @@ function handleUpdateProduct(e) {
         '콜롬비아',
         '탄자니아',
         '프랑스',
-        '호수',
+        '호주',
       ],
       prop: 'value',
       from: 'innerHTML',
@@ -492,13 +492,13 @@ function handleUpdateSave(e) {
     e.target.parentNode.parentNode.querySelector('.product-id').innerHTML
   const token = localStorage.getItem('jwt')
 
-  // for (let [key, value] of formData.entries()) {
-  //   console.log(`${key}: ${value}`)
-  // }
+  for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`)
+  }
   fetch(`${API_URL}admin/products/${id}`, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'multipart/form-data',
+      // 'Content-Type': 'multipart/form-data',
       Authorization: token,
     },
     body: formData,
