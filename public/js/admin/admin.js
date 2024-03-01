@@ -13,7 +13,12 @@ const getOrders = async () => {
     },
   })
   const orderDatas = await res.json()
-  console.log(orderDatas)
+  if (orderDatas.error === 'jwt expired') {
+    localStorage.removeItem('jwt')
+    alert('로그인 인증이 만료되었습니다')
+    location.href = '/user/login.html'
+    return false
+  }
   const adminContainerEl = document.querySelector('.admin-container')
 
   orderDatas.data.forEach(data => {
@@ -167,6 +172,12 @@ function handleDeleteOrder(e) {
     },
   })
     .then(response => {
+      if (response.json().error === 'jwt expired') {
+        localStorage.removeItem('jwt')
+        alert('로그인 인증이 만료되었습니다')
+        location.href = '/user/login.html'
+        return false
+      }
       if (response.ok) {
         location.reload()
       } else {
@@ -203,6 +214,12 @@ function handleOrderSave(e) {
     body: JSON.stringify(datas),
   })
     .then(response => {
+      if (response.json().error === 'jwt expired') {
+        localStorage.removeItem('jwt')
+        alert('로그인 인증이 만료되었습니다')
+        location.href = '/user/login.html'
+        return false
+      }
       if (response.ok) {
         location.reload()
       } else {
