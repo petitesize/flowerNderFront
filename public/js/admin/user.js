@@ -1,3 +1,4 @@
+import { API_URL } from '/public/js/constants.js'
 // import { API_URL } from '/public/js/constants.js'
 const token = localStorage.getItem('jwt')
 if (!token) {
@@ -6,7 +7,7 @@ if (!token) {
 
 const getUsers = async () => {
   const token = localStorage.getItem('jwt')
-  const res = await fetch('http://localhost:8080/api/v1/admin/users', {
+  const res = await fetch(`${API_URL}admin/users`, {
     method: 'GET',
     headers: {
       Authorization: token,
