@@ -289,7 +289,7 @@ function setUserInfo(e) {
     if (passwordVal) {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
-            fetch(`${API_URL}api/v1/user/me`, {
+            fetch(`${API_URL}user/me`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
@@ -333,7 +333,7 @@ function setUserInfo(e) {
     else {
         if (localStorage.getItem('jwt')) {
             const jwt = localStorage.getItem('jwt');
-            fetch(`${API_URL}api/v1/user/me`, {
+            fetch(`${API_URL}user/me`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
