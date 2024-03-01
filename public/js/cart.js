@@ -57,9 +57,6 @@ const plusList = () => {
                 </span>
                 <span class="cl-list-4">
                     <span class="cart-price">${saveCart[i].price.toLocaleString()}원</span>
-                    <span class="cart-baro">
-                        <a href="#" class="cart-common-btn">바로구매</a>
-                    </span>
                 </span>
             </div>
         `;

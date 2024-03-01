@@ -59,7 +59,7 @@ const categoryList = async () => {
                 <div class="list-bottom">
                     <a href="/main/detail.html?=${realData[i]._id}" class="list-title">${realData[i].title}</a>
                     <p class="list-cg">${realData[i].category}</p>
-                    <p class="list-pay">${realData[i].price}</p>
+                    <p class="list-pay">${realData[i].price.toLocaleString()}원</p>
                     <!-- *** 수량이 0이 되었을때 사진 띄워짐 sold -->
                     <div class="list-status">
                         ${stockImage}
