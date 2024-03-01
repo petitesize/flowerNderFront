@@ -219,3 +219,11 @@ const logOut_btn = document.querySelector('.logOut-btn')
 logOut_btn.addEventListener('click', () => {
   localStorage.removeItem('jwt')
 })
+
+// 토큰 유효기간 완료
+if (res.error === 'jwt expired') {
+  localStorage.removeItem('jwt')
+  alert('로그인 인증이 만료되었습니다.')
+  location.href = '/user/login.html'
+  return false
+}
