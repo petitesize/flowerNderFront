@@ -316,11 +316,13 @@ function createAccount(e) {
         .then(res => {
             if (res.error === '리소스 중복 에러') {
                 alert('이미 가입된 이메일입니다.')
+                return false;
             }
 
             if (!res.error) {
                 alert('가입이 완료되었습니다. 로그인하세요.')
                 location.href = '/user/login.html';
+                return false;
             }
         })
 }

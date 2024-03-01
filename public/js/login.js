@@ -90,14 +90,21 @@ function setLogin(e) {
         }),
     }).then(res => res.json())
         .then(res => {
-            if (res.error === '이메일 또는 비밀번호를 다시 확인하세요.') {
+            if (res.error === '이메일 또는 비밀번호를 다시 확인해주세요') {
                 alert('잘못된 이메일 또는 비밀번호입니다.');
+                return false;
+            }
+
+            if (res.error === 'Resource not found') {
+                alert('로그인 정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
+                location.href = '/index.html';
                 return false;
             }
 
             if (!res.error) {
                 localStorage.setItem("jwt", res.data);
                 location.href = '/index.html';
+                return false;
             }
         })
 }

@@ -641,16 +641,17 @@ deleteBox.addEventListener('click', () => {
 
                       // 주문조회 결과 주문내역이 있을 경우
                       if (res.data) {
+                          console.log(res.data);
                           res.data.forEach(e => {
                               // '배송완료'를 제외한 주문이 있을 경우 회원탈퇴 불가
                               if (e.order_status !== '배송완료') {
                                   alert('진행중인 주문이 있어 회원탈퇴가 불가합니다.');
                                   location.href = '/index.html';
+                                  return false;
                               }
                           })
-                          return false;
+                          deleteAccount(jwt);
                       }
-                      deleteAccount(jwt);
                   }
               })
       }
@@ -670,17 +671,20 @@ function deleteAccount(jwt) {
               localStorage.removeItem('jwt');
               alert('로그인 인증이 만료되었습니다.');
               location.href = '/user/login.html';
+              return false;
           }
 
           if (res.error === 'Resource not found') {
               alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
               location.href = '/index.html';
+              return false;
           }
 
           if (!res.error) {
               localStorage.removeItem('jwt');
               alert('회원탈퇴가 정상적으로 완료되었습니다.');
               location.href = '/index.html';
+              return false;
           }
       })
 }
