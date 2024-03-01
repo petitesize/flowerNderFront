@@ -314,7 +314,7 @@ function handleUpdateProduct(e) {
       selector: '.product-img',
       type: 'label',
       class: 'img-label',
-      innerHTML: '이미지첨부 (최대 6개)',
+      innerHTML: '이미지를 다시 첨부해주셔야 수정 가능합니다.(최대6개)',
       child: {
         type: 'input',
         id: 'input-img',
@@ -536,10 +536,7 @@ function handleUpdateSave(e) {
     body: formData,
   })
     .then(response => {
-      response.json()
-    })
-    .then(data => {
-      if (data.error === 'jwt expired') {
+      if (response.json().error === 'jwt expired') {
         localStorage.removeItem('jwt')
         alert('로그인 인증이 만료되었습니다.')
         location.href = '/user/login.html'
