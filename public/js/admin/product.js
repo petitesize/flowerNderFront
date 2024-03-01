@@ -386,7 +386,7 @@ function handleUpdateProduct(e) {
       class: 'product-input description1',
       prop: 'value',
       from: 'innerHTML',
-      attributes: { cols: 25, rows: 2, maxLength: 50 },
+      attributes: { cols: 25, rows: 2 },
     },
     {
       selector: '.product-attribute',
@@ -394,7 +394,7 @@ function handleUpdateProduct(e) {
       class: 'product-input attribute1',
       prop: 'value',
       from: 'innerHTML',
-      attributes: { cols: 25, rows: 2, maxLength: 50 },
+      attributes: { cols: 25, rows: 2 },
     },
   ]
 
