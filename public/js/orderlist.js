@@ -1,6 +1,9 @@
 import { API_URL } from "/public/js/constants.js";
 const LOCALSTORAGE_JWT = "jwt";
 
+// 회원탈퇴
+const deleteBox = document.querySelector('.delete');
+
 /***** orderlist.html 진입 시, order API GET해와서 주문조회 데이터 렌더링 *****/
 document.addEventListener("DOMContentLoaded", () => {
   const $orderlist = document.querySelector(".orderlist");
@@ -604,4 +607,80 @@ function validation() {
     return true;
   }
   return false;
+}
+
+deleteBox.addEventListener('click', () => {
+  if (confirm('가입된 회원정보가 모두 삭제되며 복구되지 않습니다. 회원 탈퇴를 진행하시겠습니까?')) {
+      // 주문조회
+      if (localStorage.getItem('jwt')) {
+          const jwt = localStorage.getItem('jwt');
+          fetch(`${API_URL}user/order`, {
+              method: 'GET',
+              headers: {
+                  "Content-Type": "application/json",
+                  "authorization": `${jwt}`
+              }
+          }).then(res => res.json())
+              .then(res => {
+                  // 에러 있을 경우
+                  if (res.error === 'jwt expired') {
+                      localStorage.removeItem('jwt');
+                      alert('로그인 인증이 만료되었습니다.');
+                      location.href = '/user/login.html';
+                  }
+
+                  if (res.error === 'Resource not found') {
+                      alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
+                      location.href = '/index.html';
+                  }
+
+                  // 에러 없을 경우
+                  if (!res.error) {
+                      // 주문조회 결과 주문내역이 없을 경우 회원탈퇴 진행
+                      if (!res.data) deleteAccount(jwt);
+
+                      // 주문조회 결과 주문내역이 있을 경우
+                      if (res.data) {
+                          res.data.forEach(e => {
+                              // '배송완료'를 제외한 주문이 있을 경우 회원탈퇴 불가
+                              if (e.order_status !== '배송완료') {
+                                  alert('진행중인 주문이 있어 회원탈퇴가 불가합니다.');
+                                  location.href = '/index.html';
+                              }
+                          })
+                          return false;
+                      }
+                      deleteAccount(jwt);
+                  }
+              })
+      }
+  }
+})
+
+function deleteAccount(jwt) {
+  fetch(`${API_URL}user/me`, {
+      method: 'DELETE',
+      headers: {
+          "Content-Type": "application/json",
+          "authorization": `${jwt}`
+      }
+  }).then(res => res.json())
+      .then(res => {
+          if (res.error === 'jwt expired') {
+              localStorage.removeItem('jwt');
+              alert('로그인 인증이 만료되었습니다.');
+              location.href = '/user/login.html';
+          }
+
+          if (res.error === 'Resource not found') {
+              alert('회원정보를 불러올 수 없습니다. 고객센터 또는 카카오톡 채널로 문의해주세요.');
+              location.href = '/index.html';
+          }
+
+          if (!res.error) {
+              localStorage.removeItem('jwt');
+              alert('회원탈퇴가 정상적으로 완료되었습니다.');
+              location.href = '/index.html';
+          }
+      })
 }
