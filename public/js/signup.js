@@ -94,7 +94,19 @@ foldButton.addEventListener('click', () => {
 })
 
 // 회원가입 POST
-signUpButton.addEventListener('click', e => {
+signUpButton.addEventListener('click', e => createAccount(e));
+
+// 엔터
+email.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+password.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+passwordConfirm.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+userName.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+phoneNumber.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+postalCode.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+address.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+addressDetail.addEventListener('keyup', e => { if (e.keyCode === 13) createAccount(e) });
+
+function createAccount(e) {
     e.preventDefault();
 
     const emailVal = email.value;
@@ -304,10 +316,11 @@ signUpButton.addEventListener('click', e => {
         .then(res => {
             if (res.error === '리소스 중복 에러') {
                 alert('이미 가입된 이메일입니다.')
-                return false;
             }
 
-            alert('가입이 완료되었습니다. 로그인하세요.')
-            location.href = '/user/login.html';
+            if (!res.error) {
+                alert('가입이 완료되었습니다. 로그인하세요.')
+                location.href = '/user/login.html';
+            }
         })
-})
+}
