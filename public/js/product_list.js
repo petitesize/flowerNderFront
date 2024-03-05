@@ -35,10 +35,6 @@ const categoryList = async () => {
         navList.insertAdjacentHTML('beforeend', categoryLink);
     }
 
-    // const url = window.location.href;
-    // const URLSearch = new URL(url);
-    // const getcate = URLSearch.searchParams.get('category');
-    // console.log('asd', getcate);
     // ----------------------------- *** 카테고리에 해당하는 제품 list 가져오기
     for (let i = 0; i < realData.length; i++) {
         // 카테고리가 일치하는 경우에만 해당 상품을 보여줌 (대소문자 구별X)

@@ -9,6 +9,7 @@ const url = window.location.href;
 const URLSearch = new URL(url);
 const getid = URLSearch.searchParams.get('id'); 
 
+
 // ========================= API 불러오기 시작 =========================
 const fetchDetailData = async () => {
     const res = await fetch(`${API_URL}products/${getid}`, {
