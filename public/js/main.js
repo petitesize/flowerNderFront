@@ -37,6 +37,7 @@ const mainList = async () => {
         navList.insertAdjacentHTML('beforeend', categoryLink);
     }
 
+    
     // ================ 상품 리스트 템플릿 ================
     const productList = document.querySelector('#product-list');
     console.log(`/main/detail.html?=${realData[0]._id}`);
