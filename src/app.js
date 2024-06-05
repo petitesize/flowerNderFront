@@ -9,7 +9,7 @@ app.use("/", express.static(path.join(process.cwd(), "src", "views")));
 app.use("/public", express.static(path.join(process.cwd(), "public")));
 // /public/css/admin.css
 
-const PORT = 3000;
+const PORT = 8081;
 
 app.listen(PORT, () => {
   console.log("express app listen", PORT);
