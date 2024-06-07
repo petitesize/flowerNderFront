@@ -1,0 +1,28 @@
+.loading {
+  display: none;
+  font-size: 20px;
+  text-align: center;
+  margin: 150px 0;
+}
+.content {
+  display: none;
+}
+
+.flower-icon {
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
