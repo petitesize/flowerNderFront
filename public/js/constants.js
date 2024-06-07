@@ -2,4 +2,4 @@
 // VM 서버 올라오면 http://34.47.78.146/api/v1/
 // export const API_URL = 'http://kdt-sw-8-team05.elicecoding.com/api/v1/'
 // export const API_URL = "http://localhost:8080/api/v1/";
-export const API_URL = "http://3.107.20.201/api/v1/";
+export const API_URL = "http://13.239.15.179/api/v1/";
