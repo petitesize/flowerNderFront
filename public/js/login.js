@@ -93,6 +93,13 @@ function setLogin(e) {
     }
   });
 
+  // 로그인 버튼
+  const loginButton = document.querySelector(".login-button");
+  const originalText = loginButton.textContent;
+  loginButton.textContent = "로그인하는 중입니다...";
+  loginButton.disabled = true; // 버튼을 비활성화합니다.
+  loginButton.classList.add("no-pointer"); // 커서 포인터를 없애기 위해 클래스를 추가합니다.
+
   // 아이디, 비밀번호 입력값이 모두 있을 경우 로그인 정보 POST
   fetch(`${API_URL}auth/login`, {
     method: "POST",
@@ -122,5 +129,14 @@ function setLogin(e) {
         location.href = "/index.html";
         return false;
       }
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+    .finally(() => {
+      // 요청이 완료되면 버튼 텍스트를 원래대로 되돌리고 버튼을 다시 활성화합니다.
+      loginButton.textContent = originalText;
+      loginButton.disabled = false;
+      loginButton.classList.remove("no-pointer");
     });
 }
